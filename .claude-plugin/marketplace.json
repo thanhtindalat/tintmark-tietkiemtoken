@@ -3,6 +3,7 @@
  "owner": {
   "name": "Tintmark"
  },
+ "description": "Plugin tiết kiệm token cho Claude Code (Tintmark)",
  "plugins": [
   {
    "name": "tintmark-tietkiem",
