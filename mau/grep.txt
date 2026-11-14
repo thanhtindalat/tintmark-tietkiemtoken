@@ -1,0 +1,324 @@
+tools/cong_cu_4.py:2:def ham_4_0(x, y=None):
+tools/cong_cu_4.py:5:def ham_4_1(x, y=None):
+tools/cong_cu_4.py:8:def ham_4_2(x, y=None):
+tools/cong_cu_4.py:11:def ham_4_3(x, y=None):
+tools/cong_cu_4.py:14:def ham_4_4(x, y=None):
+tools/cong_cu_4.py:17:def ham_4_5(x, y=None):
+tools/cong_cu_4.py:20:def ham_4_6(x, y=None):
+tools/cong_cu_4.py:23:def ham_4_7(x, y=None):
+tools/cong_cu_4.py:26:def ham_4_8(x, y=None):
+tools/cong_cu_4.py:29:def ham_4_9(x, y=None):
+tools/cong_cu_4.py:32:def ham_4_10(x, y=None):
+tools/cong_cu_4.py:35:def ham_4_11(x, y=None):
+tools/cong_cu_4.py:38:def ham_4_12(x, y=None):
+tools/cong_cu_4.py:41:def ham_4_13(x, y=None):
+tools/cong_cu_4.py:44:def ham_4_14(x, y=None):
+tools/cong_cu_4.py:47:def ham_4_15(x, y=None):
+tools/cong_cu_4.py:50:def ham_4_16(x, y=None):
+tools/cong_cu_4.py:53:def ham_4_17(x, y=None):
+tools/cong_cu_4.py:56:def ham_4_18(x, y=None):
+tools/cong_cu_4.py:59:def ham_4_19(x, y=None):
+tools/cong_cu_4.py:62:def ham_4_20(x, y=None):
+tools/cong_cu_4.py:65:def ham_4_21(x, y=None):
+tools/cong_cu_4.py:68:def ham_4_22(x, y=None):
+tools/cong_cu_4.py:71:def ham_4_23(x, y=None):
+tools/cong_cu_4.py:74:def ham_4_24(x, y=None):
+tools/cong_cu_4.py:77:def ham_4_25(x, y=None):
+tools/cong_cu_4.py:80:def ham_4_26(x, y=None):
+tools/cong_cu_4.py:83:def ham_moi_4(): return 4
+tools/cong_cu_4.py:84:def ham_moi_16(): return 16
+tools/cong_cu_4.py:85:def ham_moi_28(): return 28
+tools/cong_cu_4.py:86:def ham_moi_40(): return 40
+tools/cong_cu_4.py:87:def ham_moi_52(): return 52
+tools/cong_cu_4.py:88:def ham_moi_64(): return 64
+tools/cong_cu_4.py:89:def ham_moi_76(): return 76
+tools/cong_cu_4.py:90:def ham_moi_88(): return 88
+tools/cong_cu_4.py:91:def ham_moi_100(): return 100
+tools/cong_cu_4.py:92:def ham_moi_112(): return 112
+tools/cong_cu_4.py:93:def ham_moi_124(): return 124
+tools/cong_cu_4.py:94:def ham_moi_136(): return 136
+tools/cong_cu_4.py:95:def ham_moi_148(): return 148
+tools/cong_cu_4.py:96:def ham_moi_160(): return 160
+tools/cong_cu_4.py:97:def ham_moi_172(): return 172
+tools/cong_cu_4.py:98:def ham_moi_184(): return 184
+tools/cong_cu_4.py:99:def ham_moi_196(): return 196
+tools/cong_cu_4.py:100:def ham_moi_208(): return 208
+tools/cong_cu_4.py:101:def ham_moi_220(): return 220
+tools/cong_cu_4.py:102:def ham_moi_232(): return 232
+tools/cong_cu_4.py:103:def ham_moi_244(): return 244
+tools/cong_cu_4.py:104:def ham_moi_256(): return 256
+tools/cong_cu_4.py:105:def ham_moi_268(): return 268
+tools/cong_cu_4.py:106:def ham_moi_280(): return 280
+tools/cong_cu_4.py:107:def ham_moi_292(): return 292
+tools/cong_cu_4.py:108:def ham_moi_304(): return 304
+tools/cong_cu_4.py:109:def ham_moi_316(): return 316
+tools/cong_cu_0.py:2:def ham_0_0(x, y=None):
+tools/cong_cu_0.py:5:def ham_0_1(x, y=None):
+tools/cong_cu_0.py:8:def ham_0_2(x, y=None):
+tools/cong_cu_0.py:11:def ham_0_3(x, y=None):
+tools/cong_cu_0.py:14:def ham_0_4(x, y=None):
+tools/cong_cu_0.py:17:def ham_0_5(x, y=None):
+tools/cong_cu_0.py:20:def ham_0_6(x, y=None):
+tools/cong_cu_0.py:23:def ham_0_7(x, y=None):
+tools/cong_cu_0.py:26:def ham_0_8(x, y=None):
+tools/cong_cu_0.py:29:def ham_0_9(x, y=None):
+tools/cong_cu_0.py:32:def ham_0_10(x, y=None):
+tools/cong_cu_0.py:35:def ham_0_11(x, y=None):
+tools/cong_cu_0.py:38:def ham_0_12(x, y=None):
+tools/cong_cu_0.py:41:def ham_0_13(x, y=None):
+tools/cong_cu_0.py:44:def ham_0_14(x, y=None):
+tools/cong_cu_0.py:47:def ham_0_15(x, y=None):
+tools/cong_cu_0.py:50:def ham_0_16(x, y=None):
+tools/cong_cu_0.py:53:def ham_0_17(x, y=None):
+tools/cong_cu_0.py:56:def ham_0_18(x, y=None):
+tools/cong_cu_0.py:59:def ham_0_19(x, y=None):
+tools/cong_cu_0.py:62:def ham_0_20(x, y=None):
+tools/cong_cu_0.py:65:def ham_0_21(x, y=None):
+tools/cong_cu_0.py:68:def ham_0_22(x, y=None):
+tools/cong_cu_0.py:71:def ham_0_23(x, y=None):
+tools/cong_cu_0.py:74:def ham_0_24(x, y=None):
+tools/cong_cu_0.py:77:def ham_0_25(x, y=None):
+tools/cong_cu_0.py:80:def ham_0_26(x, y=None):
+tools/cong_cu_0.py:83:def ham_moi_12(): return 12
+tools/cong_cu_0.py:84:def ham_moi_24(): return 24
+tools/cong_cu_0.py:85:def ham_moi_36(): return 36
+tools/cong_cu_0.py:86:def ham_moi_48(): return 48
+tools/cong_cu_0.py:87:def ham_moi_60(): return 60
+tools/cong_cu_0.py:88:def ham_moi_72(): return 72
+tools/cong_cu_0.py:89:def ham_moi_84(): return 84
+tools/cong_cu_0.py:90:def ham_moi_96(): return 96
+tools/cong_cu_0.py:91:def ham_moi_108(): return 108
+tools/cong_cu_0.py:92:def ham_moi_120(): return 120
+tools/cong_cu_0.py:93:def ham_moi_132(): return 132
+tools/cong_cu_0.py:94:def ham_moi_144(): return 144
+tools/cong_cu_0.py:95:def ham_moi_156(): return 156
+tools/cong_cu_0.py:96:def ham_moi_168(): return 168
+tools/cong_cu_0.py:97:def ham_moi_180(): return 180
+tools/cong_cu_0.py:98:def ham_moi_192(): return 192
+tools/cong_cu_0.py:99:def ham_moi_204(): return 204
+tools/cong_cu_0.py:100:def ham_moi_216(): return 216
+tools/cong_cu_0.py:101:def ham_moi_228(): return 228
+tools/cong_cu_0.py:102:def ham_moi_240(): return 240
+tools/cong_cu_0.py:103:def ham_moi_252(): return 252
+tools/cong_cu_0.py:104:def ham_moi_264(): return 264
+tools/cong_cu_0.py:105:def ham_moi_276(): return 276
+tools/cong_cu_0.py:106:def ham_moi_288(): return 288
+tools/cong_cu_0.py:107:def ham_moi_300(): return 300
+tools/cong_cu_0.py:108:def ham_moi_312(): return 312
+tools/cong_cu_10.py:2:def ham_10_0(x, y=None):
+tools/cong_cu_10.py:5:def ham_10_1(x, y=None):
+tools/cong_cu_10.py:8:def ham_10_2(x, y=None):
+tools/cong_cu_10.py:11:def ham_10_3(x, y=None):
+tools/cong_cu_10.py:14:def ham_10_4(x, y=None):
+tools/cong_cu_10.py:17:def ham_10_5(x, y=None):
+tools/cong_cu_10.py:20:def ham_10_6(x, y=None):
+tools/cong_cu_10.py:23:def ham_10_7(x, y=None):
+tools/cong_cu_10.py:26:def ham_10_8(x, y=None):
+tools/cong_cu_10.py:29:def ham_10_9(x, y=None):
+tools/cong_cu_10.py:32:def ham_10_10(x, y=None):
+tools/cong_cu_10.py:35:def ham_10_11(x, y=None):
+tools/cong_cu_10.py:38:def ham_10_12(x, y=None):
+tools/cong_cu_10.py:41:def ham_10_13(x, y=None):
+tools/cong_cu_10.py:44:def ham_10_14(x, y=None):
+tools/cong_cu_10.py:47:def ham_10_15(x, y=None):
+tools/cong_cu_10.py:50:def ham_10_16(x, y=None):
+tools/cong_cu_10.py:53:def ham_10_17(x, y=None):
+tools/cong_cu_10.py:56:def ham_10_18(x, y=None):
+tools/cong_cu_10.py:59:def ham_10_19(x, y=None):
+tools/cong_cu_10.py:62:def ham_10_20(x, y=None):
+tools/cong_cu_10.py:65:def ham_10_21(x, y=None):
+tools/cong_cu_10.py:68:def ham_10_22(x, y=None):
+tools/cong_cu_10.py:71:def ham_10_23(x, y=None):
+tools/cong_cu_10.py:74:def ham_10_24(x, y=None):
+tools/cong_cu_10.py:77:def ham_10_25(x, y=None):
+tools/cong_cu_10.py:80:def ham_10_26(x, y=None):
+tools/cong_cu_10.py:83:def ham_moi_10(): return 10
+tools/cong_cu_10.py:84:def ham_moi_22(): return 22
+tools/cong_cu_10.py:85:def ham_moi_34(): return 34
+tools/cong_cu_10.py:86:def ham_moi_46(): return 46
+tools/cong_cu_10.py:87:def ham_moi_58(): return 58
+tools/cong_cu_10.py:88:def ham_moi_70(): return 70
+tools/cong_cu_10.py:89:def ham_moi_82(): return 82
+tools/cong_cu_10.py:90:def ham_moi_94(): return 94
+tools/cong_cu_10.py:91:def ham_moi_106(): return 106
+tools/cong_cu_10.py:92:def ham_moi_118(): return 118
+tools/cong_cu_10.py:93:def ham_moi_130(): return 130
+tools/cong_cu_10.py:94:def ham_moi_142(): return 142
+tools/cong_cu_10.py:95:def ham_moi_154(): return 154
+tools/cong_cu_10.py:96:def ham_moi_166(): return 166
+tools/cong_cu_10.py:97:def ham_moi_178(): return 178
+tools/cong_cu_10.py:98:def ham_moi_190(): return 190
+tools/cong_cu_10.py:99:def ham_moi_202(): return 202
+tools/cong_cu_10.py:100:def ham_moi_214(): return 214
+tools/cong_cu_10.py:101:def ham_moi_226(): return 226
+tools/cong_cu_10.py:102:def ham_moi_238(): return 238
+tools/cong_cu_10.py:103:def ham_moi_250(): return 250
+tools/cong_cu_10.py:104:def ham_moi_262(): return 262
+tools/cong_cu_10.py:105:def ham_moi_274(): return 274
+tools/cong_cu_10.py:106:def ham_moi_286(): return 286
+tools/cong_cu_10.py:107:def ham_moi_298(): return 298
+tools/cong_cu_10.py:108:def ham_moi_310(): return 310
+tools/cong_cu_11.py:2:def ham_11_0(x, y=None):
+tools/cong_cu_11.py:5:def ham_11_1(x, y=None):
+tools/cong_cu_11.py:8:def ham_11_2(x, y=None):
+tools/cong_cu_11.py:11:def ham_11_3(x, y=None):
+tools/cong_cu_11.py:14:def ham_11_4(x, y=None):
+tools/cong_cu_11.py:17:def ham_11_5(x, y=None):
+tools/cong_cu_11.py:20:def ham_11_6(x, y=None):
+tools/cong_cu_11.py:23:def ham_11_7(x, y=None):
+tools/cong_cu_11.py:26:def ham_11_8(x, y=None):
+tools/cong_cu_11.py:29:def ham_11_9(x, y=None):
+tools/cong_cu_11.py:32:def ham_11_10(x, y=None):
+tools/cong_cu_11.py:35:def ham_11_11(x, y=None):
+tools/cong_cu_11.py:38:def ham_11_12(x, y=None):
+tools/cong_cu_11.py:41:def ham_11_13(x, y=None):
+tools/cong_cu_11.py:44:def ham_11_14(x, y=None):
+tools/cong_cu_11.py:47:def ham_11_15(x, y=None):
+tools/cong_cu_11.py:50:def ham_11_16(x, y=None):
+tools/cong_cu_11.py:53:def ham_11_17(x, y=None):
+tools/cong_cu_11.py:56:def ham_11_18(x, y=None):
+tools/cong_cu_11.py:59:def ham_11_19(x, y=None):
+tools/cong_cu_11.py:62:def ham_11_20(x, y=None):
+tools/cong_cu_11.py:65:def ham_11_21(x, y=None):
+tools/cong_cu_11.py:68:def ham_11_22(x, y=None):
+tools/cong_cu_11.py:71:def ham_11_23(x, y=None):
+tools/cong_cu_11.py:74:def ham_11_24(x, y=None):
+tools/cong_cu_11.py:77:def ham_11_25(x, y=None):
+tools/cong_cu_11.py:80:def ham_11_26(x, y=None):
+tools/cong_cu_11.py:83:def ham_moi_11(): return 11
+tools/cong_cu_11.py:84:def ham_moi_23(): return 23
+tools/cong_cu_11.py:85:def ham_moi_35(): return 35
+tools/cong_cu_11.py:86:def ham_moi_47(): return 47
+tools/cong_cu_11.py:87:def ham_moi_59(): return 59
+tools/cong_cu_11.py:88:def ham_moi_71(): return 71
+tools/cong_cu_11.py:89:def ham_moi_83(): return 83
+tools/cong_cu_11.py:90:def ham_moi_95(): return 95
+tools/cong_cu_11.py:91:def ham_moi_107(): return 107
+tools/cong_cu_11.py:92:def ham_moi_119(): return 119
+tools/cong_cu_11.py:93:def ham_moi_131(): return 131
+tools/cong_cu_11.py:94:def ham_moi_143(): return 143
+tools/cong_cu_11.py:95:def ham_moi_155(): return 155
+tools/cong_cu_11.py:96:def ham_moi_167(): return 167
+tools/cong_cu_11.py:97:def ham_moi_179(): return 179
+tools/cong_cu_11.py:98:def ham_moi_191(): return 191
+tools/cong_cu_11.py:99:def ham_moi_203(): return 203
+tools/cong_cu_11.py:100:def ham_moi_215(): return 215
+tools/cong_cu_11.py:101:def ham_moi_227(): return 227
+tools/cong_cu_11.py:102:def ham_moi_239(): return 239
+tools/cong_cu_11.py:103:def ham_moi_251(): return 251
+tools/cong_cu_11.py:104:def ham_moi_263(): return 263
+tools/cong_cu_11.py:105:def ham_moi_275(): return 275
+tools/cong_cu_11.py:106:def ham_moi_287(): return 287
+tools/cong_cu_11.py:107:def ham_moi_299(): return 299
+tools/cong_cu_11.py:108:def ham_moi_311(): return 311
+tools/cong_cu_2.py:2:def ham_2_0(x, y=None):
+tools/cong_cu_2.py:5:def ham_2_1(x, y=None):
+tools/cong_cu_2.py:8:def ham_2_2(x, y=None):
+tools/cong_cu_2.py:11:def ham_2_3(x, y=None):
+tools/cong_cu_2.py:14:def ham_2_4(x, y=None):
+tools/cong_cu_2.py:17:def ham_2_5(x, y=None):
+tools/cong_cu_2.py:20:def ham_2_6(x, y=None):
+tools/cong_cu_2.py:23:def ham_2_7(x, y=None):
+tools/cong_cu_2.py:26:def ham_2_8(x, y=None):
+tools/cong_cu_2.py:29:def ham_2_9(x, y=None):
+tools/cong_cu_2.py:32:def ham_2_10(x, y=None):
+tools/cong_cu_2.py:35:def ham_2_11(x, y=None):
+tools/cong_cu_2.py:38:def ham_2_12(x, y=None):
+tools/cong_cu_2.py:41:def ham_2_13(x, y=None):
+tools/cong_cu_2.py:44:def ham_2_14(x, y=None):
+tools/cong_cu_2.py:47:def ham_2_15(x, y=None):
+tools/cong_cu_2.py:50:def ham_2_16(x, y=None):
+tools/cong_cu_2.py:53:def ham_2_17(x, y=None):
+tools/cong_cu_2.py:56:def ham_2_18(x, y=None):
+tools/cong_cu_2.py:59:def ham_2_19(x, y=None):
+tools/cong_cu_2.py:62:def ham_2_20(x, y=None):
+tools/cong_cu_2.py:65:def ham_2_21(x, y=None):
+tools/cong_cu_2.py:68:def ham_2_22(x, y=None):
+tools/cong_cu_2.py:71:def ham_2_23(x, y=None):
+tools/cong_cu_2.py:74:def ham_2_24(x, y=None):
+tools/cong_cu_2.py:77:def ham_2_25(x, y=None):
+tools/cong_cu_2.py:80:def ham_2_26(x, y=None):
+tools/cong_cu_2.py:83:def ham_moi_2(): return 2
+tools/cong_cu_2.py:84:def ham_moi_14(): return 14
+tools/cong_cu_2.py:85:def ham_moi_26(): return 26
+tools/cong_cu_2.py:86:def ham_moi_38(): return 38
+tools/cong_cu_2.py:87:def ham_moi_50(): return 50
+tools/cong_cu_2.py:88:def ham_moi_62(): return 62
+tools/cong_cu_2.py:89:def ham_moi_74(): return 74
+tools/cong_cu_2.py:90:def ham_moi_86(): return 86
+tools/cong_cu_2.py:91:def ham_moi_98(): return 98
+tools/cong_cu_2.py:92:def ham_moi_110(): return 110
+tools/cong_cu_2.py:93:def ham_moi_122(): return 122
+tools/cong_cu_2.py:94:def ham_moi_134(): return 134
+tools/cong_cu_2.py:95:def ham_moi_146(): return 146
+tools/cong_cu_2.py:96:def ham_moi_158(): return 158
+tools/cong_cu_2.py:97:def ham_moi_170(): return 170
+tools/cong_cu_2.py:98:def ham_moi_182(): return 182
+tools/cong_cu_2.py:99:def ham_moi_194(): return 194
+tools/cong_cu_2.py:100:def ham_moi_206(): return 206
+tools/cong_cu_2.py:101:def ham_moi_218(): return 218
+tools/cong_cu_2.py:102:def ham_moi_230(): return 230
+tools/cong_cu_2.py:103:def ham_moi_242(): return 242
+tools/cong_cu_2.py:104:def ham_moi_254(): return 254
+tools/cong_cu_2.py:105:def ham_moi_266(): return 266
+tools/cong_cu_2.py:106:def ham_moi_278(): return 278
+tools/cong_cu_2.py:107:def ham_moi_290(): return 290
+tools/cong_cu_2.py:108:def ham_moi_302(): return 302
+tools/cong_cu_2.py:109:def ham_moi_314(): return 314
+tools/cong_cu_6.py:2:def ham_6_0(x, y=None):
+tools/cong_cu_6.py:5:def ham_6_1(x, y=None):
+tools/cong_cu_6.py:8:def ham_6_2(x, y=None):
+tools/cong_cu_6.py:11:def ham_6_3(x, y=None):
+tools/cong_cu_6.py:14:def ham_6_4(x, y=None):
+tools/cong_cu_6.py:17:def ham_6_5(x, y=None):
+tools/cong_cu_6.py:20:def ham_6_6(x, y=None):
+tools/cong_cu_6.py:23:def ham_6_7(x, y=None):
+tools/cong_cu_6.py:26:def ham_6_8(x, y=None):
+tools/cong_cu_6.py:29:def ham_6_9(x, y=None):
+tools/cong_cu_6.py:32:def ham_6_10(x, y=None):
+tools/cong_cu_6.py:35:def ham_6_11(x, y=None):
+tools/cong_cu_6.py:38:def ham_6_12(x, y=None):
+tools/cong_cu_6.py:41:def ham_6_13(x, y=None):
+tools/cong_cu_6.py:44:def ham_6_14(x, y=None):
+tools/cong_cu_6.py:47:def ham_6_15(x, y=None):
+tools/cong_cu_6.py:50:def ham_6_16(x, y=None):
+tools/cong_cu_6.py:53:def ham_6_17(x, y=None):
+tools/cong_cu_6.py:56:def ham_6_18(x, y=None):
+tools/cong_cu_6.py:59:def ham_6_19(x, y=None):
+tools/cong_cu_6.py:62:def ham_6_20(x, y=None):
+tools/cong_cu_6.py:65:def ham_6_21(x, y=None):
+tools/cong_cu_6.py:68:def ham_6_22(x, y=None):
+tools/cong_cu_6.py:71:def ham_6_23(x, y=None):
+tools/cong_cu_6.py:74:def ham_6_24(x, y=None):
+tools/cong_cu_6.py:77:def ham_6_25(x, y=None):
+tools/cong_cu_6.py:80:def ham_6_26(x, y=None):
+tools/cong_cu_6.py:83:def ham_moi_6(): return 6
+tools/cong_cu_6.py:84:def ham_moi_18(): return 18
+tools/cong_cu_6.py:85:def ham_moi_30(): return 30
+tools/cong_cu_6.py:86:def ham_moi_42(): return 42
+tools/cong_cu_6.py:87:def ham_moi_54(): return 54
+tools/cong_cu_6.py:88:def ham_moi_66(): return 66
+tools/cong_cu_6.py:89:def ham_moi_78(): return 78
+tools/cong_cu_6.py:90:def ham_moi_90(): return 90
+tools/cong_cu_6.py:91:def ham_moi_102(): return 102
+tools/cong_cu_6.py:92:def ham_moi_114(): return 114
+tools/cong_cu_6.py:93:def ham_moi_126(): return 126
+tools/cong_cu_6.py:94:def ham_moi_138(): return 138
+tools/cong_cu_6.py:95:def ham_moi_150(): return 150
+tools/cong_cu_6.py:96:def ham_moi_162(): return 162
+tools/cong_cu_6.py:97:def ham_moi_174(): return 174
+tools/cong_cu_6.py:98:def ham_moi_186(): return 186
+tools/cong_cu_6.py:99:def ham_moi_198(): return 198
+tools/cong_cu_6.py:100:def ham_moi_210(): return 210
+tools/cong_cu_6.py:101:def ham_moi_222(): return 222
+tools/cong_cu_6.py:102:def ham_moi_234(): return 234
+tools/cong_cu_6.py:103:def ham_moi_246(): return 246
+tools/cong_cu_6.py:104:def ham_moi_258(): return 258
+tools/cong_cu_6.py:105:def ham_moi_270(): return 270
+tools/cong_cu_6.py:106:def ham_moi_282(): return 282
+tools/cong_cu_6.py:107:def ham_moi_294(): return 294
+tools/cong_cu_6.py:108:def ham_moi_306(): return 306
+tools/cong_cu_6.py:109:def ham_moi_318(): return 318
+tools/cong_cu_5.py:2:def ham_5_0(x, y=None):
+tools/cong_cu_5.py:5:def ham_5_1(x, y=None):
+tools/cong_cu_5.py:8:def ham_5_2(x, y=None):

@@ -1,0 +1,74 @@
+test_bad (test_x.T) ... FAIL
+test_ok_0 (test_x.T) ... ok
+test_ok_1 (test_x.T) ... ok
+test_ok_10 (test_x.T) ... ok
+test_ok_11 (test_x.T) ... ok
+test_ok_12 (test_x.T) ... ok
+test_ok_13 (test_x.T) ... ok
+test_ok_14 (test_x.T) ... ok
+test_ok_15 (test_x.T) ... ok
+test_ok_16 (test_x.T) ... ok
+test_ok_17 (test_x.T) ... ok
+test_ok_18 (test_x.T) ... ok
+test_ok_19 (test_x.T) ... ok
+test_ok_2 (test_x.T) ... ok
+test_ok_20 (test_x.T) ... ok
+test_ok_21 (test_x.T) ... ok
+test_ok_22 (test_x.T) ... ok
+test_ok_23 (test_x.T) ... ok
+test_ok_24 (test_x.T) ... ok
+test_ok_25 (test_x.T) ... ok
+test_ok_26 (test_x.T) ... ok
+test_ok_27 (test_x.T) ... ok
+test_ok_28 (test_x.T) ... ok
+test_ok_29 (test_x.T) ... ok
+test_ok_3 (test_x.T) ... ok
+test_ok_30 (test_x.T) ... ok
+test_ok_31 (test_x.T) ... ok
+test_ok_32 (test_x.T) ... ok
+test_ok_33 (test_x.T) ... ok
+test_ok_34 (test_x.T) ... ok
+test_ok_35 (test_x.T) ... ok
+test_ok_36 (test_x.T) ... ok
+test_ok_37 (test_x.T) ... ok
+test_ok_38 (test_x.T) ... ok
+test_ok_39 (test_x.T) ... ok
+test_ok_4 (test_x.T) ... ok
+test_ok_40 (test_x.T) ... ok
+test_ok_41 (test_x.T) ... ok
+test_ok_42 (test_x.T) ... ok
+test_ok_43 (test_x.T) ... ok
+test_ok_44 (test_x.T) ... ok
+test_ok_45 (test_x.T) ... ok
+test_ok_46 (test_x.T) ... ok
+test_ok_47 (test_x.T) ... ok
+test_ok_48 (test_x.T) ... ok
+test_ok_49 (test_x.T) ... ok
+test_ok_5 (test_x.T) ... ok
+test_ok_50 (test_x.T) ... ok
+test_ok_51 (test_x.T) ... ok
+test_ok_52 (test_x.T) ... ok
+test_ok_53 (test_x.T) ... ok
+test_ok_54 (test_x.T) ... ok
+test_ok_55 (test_x.T) ... ok
+test_ok_56 (test_x.T) ... ok
+test_ok_57 (test_x.T) ... ok
+test_ok_58 (test_x.T) ... ok
+test_ok_59 (test_x.T) ... ok
+test_ok_6 (test_x.T) ... ok
+test_ok_7 (test_x.T) ... ok
+test_ok_8 (test_x.T) ... ok
+test_ok_9 (test_x.T) ... ok
+
+======================================================================
+FAIL: test_bad (test_x.T)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/du_an/ut/test_x.py", line 6, in bad
+    def bad(self): self.assertEqual(1, 2)
+AssertionError: 1 != 2
+
+----------------------------------------------------------------------
+Ran 61 tests in 0.003s
+
+FAILED (failures=1)

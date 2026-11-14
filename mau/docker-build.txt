@@ -1,0 +1,197 @@
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 512B done
+#1 DONE 0.0s
+
+#2 [3/12] RUN apt-get install -y pkg2
+#2 0.215 Reading package lists...  2%
+#2 CACHED
+#2 DONE 2.2s
+
+#3 [4/12] RUN apt-get install -y pkg3
+#3 0.215 Reading package lists...  3%
+#3 CACHED
+#3 DONE 3.3s
+
+#4 [5/12] RUN apt-get install -y pkg4
+#4 0.215 Reading package lists...  4%
+#4 CACHED
+#4 DONE 4.4s
+
+#5 [6/12] RUN apt-get install -y pkg5
+#5 0.215 Reading package lists...  5%
+#5 CACHED
+#5 DONE 0.5s
+
+#6 [7/12] RUN apt-get install -y pkg6
+#6 0.215 Reading package lists...  6%
+#6 CACHED
+#6 DONE 1.6s
+
+#7 [8/12] RUN apt-get install -y pkg7
+#7 0.215 Reading package lists...  7%
+#7 CACHED
+#7 DONE 2.7s
+
+#8 [9/12] RUN apt-get install -y pkg8
+#8 0.215 Reading package lists...  8%
+#8 CACHED
+#8 DONE 3.8s
+
+#9 [10/12] RUN apt-get install -y pkg9
+#9 0.215 Reading package lists...  9%
+#9 CACHED
+#9 DONE 4.0s
+
+#10 [11/12] RUN apt-get install -y pkg10
+#10 0.215 Reading package lists...  10%
+#10 CACHED
+#10 DONE 0.1s
+
+#11 [12/12] RUN apt-get install -y pkg11
+#11 0.215 Reading package lists...  11%
+#11 CACHED
+#11 DONE 1.2s
+
+#12 [1/12] RUN apt-get install -y pkg12
+#12 0.215 Reading package lists...  12%
+#12 CACHED
+#12 DONE 2.3s
+
+#13 [2/12] RUN apt-get install -y pkg13
+#13 0.215 Reading package lists...  13%
+#13 CACHED
+#13 DONE 3.4s
+
+#14 [3/12] RUN apt-get install -y pkg14
+#14 0.215 Reading package lists...  14%
+#14 CACHED
+#14 DONE 4.5s
+
+#15 [4/12] RUN apt-get install -y pkg15
+#15 0.215 Reading package lists...  15%
+#15 CACHED
+#15 DONE 0.6s
+
+#16 [5/12] RUN apt-get install -y pkg16
+#16 0.215 Reading package lists...  16%
+#16 CACHED
+#16 DONE 1.7s
+
+#17 [6/12] RUN apt-get install -y pkg17
+#17 0.215 Reading package lists...  17%
+#17 CACHED
+#17 DONE 2.8s
+
+#18 [7/12] RUN apt-get install -y pkg18
+#18 0.215 Reading package lists...  18%
+#18 CACHED
+#18 DONE 3.0s
+
+#19 [8/12] RUN apt-get install -y pkg19
+#19 0.215 Reading package lists...  19%
+#19 CACHED
+#19 DONE 4.1s
+
+#20 [9/12] RUN apt-get install -y pkg20
+#20 0.215 Reading package lists...  20%
+#20 CACHED
+#20 DONE 0.2s
+
+#21 [10/12] RUN apt-get install -y pkg21
+#21 0.215 Reading package lists...  21%
+#21 CACHED
+#21 DONE 1.3s
+
+#22 [11/12] RUN apt-get install -y pkg22
+#22 0.215 Reading package lists...  22%
+#22 CACHED
+#22 DONE 2.4s
+
+#23 [12/12] RUN apt-get install -y pkg23
+#23 0.215 Reading package lists...  23%
+#23 CACHED
+#23 DONE 3.5s
+
+#24 [1/12] RUN apt-get install -y pkg24
+#24 0.215 Reading package lists...  24%
+#24 CACHED
+#24 DONE 4.6s
+
+#25 [2/12] RUN apt-get install -y pkg25
+#25 0.215 Reading package lists...  25%
+#25 CACHED
+#25 DONE 0.7s
+
+#26 [3/12] RUN apt-get install -y pkg26
+#26 0.215 Reading package lists...  26%
+#26 CACHED
+#26 DONE 1.8s
+
+#27 [4/12] RUN apt-get install -y pkg27
+#27 0.215 Reading package lists...  27%
+#27 CACHED
+#27 DONE 2.0s
+
+#28 [5/12] RUN apt-get install -y pkg28
+#28 0.215 Reading package lists...  28%
+#28 CACHED
+#28 DONE 3.1s
+
+#29 [6/12] RUN apt-get install -y pkg29
+#29 0.215 Reading package lists...  29%
+#29 CACHED
+#29 DONE 4.2s
+
+#30 [7/12] RUN apt-get install -y pkg30
+#30 0.215 Reading package lists...  30%
+#30 CACHED
+#30 DONE 0.3s
+
+#31 [8/12] RUN apt-get install -y pkg31
+#31 0.215 Reading package lists...  31%
+#31 CACHED
+#31 DONE 1.4s
+
+#32 [9/12] RUN apt-get install -y pkg32
+#32 0.215 Reading package lists...  32%
+#32 CACHED
+#32 DONE 2.5s
+
+#33 [10/12] RUN apt-get install -y pkg33
+#33 0.215 Reading package lists...  33%
+#33 CACHED
+#33 DONE 3.6s
+
+#34 [11/12] RUN apt-get install -y pkg34
+#34 0.215 Reading package lists...  34%
+#34 CACHED
+#34 DONE 4.7s
+
+#35 [12/12] RUN apt-get install -y pkg35
+#35 0.215 Reading package lists...  35%
+#35 CACHED
+#35 DONE 0.8s
+
+#36 [1/12] RUN apt-get install -y pkg36
+#36 0.215 Reading package lists...  36%
+#36 CACHED
+#36 DONE 1.0s
+
+#37 [2/12] RUN apt-get install -y pkg37
+#37 0.215 Reading package lists...  37%
+#37 CACHED
+#37 DONE 2.1s
+
+#38 [3/12] RUN apt-get install -y pkg38
+#38 0.215 Reading package lists...  38%
+#38 CACHED
+#38 DONE 3.2s
+
+#39 [4/12] RUN apt-get install -y pkg39
+#39 0.215 Reading package lists...  39%
+#39 CACHED
+#39 DONE 4.3s
+
+#40 exporting to image
+#40 writing image sha256:ab12cd34ab12cd34ab12cd34ab12cd34ab12cd34ab12cd34ab12cd34ab12cd34 done
+#40 DONE 0.1s

@@ -1,0 +1,315 @@
+{
+  "ghi_chu": "Thêm lệnh mới = thêm một mục vào 'luat'. Luật riêng cá nhân: ~/.claude/plugin-tintmark-tietkiem/luat_rieng.json (đứng trước). Trường: id, match (regex trên cả chuỗi lệnh), exclude, strip_ansi, replace [[regex, thay]], drop [regex], keep [regex: luôn giữ + giữ khi cắt giữa], dedupe none|consecutive|all, mask (số -> #), max_line_len, max_lines, max_lines_fail (khi lệnh lỗi), min_bytes, on_empty.",
+  "luat": [
+    {
+      "id": "git-status",
+      "match": "^git(\\s+-C\\s+\\S+)?\\s+status",
+      "exclude": "(--porcelain|\\s-s\\b|--short)",
+      "drop": [
+        "^\\s*\\(use \"git",
+        "^\\s*\\(commit ",
+        "^\\s*\\(fix conflicts",
+        "^\\s*\\(all conflicts",
+        "^no changes added to commit",
+        "^\\s*\\(create/copy"
+      ],
+      "keep": [
+        "^Untracked|^Changes|^On branch|^Your branch|^nothing|both modified|conflict"
+      ],
+      "replace": [
+        [
+          "^\\t(modified:|deleted:|new file:|renamed:)\\s+",
+          "\\1 "
+        ]
+      ],
+      "dedupe": "consecutive",
+      "max_lines": 60,
+      "min_bytes": 400
+    },
+    {
+      "id": "git-diff",
+      "match": "^git(\\s+-C\\s+\\S+)?\\s+(diff|show)\\b",
+      "exclude": "(--stat|--name-only|--name-status|--shortstat)",
+      "drop": [
+        "^index [0-9a-f]+\\.\\.[0-9a-f]+",
+        "^similarity index",
+        "^(old|new) mode"
+      ],
+      "keep": [
+        "^diff --git",
+        "^@@",
+        "^(new|deleted) file",
+        "^rename "
+      ],
+      "max_line_len": 220,
+      "max_lines": 300,
+      "max_lines_fail": 300,
+      "min_bytes": 1500
+    },
+    {
+      "id": "git-log-gon",
+      "match": "^git(\\s+-C\\s+\\S+)?\\s+log\\b.*(--oneline|--pretty|--format|--graph)",
+      "max_line_len": 200,
+      "max_lines": 80,
+      "min_bytes": 3000
+    },
+    {
+      "id": "git-log",
+      "match": "^git(\\s+-C\\s+\\S+)?\\s+log\\b",
+      "exclude": "(\\s-p\\b|--patch|--stat)",
+      "replace": [
+        [
+          "^commit ([0-9a-f]{8})[0-9a-f]+.*",
+          "commit \\1"
+        ],
+        [
+          "^Author:\\s+(.*?)\\s*<[^>]*>",
+          "Author: \\1"
+        ],
+        [
+          "^Date:\\s+\\w+ (\\w+ \\d+) [\\d:]+ (\\d{4}) .*",
+          "Date: \\1 \\2"
+        ]
+      ],
+      "drop": [
+        "^\\s*Co-Authored-By:",
+        "^\\s*🤖",
+        "^Merge:"
+      ],
+      "max_line_len": 200,
+      "max_lines": 120,
+      "min_bytes": 1500
+    },
+    {
+      "id": "git-ghi",
+      "match": "^git(\\s+-C\\s+\\S+)?\\s+(push|pull|fetch|clone|commit|branch|checkout|switch|merge|rebase|stash|tag)\\b",
+      "ghi_chu": "Bỏ dòng tiến độ (Counting/Compressing/Writing…), giữ lỗi, nhánh, kết quả.",
+      "drop": [
+        "^(remote:\\s*)?(Enumerating|Counting|Compressing|Writing|Receiving|Resolving|Unpacking) objects:.*\\d+%",
+        "^(remote:\\s*)?Resolving deltas:\\s+\\d+%",
+        "^(remote:\\s*)?Delta compression",
+        "^remote:\\s*$"
+      ],
+      "keep": [
+        "error|fatal|rejected|CONFLICT|->|\\[new|Fast-forward|Already up to date|files? changed|Total \\d+|done\\.$"
+      ],
+      "dedupe": "consecutive",
+      "max_line_len": 240,
+      "max_lines": 60,
+      "max_lines_fail": 120,
+      "min_bytes": 600
+    },
+    {
+      "id": "pytest",
+      "match": "^(python3?\\s+-m\\s+)?(pytest|py\\.test)\\b",
+      "drop": [
+        "^platform ",
+        "^rootdir:",
+        "^plugins:",
+        "^cachedir:",
+        "^configfile:",
+        "^collecting",
+        "^collected ",
+        "^\\S+\\.py\\s+\\.+(\\s+\\[\\s*\\d+%\\])?$",
+        "^\\s*$"
+      ],
+      "keep": [
+        "FAILED|ERROR|^E\\s|passed|failed|Error|^_{3,}|^={3,}|\\.py:\\d+"
+      ],
+      "dedupe": "consecutive",
+      "max_lines": 80,
+      "max_lines_fail": 160,
+      "min_bytes": 500
+    },
+    {
+      "id": "unittest",
+      "match": "^python3?\\s+-m\\s+unittest\\b",
+      "drop": [
+        "\\.\\.\\. ok$",
+        "^\\s*$",
+        "ResourceWarning",
+        "^\\s+\\S.*\\bopen\\("
+      ],
+      "keep": [
+        "FAIL|ERROR|Traceback|Error|^Ran |^OK|^FAILED|^-{20,}|^={20,}"
+      ],
+      "dedupe": "consecutive",
+      "max_lines": 80,
+      "max_lines_fail": 160,
+      "min_bytes": 500
+    },
+    {
+      "id": "node-test",
+      "match": "^(npm\\s+(run\\s+)?test|npx\\s+(jest|vitest)|jest|vitest|node\\s+--test|yarn\\s+test|pnpm\\s+test)\\b",
+      "exclude": "(--watch|-w\\b)",
+      "drop": [
+        "^\\s*(✔|✓|PASS)\\s",
+        "^\\s*$",
+        "^> "
+      ],
+      "keep": [
+        "✖|FAIL|●|Tests?:|Test Suites:|# (tests|pass|fail)|Error|expected|actual|\\bat "
+      ],
+      "dedupe": "consecutive",
+      "max_lines": 80,
+      "max_lines_fail": 160,
+      "min_bytes": 500
+    },
+    {
+      "id": "cargo-test",
+      "match": "^cargo\\s+test\\b",
+      "drop": [
+        "^\\s*(Compiling|Downloaded|Downloading|Fresh|Updating|Locking|Blocking)\\s",
+        "^test .* \\.\\.\\. ok$",
+        "^\\s*$"
+      ],
+      "keep": [
+        "FAILED|panicked|^error|test result|left:|right:|failures:"
+      ],
+      "dedupe": "consecutive",
+      "max_lines": 80,
+      "max_lines_fail": 160,
+      "min_bytes": 500
+    },
+    {
+      "id": "build-lint",
+      "match": "^((npm|yarn|pnpm)\\s+(run\\s+)?(build|lint|typecheck)|npx\\s+(tsc|eslint|vite|webpack|prettier)|tsc|eslint|ruff|flake8|mypy|make|cargo\\s+(build|check|clippy)|gradlew?\\s|\\./gradlew)\\b",
+      "exclude": "(--watch|-w\\b|\\bdev\\b|serve)",
+      "drop": [
+        "^\\s*(Compiling|Downloading|Downloaded|Finished)\\s",
+        "transforming \\(",
+        "^npm WARN deprecated",
+        "^\\s*$",
+        "^\\s*>\\s"
+      ],
+      "keep": [
+        "error|Error|✖|✘|warning:|FAILED|BUILD|Found \\d+|failed"
+      ],
+      "dedupe": "all",
+      "mask": true,
+      "max_line_len": 240,
+      "max_lines": 100,
+      "max_lines_fail": 200,
+      "min_bytes": 500
+    },
+    {
+      "id": "ls",
+      "match": "^ls\\b",
+      "drop": [
+        "^total \\d+"
+      ],
+      "max_line_len": 200,
+      "max_lines": 70,
+      "min_bytes": 1500
+    },
+    {
+      "id": "find",
+      "match": "^find\\s",
+      "exclude": "(-exec|-delete|-ok\\b)",
+      "dedupe": "all",
+      "max_line_len": 220,
+      "max_lines": 80,
+      "min_bytes": 1500
+    },
+    {
+      "id": "grep",
+      "match": "^(grep|rg|egrep)\\s",
+      "exclude": "(\\s-c\\b|--count|\\s-q\\b|\\s-l\\b)",
+      "dedupe": "all",
+      "max_line_len": 200,
+      "max_lines": 80,
+      "min_bytes": 1500
+    },
+    {
+      "id": "adb-logcat",
+      "match": "^adb(\\s+-s\\s+\\S+)?\\s+logcat\\b.*\\s-d\\b",
+      "drop": [
+        "^\\d\\d-\\d\\d\\s+[\\d:.]+\\s+\\d+\\s+\\d+\\s+[VDI]\\s"
+      ],
+      "keep": [
+        "\\s[EFW]\\s|FATAL|Exception|ANR"
+      ],
+      "dedupe": "all",
+      "mask": true,
+      "max_line_len": 220,
+      "max_lines": 80,
+      "max_lines_fail": 120,
+      "min_bytes": 800
+    },
+    {
+      "id": "adb",
+      "match": "^adb\\b",
+      "exclude": "(logcat|\\s-w\\b|shell\\s+(uiautomator|screenrecord|input))",
+      "replace": [
+        [
+          "^\\[\\s*\\d+%\\].*",
+          ""
+        ]
+      ],
+      "drop": [
+        "^\\* daemon"
+      ],
+      "dedupe": "consecutive",
+      "max_line_len": 220,
+      "max_lines": 100,
+      "min_bytes": 800
+    },
+    {
+      "id": "docker-build",
+      "match": "^docker(\\s+compose)?\\s+(build|buildx\\s+build|compose\\s+build|pull|compose\\s+up\\s+--build)\\b",
+      "drop": [
+        "^#\\d+ (CACHED|DONE|\\[internal\\]|transferring|sha256)",
+        "^#\\d+ \\d+\\.\\d+\\s",
+        "^\\s*$"
+      ],
+      "keep": [
+        "ERROR|error|failed|exporting to image|naming to"
+      ],
+      "dedupe": "consecutive",
+      "max_lines": 60,
+      "max_lines_fail": 120,
+      "min_bytes": 600
+    },
+    {
+      "id": "docker-logs",
+      "match": "^docker(\\s+compose)?\\s+logs\\b",
+      "exclude": "(\\s-f\\b|--follow)",
+      "keep": [
+        "ERROR|error|Error|FATAL|panic|Exception|WARN"
+      ],
+      "dedupe": "all",
+      "mask": true,
+      "max_line_len": 220,
+      "max_lines": 100,
+      "max_lines_fail": 150,
+      "min_bytes": 800
+    },
+    {
+      "id": "docker-list",
+      "match": "^docker\\s+(ps|images|container\\s+ls|image\\s+ls|volume\\s+ls)\\b",
+      "replace": [
+        [
+          "\\s{3,}",
+          "  "
+        ]
+      ],
+      "max_line_len": 400,
+      "max_lines": 30,
+      "min_bytes": 1500
+    },
+    {
+      "id": "log-dai",
+      "match": "^(cat|tail|head)\\s+(-n\\s*\\d+\\s+|-\\d+\\s+)?\\S+\\.(log|out|txt)(\\s+\\S+\\.(log|out|txt))*\\s*$",
+      "exclude": "\\s-f\\b",
+      "keep": [
+        "ERROR|error|Error|FATAL|panic|Exception|WARN|Traceback|failed|FAIL"
+      ],
+      "dedupe": "all",
+      "mask": true,
+      "max_line_len": 220,
+      "max_lines": 100,
+      "max_lines_fail": 150,
+      "min_bytes": 1500
+    }
+  ]
+}

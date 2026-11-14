@@ -1,0 +1,13 @@
+{
+ "name": "tintmark-tietkiem",
+ "owner": {
+  "name": "Tintmark"
+ },
+ "plugins": [
+  {
+   "name": "tintmark-tietkiem",
+   "source": "./",
+   "description": "Tiết kiệm token cho Claude Code: nén output lệnh bash, ngưỡng đổi phiên, đo token, phản hồi, tự sửa, cập nhật có quay lui"
+  }
+ ]
+}

@@ -1,0 +1,109 @@
+# tintmark-tietkiem — plugin tiết kiệm token cho Claude Code
+
+Một gói gồm: nén output lệnh bash, skill `tintmark-token` (ngưỡng 250k / 300k đổi phiên, bàn giao, chọn model, dọn ngữ cảnh), hook đo ngưỡng, sổ vòng lặp, đo token, sổ phản hồi, tự sửa bộ lọc, cập nhật có sao lưu và quay lui.
+
+Python 3 thư viện chuẩn. Không cài thêm gì, không API trả phí, không gửi dữ liệu ra ngoài máy.
+
+> **Giấy phép:** chưa cấp phép sử dụng lại, giữ mọi quyền (All rights reserved). Mã được công khai để xem; chưa cho phép sao chép, sửa, phân phối lại khi chưa có giấy phép chính thức.
+
+## Thư mục
+
+| Thư mục | Nội dung |
+|---|---|
+| `scripts/` | `hook_sau.py` (nén ở PostToolUse), `hook.py` (chế độ cũ), `nen.py` + `nen_loi.py` (lõi nén), `thong_ke.py`, `phan_hoi.py`, `tu_sua.py`, `phat_ban.py`, `cap_nhat.py`, `cai_dat.py`, `doi_ten.py` (chuyển máy từ tên cũ `nen-token`) |
+| `luat/luat.json` | 19 bộ lọc: git status / diff / log / push-pull-commit-branch, pytest, unittest, node test, cargo test, build / lint, ls, find, grep, adb (+ logcat), docker (build, logs, danh sách), log dài. Luật riêng của máy: `~/.claude/plugin-tintmark-tietkiem/luat_rieng.json` (đứng trước) |
+| `commands/phan-hoi.md` | lệnh `/tintmark-tietkiem:phan-hoi` báo nén sai |
+| `hooks/hooks.json` | nối hook nén (Bash) và hook ngưỡng (PostToolUse, UserPromptSubmit) |
+| `skills/tintmark-token/` | skill + `cong_cu/` (`nguong_token.py`, `do_token.py`, `vong_lap.py`) |
+| `mau/`, `tests/` | output mẫu (từ kho mẫu tổng hợp `tests/tao_mau.sh` hoặc viết tay) và test; `tests/phan_hoi/` là ca test sinh từ phản hồi |
+
+Trên máy cần 3 chỗ: **nguồn** (thư mục này), **kho bản** (`../kho_ban/tintmark-tietkiem/<số bản>/` + `kenh.json`), **liên kết cài đặt** (trỏ vào một bản trong kho; Claude Code nạp plugin qua liên kết). Dữ liệu chạy: `~/.claude/plugin-tintmark-tietkiem/`.
+
+## Cài
+
+1. Phát bản đầu vào kho bản (chạy trong nguồn): `python3 scripts/phat_ban.py --loai va --ghi-chu "bản đầu"`.
+   Cài thẳng từ kho này (marketplace GitHub): `claude plugin marketplace add <chủ>/tintmark-tietkiem` rồi `claude plugin install tintmark-tietkiem@tintmark-tietkiem`.
+2. Hoặc tạo liên kết cài đặt trỏ vào bản đó, đặt trong một marketplace cục bộ, rồi `claude plugin install tintmark-tietkiem@<tên marketplace>`. Thử nhanh không cài: `claude --plugin-dir <thư mục bản>`.
+3. Gộp skill và hook ngưỡng cũ (nếu máy đã có skill `tintmark-token` riêng), đồng thời ghi cấu hình cập nhật:
+
+```bash
+python3 <liên kết>/scripts/cai_dat.py gop --lien-ket <liên kết> --kenh <kho bản>/kenh.json --nguon <nguồn> --tu-dong ap_dung
+```
+
+4. Kiểm: `python3 <liên kết>/scripts/cai_dat.py trang-thai`.
+
+Phiên đang mở nhận hook khi mở lại hoặc `/reload-plugins`.
+
+Sau khi gộp, đặt `P=~/.claude/skills/tintmark-token/../..` để gọi script ở mọi thư mục.
+
+## Dùng hằng ngày
+
+Không phải làm gì: lệnh bash đơn giản có luật khớp, chạy thành công, output đủ dài thì tự được rút gọn. Chỗ cắt có dòng `… [nén: bỏ N dòng — chạy lại với NEN_OFF=1 để xem đủ]`. Cần output đầy đủ: thêm `NEN_OFF=1 ` trước lệnh.
+
+## Đo
+
+```bash
+python3 $P/scripts/thong_ke.py --days 7 --theo luat
+```
+```bash
+python3 $P/skills/tintmark-token/cong_cu/do_token.py 3
+```
+
+`thong_ke.py` là số byte nén được (token ≈ byte / 4, ước tính). `do_token.py` là token theo phiên từ nhật ký Claude Code.
+
+## Phản hồi và tự sửa
+
+```bash
+python3 $P/scripts/phan_hoi.py bao --loai mat-dong --lenh "docker ps -a" --mo-ta "mất cột NAMES"
+```
+```bash
+python3 $P/scripts/tu_sua.py quet
+```
+
+Bộ lọc bị báo 2 lần (hoặc 3 dấu hiệu tự ghi) trong 7 ngày thì tự tắt riêng bộ lọc đó. Sửa: `tu_sua.py tai-hien <mã> --giu "<dòng bị mất>"` → sửa `luat/luat.json` → `tu_sua.py xong <mã> --ghi-chu "…"` (test, phát bản vá, cập nhật, bật lại, đóng). Chi tiết: `skills/tintmark-token/phan-hoi.md`, `tu-sua.md`.
+
+## Cập nhật và quay lui
+
+```bash
+python3 $P/scripts/cap_nhat.py kiem
+```
+```bash
+python3 $P/scripts/cap_nhat.py ap-dung
+```
+```bash
+python3 $P/scripts/cap_nhat.py quay-lui
+```
+
+`ap-dung` kiểm băm, chạy test của bản mới, sao lưu, đổi liên kết, thử khói; hỏng bước nào thì giữ hoặc tự về bản cũ. Tự cập nhật nền mỗi 24 giờ theo `tu_dong` trong `~/.claude/plugin-tintmark-tietkiem/cap_nhat.json` (`ap_dung` | `bao` | `tat`). Chi tiết: `skills/tintmark-token/cap-nhat.md`.
+
+## Test và phát bản (trong nguồn)
+
+```bash
+python3 -W ignore -m unittest discover -s tests
+```
+```bash
+python3 scripts/phat_ban.py --loai va --ghi-chu "đã sửa gì"
+```
+
+Phát bản luôn chạy từ nguồn. Không sửa tệp trong kho bản (sai băm, bị từ chối khi cập nhật).
+
+## Tắt và gỡ
+
+- Tắt nén cho một lệnh: tiền tố `NEN_OFF=1 `. Cho cả máy: `{"che_do": "tat"}` trong `~/.claude/plugin-tintmark-tietkiem/cau_hinh.json`.
+- Trả `settings.json` và skill về trước khi gộp: `python3 $P/scripts/cai_dat.py go`.
+- Tắt plugin: `claude plugin disable tintmark-tietkiem@<tên marketplace>`.
+- Xoá dữ liệu: xoá `~/.claude/plugin-tintmark-tietkiem/`.
+
+## An toàn
+
+- Hook luôn fail-open: lỗi bất kỳ thì lệnh chạy và trả output nguyên bản. Hook không chặn lệnh, không đặt quyền.
+- Chế độ mặc định `sau` không đổi lệnh. Lệnh lỗi (mã thoát khác 0), lệnh ghép (`| & ; < > ( ) $`), lệnh nhiều dòng, lệnh chạy nền không bị nén. Riêng dạng `cd <thư mục> && <lệnh đơn>` được xét theo `<lệnh đơn>`.
+- Thống kê chỉ lưu 2 từ đầu của lệnh và số byte. Output gốc của 8 lệnh vừa nén được giữ tạm trên máy để tái hiện khi bị báo sai; phản hồi lưu output gốc trong `~/.claude/plugin-tintmark-tietkiem/phan_hoi/`.
+- Giới hạn: phiên đang mở không tự nhận bản mới; kênh cập nhật từ xa chưa có (mã từ chối kênh `http…`); không có đường gửi phản hồi ra ngoài máy.
+- Phản hồi mở quá 3 ngày: hook báo một dòng, tối đa 1 lần / ngày.
+
+## English summary
+
+`tintmark-tietkiem` is a Claude Code plugin that saves tokens: it shortens the output of common bash commands (git, test runners, build, ls/find/grep, docker, adb, long logs) after they run (PostToolUse `updatedToolOutput`, the command itself is never changed), warns at 250k / 300k context and guides a hand-off to a new session, keeps a local feedback log, can disable a misbehaving filter on its own, and updates from a local release store with hash check, tests, smoke test and rollback. Pure Python 3 standard library, runs locally, sends nothing off the machine. Hooks are fail-open: any error returns the original output. Documentation is in Vietnamese.
+
+**License:** not licensed for reuse; all rights reserved. The source is public for reading only.

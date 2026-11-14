@@ -1,0 +1,576 @@
+diff --git a/src/goi_1/mo_dun_21.py b/src/goi_1/mo_dun_21.py
+index 812bc64..8f0c2c5 100644
+--- a/src/goi_1/mo_dun_21.py
++++ b/src/goi_1/mo_dun_21.py
+@@ -1 +1,7 @@
+ GIA_TRI = 21
++# thay đổi 21 dòng 1
++# thay đổi 21 dòng 2
++# thay đổi 21 dòng 3
++# thay đổi 21 dòng 4
++# thay đổi 21 dòng 5
++# thay đổi 21 dòng 6
+diff --git a/src/goi_10/mo_dun_210.py b/src/goi_10/mo_dun_210.py
+index d7d1381..63d4ac9 100644
+--- a/src/goi_10/mo_dun_210.py
++++ b/src/goi_10/mo_dun_210.py
+@@ -1 +1,7 @@
+ GIA_TRI = 210
++# thay đổi 210 dòng 1
++# thay đổi 210 dòng 2
++# thay đổi 210 dòng 3
++# thay đổi 210 dòng 4
++# thay đổi 210 dòng 5
++# thay đổi 210 dòng 6
+diff --git a/src/goi_11/mo_dun_231.py b/src/goi_11/mo_dun_231.py
+index c8312ac..c5865b4 100644
+--- a/src/goi_11/mo_dun_231.py
++++ b/src/goi_11/mo_dun_231.py
+@@ -1 +1,7 @@
+ GIA_TRI = 231
++# thay đổi 231 dòng 1
++# thay đổi 231 dòng 2
++# thay đổi 231 dòng 3
++# thay đổi 231 dòng 4
++# thay đổi 231 dòng 5
++# thay đổi 231 dòng 6
+diff --git a/src/goi_12/mo_dun_252.py b/src/goi_12/mo_dun_252.py
+index b2a4789..d939920 100644
+--- a/src/goi_12/mo_dun_252.py
++++ b/src/goi_12/mo_dun_252.py
+@@ -1 +1,7 @@
+ GIA_TRI = 252
++# thay đổi 252 dòng 1
++# thay đổi 252 dòng 2
++# thay đổi 252 dòng 3
++# thay đổi 252 dòng 4
++# thay đổi 252 dòng 5
++# thay đổi 252 dòng 6
+diff --git a/src/goi_13/mo_dun_273.py b/src/goi_13/mo_dun_273.py
+index 9771359..76c8a34 100644
+--- a/src/goi_13/mo_dun_273.py
++++ b/src/goi_13/mo_dun_273.py
+@@ -1 +1,7 @@
+ GIA_TRI = 273
++# thay đổi 273 dòng 1
++# thay đổi 273 dòng 2
++# thay đổi 273 dòng 3
++# thay đổi 273 dòng 4
++# thay đổi 273 dòng 5
++# thay đổi 273 dòng 6
+diff --git a/src/goi_14/mo_dun_294.py b/src/goi_14/mo_dun_294.py
+index bd61351..268f22a 100644
+--- a/src/goi_14/mo_dun_294.py
++++ b/src/goi_14/mo_dun_294.py
+@@ -1 +1,7 @@
+ GIA_TRI = 294
++# thay đổi 294 dòng 1
++# thay đổi 294 dòng 2
++# thay đổi 294 dòng 3
++# thay đổi 294 dòng 4
++# thay đổi 294 dòng 5
++# thay đổi 294 dòng 6
+diff --git a/src/goi_15/mo_dun_315.py b/src/goi_15/mo_dun_315.py
+index 49904a1..29afa96 100644
+--- a/src/goi_15/mo_dun_315.py
++++ b/src/goi_15/mo_dun_315.py
+@@ -1 +1,7 @@
+ GIA_TRI = 315
++# thay đổi 315 dòng 1
++# thay đổi 315 dòng 2
++# thay đổi 315 dòng 3
++# thay đổi 315 dòng 4
++# thay đổi 315 dòng 5
++# thay đổi 315 dòng 6
+diff --git a/src/goi_2/mo_dun_42.py b/src/goi_2/mo_dun_42.py
+index e1d2197..4ae91c5 100644
+--- a/src/goi_2/mo_dun_42.py
++++ b/src/goi_2/mo_dun_42.py
+@@ -1 +1,7 @@
+ GIA_TRI = 42
++# thay đổi 42 dòng 1
++# thay đổi 42 dòng 2
++# thay đổi 42 dòng 3
++# thay đổi 42 dòng 4
++# thay đổi 42 dòng 5
++# thay đổi 42 dòng 6
+diff --git a/src/goi_3/mo_dun_63.py b/src/goi_3/mo_dun_63.py
+index 2bb4aa1..18f3b20 100644
+--- a/src/goi_3/mo_dun_63.py
++++ b/src/goi_3/mo_dun_63.py
+@@ -1 +1,7 @@
+ GIA_TRI = 63
++# thay đổi 63 dòng 1
++# thay đổi 63 dòng 2
++# thay đổi 63 dòng 3
++# thay đổi 63 dòng 4
++# thay đổi 63 dòng 5
++# thay đổi 63 dòng 6
+diff --git a/src/goi_4/mo_dun_84.py b/src/goi_4/mo_dun_84.py
+index 530cefb..f9ccc2f 100644
+--- a/src/goi_4/mo_dun_84.py
++++ b/src/goi_4/mo_dun_84.py
+@@ -1 +1,7 @@
+ GIA_TRI = 84
++# thay đổi 84 dòng 1
++# thay đổi 84 dòng 2
++# thay đổi 84 dòng 3
++# thay đổi 84 dòng 4
++# thay đổi 84 dòng 5
++# thay đổi 84 dòng 6
+diff --git a/src/goi_5/mo_dun_105.py b/src/goi_5/mo_dun_105.py
+index 7b41976..503bb50 100644
+--- a/src/goi_5/mo_dun_105.py
++++ b/src/goi_5/mo_dun_105.py
+@@ -1 +1,7 @@
+ GIA_TRI = 105
++# thay đổi 105 dòng 1
++# thay đổi 105 dòng 2
++# thay đổi 105 dòng 3
++# thay đổi 105 dòng 4
++# thay đổi 105 dòng 5
++# thay đổi 105 dòng 6
+diff --git a/src/goi_6/mo_dun_126.py b/src/goi_6/mo_dun_126.py
+index 1df7f15..14d0293 100644
+--- a/src/goi_6/mo_dun_126.py
++++ b/src/goi_6/mo_dun_126.py
+@@ -1 +1,7 @@
+ GIA_TRI = 126
++# thay đổi 126 dòng 1
++# thay đổi 126 dòng 2
++# thay đổi 126 dòng 3
++# thay đổi 126 dòng 4
++# thay đổi 126 dòng 5
++# thay đổi 126 dòng 6
+diff --git a/src/goi_7/mo_dun_147.py b/src/goi_7/mo_dun_147.py
+index 2408533..d79e6f0 100644
+--- a/src/goi_7/mo_dun_147.py
++++ b/src/goi_7/mo_dun_147.py
+@@ -1 +1,7 @@
+ GIA_TRI = 147
++# thay đổi 147 dòng 1
++# thay đổi 147 dòng 2
++# thay đổi 147 dòng 3
++# thay đổi 147 dòng 4
++# thay đổi 147 dòng 5
++# thay đổi 147 dòng 6
+diff --git a/src/goi_8/mo_dun_168.py b/src/goi_8/mo_dun_168.py
+index 3bcaea7..e90ddc2 100644
+--- a/src/goi_8/mo_dun_168.py
++++ b/src/goi_8/mo_dun_168.py
+@@ -1 +1,7 @@
+ GIA_TRI = 168
++# thay đổi 168 dòng 1
++# thay đổi 168 dòng 2
++# thay đổi 168 dòng 3
++# thay đổi 168 dòng 4
++# thay đổi 168 dòng 5
++# thay đổi 168 dòng 6
+diff --git a/src/goi_9/mo_dun_189.py b/src/goi_9/mo_dun_189.py
+index 44c86fd..b1fe259 100644
+--- a/src/goi_9/mo_dun_189.py
++++ b/src/goi_9/mo_dun_189.py
+@@ -1 +1,7 @@
+ GIA_TRI = 189
++# thay đổi 189 dòng 1
++# thay đổi 189 dòng 2
++# thay đổi 189 dòng 3
++# thay đổi 189 dòng 4
++# thay đổi 189 dòng 5
++# thay đổi 189 dòng 6
+diff --git a/tools/cong_cu_0.py b/tools/cong_cu_0.py
+index 3f4ea2e..5aba48a 100644
+--- a/tools/cong_cu_0.py
++++ b/tools/cong_cu_0.py
+@@ -81,3 +81,28 @@ def ham_0_26(x, y=None):
+     return (x, y, 26)
+ 
+ def ham_moi_12(): return 12
++def ham_moi_24(): return 24
++def ham_moi_36(): return 36
++def ham_moi_48(): return 48
++def ham_moi_60(): return 60
++def ham_moi_72(): return 72
++def ham_moi_84(): return 84
++def ham_moi_96(): return 96
++def ham_moi_108(): return 108
++def ham_moi_120(): return 120
++def ham_moi_132(): return 132
++def ham_moi_144(): return 144
++def ham_moi_156(): return 156
++def ham_moi_168(): return 168
++def ham_moi_180(): return 180
++def ham_moi_192(): return 192
++def ham_moi_204(): return 204
++def ham_moi_216(): return 216
++def ham_moi_228(): return 228
++def ham_moi_240(): return 240
++def ham_moi_252(): return 252
++def ham_moi_264(): return 264
++def ham_moi_276(): return 276
++def ham_moi_288(): return 288
++def ham_moi_300(): return 300
++def ham_moi_312(): return 312
+diff --git a/tools/cong_cu_1.py b/tools/cong_cu_1.py
+index 450ffd0..c6c4253 100644
+--- a/tools/cong_cu_1.py
++++ b/tools/cong_cu_1.py
+@@ -82,3 +82,28 @@ def ham_1_26(x, y=None):
+ 
+ def ham_moi_1(): return 1
+ def ham_moi_13(): return 13
++def ham_moi_25(): return 25
++def ham_moi_37(): return 37
++def ham_moi_49(): return 49
++def ham_moi_61(): return 61
++def ham_moi_73(): return 73
++def ham_moi_85(): return 85
++def ham_moi_97(): return 97
++def ham_moi_109(): return 109
++def ham_moi_121(): return 121
++def ham_moi_133(): return 133
++def ham_moi_145(): return 145
++def ham_moi_157(): return 157
++def ham_moi_169(): return 169
++def ham_moi_181(): return 181
++def ham_moi_193(): return 193
++def ham_moi_205(): return 205
++def ham_moi_217(): return 217
++def ham_moi_229(): return 229
++def ham_moi_241(): return 241
++def ham_moi_253(): return 253
++def ham_moi_265(): return 265
++def ham_moi_277(): return 277
++def ham_moi_289(): return 289
++def ham_moi_301(): return 301
++def ham_moi_313(): return 313
+diff --git a/tools/cong_cu_10.py b/tools/cong_cu_10.py
+index 42ac790..542b2d9 100644
+--- a/tools/cong_cu_10.py
++++ b/tools/cong_cu_10.py
+@@ -81,3 +81,28 @@ def ham_10_26(x, y=None):
+     return (x, y, 26)
+ 
+ def ham_moi_10(): return 10
++def ham_moi_22(): return 22
++def ham_moi_34(): return 34
++def ham_moi_46(): return 46
++def ham_moi_58(): return 58
++def ham_moi_70(): return 70
++def ham_moi_82(): return 82
++def ham_moi_94(): return 94
++def ham_moi_106(): return 106
++def ham_moi_118(): return 118
++def ham_moi_130(): return 130
++def ham_moi_142(): return 142
++def ham_moi_154(): return 154
++def ham_moi_166(): return 166
++def ham_moi_178(): return 178
++def ham_moi_190(): return 190
++def ham_moi_202(): return 202
++def ham_moi_214(): return 214
++def ham_moi_226(): return 226
++def ham_moi_238(): return 238
++def ham_moi_250(): return 250
++def ham_moi_262(): return 262
++def ham_moi_274(): return 274
++def ham_moi_286(): return 286
++def ham_moi_298(): return 298
++def ham_moi_310(): return 310
+diff --git a/tools/cong_cu_11.py b/tools/cong_cu_11.py
+index 6dcb963..80aa9c7 100644
+--- a/tools/cong_cu_11.py
++++ b/tools/cong_cu_11.py
+@@ -81,3 +81,28 @@ def ham_11_26(x, y=None):
+     return (x, y, 26)
+ 
+ def ham_moi_11(): return 11
++def ham_moi_23(): return 23
++def ham_moi_35(): return 35
++def ham_moi_47(): return 47
++def ham_moi_59(): return 59
++def ham_moi_71(): return 71
++def ham_moi_83(): return 83
++def ham_moi_95(): return 95
++def ham_moi_107(): return 107
++def ham_moi_119(): return 119
++def ham_moi_131(): return 131
++def ham_moi_143(): return 143
++def ham_moi_155(): return 155
++def ham_moi_167(): return 167
++def ham_moi_179(): return 179
++def ham_moi_191(): return 191
++def ham_moi_203(): return 203
++def ham_moi_215(): return 215
++def ham_moi_227(): return 227
++def ham_moi_239(): return 239
++def ham_moi_251(): return 251
++def ham_moi_263(): return 263
++def ham_moi_275(): return 275
++def ham_moi_287(): return 287
++def ham_moi_299(): return 299
++def ham_moi_311(): return 311
+diff --git a/tools/cong_cu_2.py b/tools/cong_cu_2.py
+index 644020b..30acca2 100644
+--- a/tools/cong_cu_2.py
++++ b/tools/cong_cu_2.py
+@@ -82,3 +82,28 @@ def ham_2_26(x, y=None):
+ 
+ def ham_moi_2(): return 2
+ def ham_moi_14(): return 14
++def ham_moi_26(): return 26
++def ham_moi_38(): return 38
++def ham_moi_50(): return 50
++def ham_moi_62(): return 62
++def ham_moi_74(): return 74
++def ham_moi_86(): return 86
++def ham_moi_98(): return 98
++def ham_moi_110(): return 110
++def ham_moi_122(): return 122
++def ham_moi_134(): return 134
++def ham_moi_146(): return 146
++def ham_moi_158(): return 158
++def ham_moi_170(): return 170
++def ham_moi_182(): return 182
++def ham_moi_194(): return 194
++def ham_moi_206(): return 206
++def ham_moi_218(): return 218
++def ham_moi_230(): return 230
++def ham_moi_242(): return 242
++def ham_moi_254(): return 254
++def ham_moi_266(): return 266
++def ham_moi_278(): return 278
++def ham_moi_290(): return 290
++def ham_moi_302(): return 302
++def ham_moi_314(): return 314
+diff --git a/tools/cong_cu_3.py b/tools/cong_cu_3.py
+index 10a3d6e..e060a2e 100644
+--- a/tools/cong_cu_3.py
++++ b/tools/cong_cu_3.py
+@@ -82,3 +82,28 @@ def ham_3_26(x, y=None):
+ 
+ def ham_moi_3(): return 3
+ def ham_moi_15(): return 15
++def ham_moi_27(): return 27
++def ham_moi_39(): return 39
++def ham_moi_51(): return 51
++def ham_moi_63(): return 63
++def ham_moi_75(): return 75
++def ham_moi_87(): return 87
++def ham_moi_99(): return 99
++def ham_moi_111(): return 111
++def ham_moi_123(): return 123
++def ham_moi_135(): return 135
++def ham_moi_147(): return 147
++def ham_moi_159(): return 159
++def ham_moi_171(): return 171
++def ham_moi_183(): return 183
++def ham_moi_195(): return 195
++def ham_moi_207(): return 207
++def ham_moi_219(): return 219
++def ham_moi_231(): return 231
++def ham_moi_243(): return 243
++def ham_moi_255(): return 255
++def ham_moi_267(): return 267
++def ham_moi_279(): return 279
++def ham_moi_291(): return 291
++def ham_moi_303(): return 303
++def ham_moi_315(): return 315
+diff --git a/tools/cong_cu_4.py b/tools/cong_cu_4.py
+index 91e77e3..24c63aa 100644
+--- a/tools/cong_cu_4.py
++++ b/tools/cong_cu_4.py
+@@ -82,3 +82,28 @@ def ham_4_26(x, y=None):
+ 
+ def ham_moi_4(): return 4
+ def ham_moi_16(): return 16
++def ham_moi_28(): return 28
++def ham_moi_40(): return 40
++def ham_moi_52(): return 52
++def ham_moi_64(): return 64
++def ham_moi_76(): return 76
++def ham_moi_88(): return 88
++def ham_moi_100(): return 100
++def ham_moi_112(): return 112
++def ham_moi_124(): return 124
++def ham_moi_136(): return 136
++def ham_moi_148(): return 148
++def ham_moi_160(): return 160
++def ham_moi_172(): return 172
++def ham_moi_184(): return 184
++def ham_moi_196(): return 196
++def ham_moi_208(): return 208
++def ham_moi_220(): return 220
++def ham_moi_232(): return 232
++def ham_moi_244(): return 244
++def ham_moi_256(): return 256
++def ham_moi_268(): return 268
++def ham_moi_280(): return 280
++def ham_moi_292(): return 292
++def ham_moi_304(): return 304
++def ham_moi_316(): return 316
+diff --git a/tools/cong_cu_5.py b/tools/cong_cu_5.py
+index 252f0b2..717ab9e 100644
+--- a/tools/cong_cu_5.py
++++ b/tools/cong_cu_5.py
+@@ -82,3 +82,28 @@ def ham_5_26(x, y=None):
+ 
+ def ham_moi_5(): return 5
+ def ham_moi_17(): return 17
++def ham_moi_29(): return 29
++def ham_moi_41(): return 41
++def ham_moi_53(): return 53
++def ham_moi_65(): return 65
++def ham_moi_77(): return 77
++def ham_moi_89(): return 89
++def ham_moi_101(): return 101
++def ham_moi_113(): return 113
++def ham_moi_125(): return 125
++def ham_moi_137(): return 137
++def ham_moi_149(): return 149
++def ham_moi_161(): return 161
++def ham_moi_173(): return 173
++def ham_moi_185(): return 185
++def ham_moi_197(): return 197
++def ham_moi_209(): return 209
++def ham_moi_221(): return 221
++def ham_moi_233(): return 233
++def ham_moi_245(): return 245
++def ham_moi_257(): return 257
++def ham_moi_269(): return 269
++def ham_moi_281(): return 281
++def ham_moi_293(): return 293
++def ham_moi_305(): return 305
++def ham_moi_317(): return 317
+diff --git a/tools/cong_cu_6.py b/tools/cong_cu_6.py
+index acdc6c4..dc84c97 100644
+--- a/tools/cong_cu_6.py
++++ b/tools/cong_cu_6.py
+@@ -82,3 +82,28 @@ def ham_6_26(x, y=None):
+ 
+ def ham_moi_6(): return 6
+ def ham_moi_18(): return 18
++def ham_moi_30(): return 30
++def ham_moi_42(): return 42
++def ham_moi_54(): return 54
++def ham_moi_66(): return 66
++def ham_moi_78(): return 78
++def ham_moi_90(): return 90
++def ham_moi_102(): return 102
++def ham_moi_114(): return 114
++def ham_moi_126(): return 126
++def ham_moi_138(): return 138
++def ham_moi_150(): return 150
++def ham_moi_162(): return 162
++def ham_moi_174(): return 174
++def ham_moi_186(): return 186
++def ham_moi_198(): return 198
++def ham_moi_210(): return 210
++def ham_moi_222(): return 222
++def ham_moi_234(): return 234
++def ham_moi_246(): return 246
++def ham_moi_258(): return 258
++def ham_moi_270(): return 270
++def ham_moi_282(): return 282
++def ham_moi_294(): return 294
++def ham_moi_306(): return 306
++def ham_moi_318(): return 318
+diff --git a/tools/cong_cu_7.py b/tools/cong_cu_7.py
+index 919a62c..447bbd8 100644
+--- a/tools/cong_cu_7.py
++++ b/tools/cong_cu_7.py
+@@ -82,3 +82,28 @@ def ham_7_26(x, y=None):
+ 
+ def ham_moi_7(): return 7
+ def ham_moi_19(): return 19
++def ham_moi_31(): return 31
++def ham_moi_43(): return 43
++def ham_moi_55(): return 55
++def ham_moi_67(): return 67
++def ham_moi_79(): return 79
++def ham_moi_91(): return 91
++def ham_moi_103(): return 103
++def ham_moi_115(): return 115
++def ham_moi_127(): return 127
++def ham_moi_139(): return 139
++def ham_moi_151(): return 151
++def ham_moi_163(): return 163
++def ham_moi_175(): return 175
++def ham_moi_187(): return 187
++def ham_moi_199(): return 199
++def ham_moi_211(): return 211
++def ham_moi_223(): return 223
++def ham_moi_235(): return 235
++def ham_moi_247(): return 247
++def ham_moi_259(): return 259
++def ham_moi_271(): return 271
++def ham_moi_283(): return 283
++def ham_moi_295(): return 295
++def ham_moi_307(): return 307
++def ham_moi_319(): return 319
+diff --git a/tools/cong_cu_8.py b/tools/cong_cu_8.py
+index 2cf91b0..3462893 100644
+--- a/tools/cong_cu_8.py
++++ b/tools/cong_cu_8.py
+@@ -82,3 +82,28 @@ def ham_8_26(x, y=None):
+ 
+ def ham_moi_8(): return 8
+ def ham_moi_20(): return 20
++def ham_moi_32(): return 32
++def ham_moi_44(): return 44
++def ham_moi_56(): return 56
++def ham_moi_68(): return 68
++def ham_moi_80(): return 80
++def ham_moi_92(): return 92
++def ham_moi_104(): return 104
++def ham_moi_116(): return 116
++def ham_moi_128(): return 128
++def ham_moi_140(): return 140
++def ham_moi_152(): return 152
++def ham_moi_164(): return 164
++def ham_moi_176(): return 176
++def ham_moi_188(): return 188
++def ham_moi_200(): return 200
++def ham_moi_212(): return 212
++def ham_moi_224(): return 224
++def ham_moi_236(): return 236
++def ham_moi_248(): return 248
++def ham_moi_260(): return 260
++def ham_moi_272(): return 272
++def ham_moi_284(): return 284
++def ham_moi_296(): return 296
++def ham_moi_308(): return 308
++def ham_moi_320(): return 320
+diff --git a/tools/cong_cu_9.py b/tools/cong_cu_9.py
+index 71ee377..32746cd 100644
+--- a/tools/cong_cu_9.py
++++ b/tools/cong_cu_9.py
+@@ -81,3 +81,28 @@ def ham_9_26(x, y=None):
+     return (x, y, 26)
+ 
+ def ham_moi_9(): return 9
++def ham_moi_21(): return 21
++def ham_moi_33(): return 33
++def ham_moi_45(): return 45
++def ham_moi_57(): return 57
++def ham_moi_69(): return 69
++def ham_moi_81(): return 81
++def ham_moi_93(): return 93
++def ham_moi_105(): return 105
++def ham_moi_117(): return 117
++def ham_moi_129(): return 129
++def ham_moi_141(): return 141
++def ham_moi_153(): return 153
++def ham_moi_165(): return 165
++def ham_moi_177(): return 177
++def ham_moi_189(): return 189
++def ham_moi_201(): return 201
++def ham_moi_213(): return 213
++def ham_moi_225(): return 225
++def ham_moi_237(): return 237
++def ham_moi_249(): return 249
++def ham_moi_261(): return 261
++def ham_moi_273(): return 273
++def ham_moi_285(): return 285
++def ham_moi_297(): return 297
++def ham_moi_309(): return 309

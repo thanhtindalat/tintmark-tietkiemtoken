@@ -1,0 +1,79 @@
+> app@1.0.0 build
+> tsc -p . && vite build
+
+[32mvite v5.0.0 building for production...[39m
+[2mtransforming (0)[22m src/comp/File0.tsx
+[2mtransforming (1)[22m src/comp/File1.tsx
+[2mtransforming (2)[22m src/comp/File2.tsx
+[2mtransforming (3)[22m src/comp/File3.tsx
+[2mtransforming (4)[22m src/comp/File4.tsx
+[2mtransforming (5)[22m src/comp/File5.tsx
+[2mtransforming (6)[22m src/comp/File6.tsx
+[2mtransforming (7)[22m src/comp/File7.tsx
+[2mtransforming (8)[22m src/comp/File8.tsx
+[2mtransforming (9)[22m src/comp/File9.tsx
+[2mtransforming (10)[22m src/comp/File10.tsx
+[2mtransforming (11)[22m src/comp/File11.tsx
+[2mtransforming (12)[22m src/comp/File12.tsx
+[2mtransforming (13)[22m src/comp/File13.tsx
+[2mtransforming (14)[22m src/comp/File14.tsx
+[2mtransforming (15)[22m src/comp/File15.tsx
+[2mtransforming (16)[22m src/comp/File16.tsx
+[2mtransforming (17)[22m src/comp/File17.tsx
+[2mtransforming (18)[22m src/comp/File18.tsx
+[2mtransforming (19)[22m src/comp/File19.tsx
+[2mtransforming (20)[22m src/comp/File20.tsx
+[2mtransforming (21)[22m src/comp/File21.tsx
+[2mtransforming (22)[22m src/comp/File22.tsx
+[2mtransforming (23)[22m src/comp/File23.tsx
+[2mtransforming (24)[22m src/comp/File24.tsx
+[2mtransforming (25)[22m src/comp/File25.tsx
+[2mtransforming (26)[22m src/comp/File26.tsx
+[2mtransforming (27)[22m src/comp/File27.tsx
+[2mtransforming (28)[22m src/comp/File28.tsx
+[2mtransforming (29)[22m src/comp/File29.tsx
+[2mtransforming (30)[22m src/comp/File30.tsx
+[2mtransforming (31)[22m src/comp/File31.tsx
+[2mtransforming (32)[22m src/comp/File32.tsx
+[2mtransforming (33)[22m src/comp/File33.tsx
+[2mtransforming (34)[22m src/comp/File34.tsx
+[2mtransforming (35)[22m src/comp/File35.tsx
+[2mtransforming (36)[22m src/comp/File36.tsx
+[2mtransforming (37)[22m src/comp/File37.tsx
+[2mtransforming (38)[22m src/comp/File38.tsx
+[2mtransforming (39)[22m src/comp/File39.tsx
+[2mtransforming (40)[22m src/comp/File40.tsx
+[2mtransforming (41)[22m src/comp/File41.tsx
+[2mtransforming (42)[22m src/comp/File42.tsx
+[2mtransforming (43)[22m src/comp/File43.tsx
+[2mtransforming (44)[22m src/comp/File44.tsx
+[2mtransforming (45)[22m src/comp/File45.tsx
+[2mtransforming (46)[22m src/comp/File46.tsx
+[2mtransforming (47)[22m src/comp/File47.tsx
+[2mtransforming (48)[22m src/comp/File48.tsx
+[2mtransforming (49)[22m src/comp/File49.tsx
+[2mtransforming (50)[22m src/comp/File50.tsx
+[2mtransforming (51)[22m src/comp/File51.tsx
+[2mtransforming (52)[22m src/comp/File52.tsx
+[2mtransforming (53)[22m src/comp/File53.tsx
+[2mtransforming (54)[22m src/comp/File54.tsx
+[2mtransforming (55)[22m src/comp/File55.tsx
+[2mtransforming (56)[22m src/comp/File56.tsx
+[2mtransforming (57)[22m src/comp/File57.tsx
+[2mtransforming (58)[22m src/comp/File58.tsx
+[2mtransforming (59)[22m src/comp/File59.tsx
+src/app.ts(12,5): error TS2322: Type 'string' is not assignable to type 'number'.
+src/util.ts(40,1): error TS2304: Cannot find name 'foo'.
+[32m✓[39m 61 modules transformed.
+npm WARN deprecated foo@1.0.0: no longer supported
+npm WARN deprecated foo@1.0.0: no longer supported
+npm WARN deprecated foo@1.0.0: no longer supported
+npm WARN deprecated foo@1.0.0: no longer supported
+npm WARN deprecated foo@1.0.0: no longer supported
+npm WARN deprecated foo@1.0.0: no longer supported
+npm WARN deprecated foo@1.0.0: no longer supported
+npm WARN deprecated foo@1.0.0: no longer supported
+npm WARN deprecated foo@1.0.0: no longer supported
+npm WARN deprecated foo@1.0.0: no longer supported
+npm WARN deprecated foo@1.0.0: no longer supported
+Found 2 errors.

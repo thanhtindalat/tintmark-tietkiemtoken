@@ -1,0 +1,55 @@
+* daemon not running; starting now at tcp:5037
+* daemon started successfully
+Performing Streamed Install
+[  0%] pushing chunk 0
+[  2%] pushing chunk 2
+[  4%] pushing chunk 4
+[  6%] pushing chunk 6
+[  8%] pushing chunk 8
+[ 10%] pushing chunk 10
+[ 12%] pushing chunk 12
+[ 14%] pushing chunk 14
+[ 16%] pushing chunk 16
+[ 18%] pushing chunk 18
+[ 20%] pushing chunk 20
+[ 22%] pushing chunk 22
+[ 24%] pushing chunk 24
+[ 26%] pushing chunk 26
+[ 28%] pushing chunk 28
+[ 30%] pushing chunk 30
+[ 32%] pushing chunk 32
+[ 34%] pushing chunk 34
+[ 36%] pushing chunk 36
+[ 38%] pushing chunk 38
+[ 40%] pushing chunk 40
+[ 42%] pushing chunk 42
+[ 44%] pushing chunk 44
+[ 46%] pushing chunk 46
+[ 48%] pushing chunk 48
+[ 50%] pushing chunk 50
+[ 52%] pushing chunk 52
+[ 54%] pushing chunk 54
+[ 56%] pushing chunk 56
+[ 58%] pushing chunk 58
+[ 60%] pushing chunk 60
+[ 62%] pushing chunk 62
+[ 64%] pushing chunk 64
+[ 66%] pushing chunk 66
+[ 68%] pushing chunk 68
+[ 70%] pushing chunk 70
+[ 72%] pushing chunk 72
+[ 74%] pushing chunk 74
+[ 76%] pushing chunk 76
+[ 78%] pushing chunk 78
+[ 80%] pushing chunk 80
+[ 82%] pushing chunk 82
+[ 84%] pushing chunk 84
+[ 86%] pushing chunk 86
+[ 88%] pushing chunk 88
+[ 90%] pushing chunk 90
+[ 92%] pushing chunk 92
+[ 94%] pushing chunk 94
+[ 96%] pushing chunk 96
+[ 98%] pushing chunk 98
+[100%] pushing chunk 100
+Success

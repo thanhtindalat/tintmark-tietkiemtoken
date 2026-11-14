@@ -1,0 +1,216 @@
+Enumerating objects: 1532, done.
+Counting objects: 100% (1532/1532), done.
+Delta compression using up to 10 threads
+Compressing objects:   0% (0/812)
+Compressing objects:   1% (8/812)
+Compressing objects:   2% (16/812)
+Compressing objects:   3% (24/812)
+Compressing objects:   4% (32/812)
+Compressing objects:   5% (40/812)
+Compressing objects:   6% (48/812)
+Compressing objects:   7% (56/812)
+Compressing objects:   8% (64/812)
+Compressing objects:   9% (72/812)
+Compressing objects:  10% (80/812)
+Compressing objects:  11% (88/812)
+Compressing objects:  12% (96/812)
+Compressing objects:  13% (104/812)
+Compressing objects:  14% (112/812)
+Compressing objects:  15% (120/812)
+Compressing objects:  16% (128/812)
+Compressing objects:  17% (136/812)
+Compressing objects:  18% (144/812)
+Compressing objects:  19% (152/812)
+Compressing objects:  20% (160/812)
+Compressing objects:  21% (168/812)
+Compressing objects:  22% (176/812)
+Compressing objects:  23% (184/812)
+Compressing objects:  24% (192/812)
+Compressing objects:  25% (200/812)
+Compressing objects:  26% (208/812)
+Compressing objects:  27% (216/812)
+Compressing objects:  28% (224/812)
+Compressing objects:  29% (232/812)
+Compressing objects:  30% (240/812)
+Compressing objects:  31% (248/812)
+Compressing objects:  32% (256/812)
+Compressing objects:  33% (264/812)
+Compressing objects:  34% (272/812)
+Compressing objects:  35% (280/812)
+Compressing objects:  36% (288/812)
+Compressing objects:  37% (296/812)
+Compressing objects:  38% (304/812)
+Compressing objects:  39% (312/812)
+Compressing objects:  40% (320/812)
+Compressing objects:  41% (328/812)
+Compressing objects:  42% (336/812)
+Compressing objects:  43% (344/812)
+Compressing objects:  44% (352/812)
+Compressing objects:  45% (360/812)
+Compressing objects:  46% (368/812)
+Compressing objects:  47% (376/812)
+Compressing objects:  48% (384/812)
+Compressing objects:  49% (392/812)
+Compressing objects:  50% (400/812)
+Compressing objects:  51% (408/812)
+Compressing objects:  52% (416/812)
+Compressing objects:  53% (424/812)
+Compressing objects:  54% (432/812)
+Compressing objects:  55% (440/812)
+Compressing objects:  56% (448/812)
+Compressing objects:  57% (456/812)
+Compressing objects:  58% (464/812)
+Compressing objects:  59% (472/812)
+Compressing objects:  60% (480/812)
+Compressing objects:  61% (488/812)
+Compressing objects:  62% (496/812)
+Compressing objects:  63% (504/812)
+Compressing objects:  64% (512/812)
+Compressing objects:  65% (520/812)
+Compressing objects:  66% (528/812)
+Compressing objects:  67% (536/812)
+Compressing objects:  68% (544/812)
+Compressing objects:  69% (552/812)
+Compressing objects:  70% (560/812)
+Compressing objects:  71% (568/812)
+Compressing objects:  72% (576/812)
+Compressing objects:  73% (584/812)
+Compressing objects:  74% (592/812)
+Compressing objects:  75% (600/812)
+Compressing objects:  76% (608/812)
+Compressing objects:  77% (616/812)
+Compressing objects:  78% (624/812)
+Compressing objects:  79% (632/812)
+Compressing objects:  80% (640/812)
+Compressing objects:  81% (648/812)
+Compressing objects:  82% (656/812)
+Compressing objects:  83% (664/812)
+Compressing objects:  84% (672/812)
+Compressing objects:  85% (680/812)
+Compressing objects:  86% (688/812)
+Compressing objects:  87% (696/812)
+Compressing objects:  88% (704/812)
+Compressing objects:  89% (712/812)
+Compressing objects:  90% (720/812)
+Compressing objects:  91% (728/812)
+Compressing objects:  92% (736/812)
+Compressing objects:  93% (744/812)
+Compressing objects:  94% (752/812)
+Compressing objects:  95% (760/812)
+Compressing objects:  96% (768/812)
+Compressing objects:  97% (776/812)
+Compressing objects:  98% (784/812)
+Compressing objects:  99% (792/812)
+Compressing objects: 100% (800/812)
+Compressing objects: 100% (812/812), done.
+Writing objects:   0% (0/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:   1% (15/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:   2% (30/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:   3% (45/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:   4% (60/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:   5% (75/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:   6% (90/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:   7% (105/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:   8% (120/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:   9% (135/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  10% (150/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  11% (165/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  12% (180/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  13% (195/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  14% (210/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  15% (225/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  16% (240/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  17% (255/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  18% (270/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  19% (285/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  20% (300/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  21% (315/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  22% (330/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  23% (345/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  24% (360/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  25% (375/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  26% (390/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  27% (405/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  28% (420/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  29% (435/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  30% (450/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  31% (465/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  32% (480/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  33% (495/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  34% (510/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  35% (525/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  36% (540/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  37% (555/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  38% (570/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  39% (585/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  40% (600/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  41% (615/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  42% (630/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  43% (645/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  44% (660/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  45% (675/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  46% (690/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  47% (705/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  48% (720/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  49% (735/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  50% (750/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  51% (765/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  52% (780/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  53% (795/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  54% (810/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  55% (825/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  56% (840/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  57% (855/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  58% (870/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  59% (885/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  60% (900/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  61% (915/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  62% (930/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  63% (945/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  64% (960/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  65% (975/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  66% (990/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  67% (1005/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  68% (1020/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  69% (1035/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  70% (1050/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  71% (1065/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  72% (1080/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  73% (1095/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  74% (1110/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  75% (1125/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  76% (1140/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  77% (1155/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  78% (1170/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  79% (1185/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  80% (1200/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  81% (1215/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  82% (1230/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  83% (1245/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  84% (1260/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  85% (1275/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  86% (1290/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  87% (1305/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  88% (1320/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  89% (1335/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  90% (1350/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  91% (1365/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  92% (1380/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  93% (1395/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  94% (1410/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  95% (1425/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  96% (1440/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  97% (1455/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  98% (1470/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects:  99% (1485/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects: 100% (1500/1532), 2.10 MiB | 3.20 MiB/s
+Writing objects: 100% (1532/1532), 4.20 MiB | 3.10 MiB/s, done.
+Total 1532 (delta 640), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (640/640), done.
+remote: 
+remote: Create a pull request for 'tinh-nang/vi-du' on GitHub by visiting:
+remote:      https://github.com/vi-du/kho-mau/pull/new/tinh-nang/vi-du
+remote: 
+To github.com:vi-du/kho-mau.git
+ * [new branch]      tinh-nang/vi-du -> tinh-nang/vi-du
+branch 'tinh-nang/vi-du' set up to track 'origin/tinh-nang/vi-du'.

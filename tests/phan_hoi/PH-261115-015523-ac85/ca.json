@@ -1,0 +1,10 @@
+{
+ "id": "PH-261115-015523-ac85",
+ "lenh": "docker ps -a",
+ "luat": "docker-list",
+ "ma": 0,
+ "giu": [
+  "QUAN_TRONG_CUOI_DONG_7"
+ ],
+ "mo_ta": "phản hồi giả lần 2"
+}

@@ -1,0 +1,211 @@
+{
+ "mau": [
+  {
+   "luat": "git-status",
+   "lenh": "git status",
+   "tep": "git-status.txt",
+   "ma": 0,
+   "giu": [
+    "On branch",
+    "Changes not staged",
+    "Untracked files",
+    "deleted:",
+    "modified:",
+    "new1.txt"
+   ],
+   "ghi": "thật (kho tạm)"
+  },
+  {
+   "luat": "git-diff",
+   "lenh": "git diff",
+   "tep": "git-diff-lon.txt",
+   "ma": 0,
+   "giu": [
+    "diff --git",
+    "@@"
+   ],
+   "ghi": "thật, kho mẫu (1500 dòng đầu của git diff HEAD~300 HEAD)"
+  },
+  {
+   "luat": "git-log",
+   "lenh": "git log -n 40",
+   "tep": "git-log.txt",
+   "ma": 0,
+   "giu": [
+    "commit ",
+    "Author:"
+   ],
+   "ghi": "thật, kho mẫu tổng hợp (tests/tao_mau.sh)"
+  },
+  {
+   "luat": "git-log-gon",
+   "lenh": "git log --oneline -n 300",
+   "tep": "git-log-gon.txt",
+   "ma": 0,
+   "giu": [],
+   "ghi": "thật, kho mẫu tổng hợp (tests/tao_mau.sh)"
+  },
+  {
+   "luat": "pytest",
+   "lenh": "pytest -q",
+   "tep": "pytest.txt",
+   "ma": 1,
+   "giu": [
+    "FAILED tests/test_mod7.py::test_gia_tri",
+    "assert 4 == 5",
+    "1 failed, 119 passed"
+   ],
+   "ghi": "viết tay theo định dạng thật (máy không có pytest)"
+  },
+  {
+   "luat": "unittest",
+   "lenh": "python3 -m unittest -v test_x",
+   "tep": "unittest.txt",
+   "ma": 1,
+   "giu": [
+    "FAIL: test_bad",
+    "AssertionError",
+    "FAILED (failures=1)"
+   ],
+   "ghi": "thật"
+  },
+  {
+   "luat": "node-test",
+   "lenh": "node --test t.test.js",
+   "tep": "node-test.txt",
+   "ma": 1,
+   "giu": [
+    "hong"
+   ],
+   "ghi": "thật"
+  },
+  {
+   "luat": "cargo-test",
+   "lenh": "cargo test",
+   "tep": "cargo-test.txt",
+   "ma": 101,
+   "giu": [
+    "case_bad",
+    "panicked at src/lib.rs:88:9",
+    "test result: FAILED. 44 passed; 1 failed"
+   ],
+   "ghi": "viết tay (máy không có cargo)"
+  },
+  {
+   "luat": "build-lint",
+   "lenh": "npm run build",
+   "tep": "build.txt",
+   "ma": 2,
+   "giu": [
+    "error TS2322",
+    "error TS2304",
+    "Found 2 errors."
+   ],
+   "ghi": "viết tay có mã màu ANSI"
+  },
+  {
+   "luat": "ls",
+   "lenh": "ls -la extension",
+   "tep": "ls.txt",
+   "ma": 0,
+   "giu": [
+    "background.js"
+   ],
+   "ghi": "thật, kho mẫu tổng hợp (tests/tao_mau.sh)"
+  },
+  {
+   "luat": "find",
+   "lenh": "find . -name '*.py'",
+   "tep": "find.txt",
+   "ma": 0,
+   "giu": [
+    ".py"
+   ],
+   "ghi": "thật, kho mẫu tổng hợp (tests/tao_mau.sh)"
+  },
+  {
+   "luat": "grep",
+   "lenh": "grep -rn 'def ' tools",
+   "tep": "grep.txt",
+   "ma": 0,
+   "giu": [
+    "def "
+   ],
+   "ghi": "thật, kho mẫu tổng hợp (tests/tao_mau.sh)"
+  },
+  {
+   "luat": "adb-logcat",
+   "lenh": "adb logcat -d",
+   "tep": "adb-logcat.txt",
+   "ma": 0,
+   "giu": [
+    "FATAL EXCEPTION",
+    "NullPointerException"
+   ],
+   "ghi": "viết tay (gói com.example.myapp)"
+  },
+  {
+   "luat": "adb",
+   "lenh": "adb install -r app.apk",
+   "tep": "adb.txt",
+   "ma": 0,
+   "giu": [
+    "Success"
+   ],
+   "ghi": "viết tay"
+  },
+  {
+   "luat": "docker-build",
+   "lenh": "docker build .",
+   "tep": "docker-build.txt",
+   "ma": 0,
+   "giu": [
+    "exporting to image"
+   ],
+   "ghi": "viết tay"
+  },
+  {
+   "luat": "docker-logs",
+   "lenh": "docker logs web",
+   "tep": "docker-logs.txt",
+   "ma": 0,
+   "giu": [
+    "ERROR db timeout"
+   ],
+   "ghi": "viết tay"
+  },
+  {
+   "luat": "docker-list",
+   "lenh": "docker ps",
+   "tep": "docker-ps.txt",
+   "ma": 0,
+   "giu": [
+    "CONTAINER ID"
+   ],
+   "ghi": "viết tay"
+  },
+  {
+   "luat": "log-dai",
+   "lenh": "cat sync.log",
+   "tep": "log-dai.txt",
+   "ma": 0,
+   "giu": [
+    "ERROR sync failed: HTTP 502"
+   ],
+   "ghi": "viết tay"
+  },
+  {
+   "luat": "git-ghi",
+   "lenh": "git push -u origin tinh-nang/vi-du",
+   "tep": "git-ghi.txt",
+   "ma": 0,
+   "giu": [
+    "To github.com:vi-du/kho-mau.git",
+    "[new branch]",
+    "Writing objects: 100% (1532/1532), 4.20 MiB | 3.10 MiB/s, done.",
+    "set up to track"
+   ],
+   "ghi": "tổng hợp (dạng output git push thật)"
+  }
+ ]
+}

@@ -1,0 +1,75 @@
+On branch main
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   src/m1/a.txt
+	deleted:    src/m1/b.py
+	modified:   src/m10/a.txt
+	deleted:    src/m10/b.py
+	modified:   src/m11/a.txt
+	deleted:    src/m11/b.py
+	modified:   src/m12/a.txt
+	deleted:    src/m12/b.py
+	modified:   src/m13/a.txt
+	deleted:    src/m13/b.py
+	modified:   src/m14/a.txt
+	deleted:    src/m14/b.py
+	modified:   src/m15/a.txt
+	deleted:    src/m15/b.py
+	modified:   src/m16/a.txt
+	deleted:    src/m16/b.py
+	modified:   src/m17/a.txt
+	deleted:    src/m17/b.py
+	modified:   src/m18/a.txt
+	deleted:    src/m18/b.py
+	modified:   src/m19/a.txt
+	deleted:    src/m19/b.py
+	modified:   src/m2/a.txt
+	deleted:    src/m2/b.py
+	modified:   src/m20/a.txt
+	deleted:    src/m20/b.py
+	modified:   src/m21/a.txt
+	deleted:    src/m21/b.py
+	modified:   src/m22/a.txt
+	deleted:    src/m22/b.py
+	modified:   src/m23/a.txt
+	deleted:    src/m23/b.py
+	modified:   src/m24/a.txt
+	deleted:    src/m24/b.py
+	modified:   src/m25/a.txt
+	deleted:    src/m25/b.py
+	modified:   src/m3/a.txt
+	deleted:    src/m3/b.py
+	modified:   src/m4/a.txt
+	deleted:    src/m4/b.py
+	modified:   src/m5/a.txt
+	deleted:    src/m5/b.py
+	modified:   src/m6/a.txt
+	deleted:    src/m6/b.py
+	modified:   src/m7/a.txt
+	deleted:    src/m7/b.py
+	modified:   src/m8/a.txt
+	deleted:    src/m8/b.py
+	modified:   src/m9/a.txt
+	deleted:    src/m9/b.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	docs/
+	new1.txt
+	new10.txt
+	new11.txt
+	new12.txt
+	new13.txt
+	new14.txt
+	new15.txt
+	new2.txt
+	new3.txt
+	new4.txt
+	new5.txt
+	new6.txt
+	new7.txt
+	new8.txt
+	new9.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")

@@ -1,0 +1,96 @@
+   Compiling libc v0.2.150
+   Compiling proc-macro2 v1.0.70
+   Compiling crate0 v0.0.0
+   Compiling crate1 v0.1.0
+   Compiling crate2 v0.2.0
+   Compiling crate3 v0.3.0
+   Compiling crate4 v0.4.0
+   Compiling crate5 v0.5.0
+   Compiling crate6 v0.6.0
+   Compiling crate7 v0.7.0
+   Compiling crate8 v0.8.0
+   Compiling crate9 v0.9.0
+   Compiling crate10 v0.10.0
+   Compiling crate11 v0.11.0
+   Compiling crate12 v0.12.0
+   Compiling crate13 v0.13.0
+   Compiling crate14 v0.14.0
+   Compiling crate15 v0.15.0
+   Compiling crate16 v0.16.0
+   Compiling crate17 v0.17.0
+   Compiling crate18 v0.18.0
+   Compiling crate19 v0.19.0
+   Compiling crate20 v0.20.0
+   Compiling crate21 v0.21.0
+   Compiling crate22 v0.22.0
+   Compiling crate23 v0.23.0
+   Compiling crate24 v0.24.0
+   Compiling crate25 v0.25.0
+   Compiling crate26 v0.26.0
+   Compiling crate27 v0.27.0
+   Compiling crate28 v0.28.0
+   Compiling crate29 v0.29.0
+    Finished test [unoptimized + debuginfo] target(s) in 24.31s
+     Running unittests src/lib.rs (target/debug/deps/app-1a2b3c)
+
+running 45 tests
+test tests::case_0 ... ok
+test tests::case_1 ... ok
+test tests::case_2 ... ok
+test tests::case_3 ... ok
+test tests::case_4 ... ok
+test tests::case_5 ... ok
+test tests::case_6 ... ok
+test tests::case_7 ... ok
+test tests::case_8 ... ok
+test tests::case_9 ... ok
+test tests::case_10 ... ok
+test tests::case_11 ... ok
+test tests::case_12 ... ok
+test tests::case_13 ... ok
+test tests::case_14 ... ok
+test tests::case_15 ... ok
+test tests::case_16 ... ok
+test tests::case_17 ... ok
+test tests::case_18 ... ok
+test tests::case_19 ... ok
+test tests::case_20 ... ok
+test tests::case_21 ... ok
+test tests::case_22 ... ok
+test tests::case_23 ... ok
+test tests::case_24 ... ok
+test tests::case_25 ... ok
+test tests::case_26 ... ok
+test tests::case_27 ... ok
+test tests::case_28 ... ok
+test tests::case_29 ... ok
+test tests::case_30 ... ok
+test tests::case_31 ... ok
+test tests::case_32 ... ok
+test tests::case_33 ... ok
+test tests::case_34 ... ok
+test tests::case_35 ... ok
+test tests::case_36 ... ok
+test tests::case_37 ... ok
+test tests::case_38 ... ok
+test tests::case_39 ... ok
+test tests::case_40 ... ok
+test tests::case_41 ... ok
+test tests::case_42 ... ok
+test tests::case_43 ... ok
+test tests::case_bad ... FAILED
+
+failures:
+
+---- tests::case_bad stdout ----
+thread 'tests::case_bad' panicked at src/lib.rs:88:9:
+assertion `left == right` failed
+  left: 1
+  right: 2
+
+failures:
+    tests::case_bad
+
+test result: FAILED. 44 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.31s
+
+error: test failed, to rerun pass `--lib`
