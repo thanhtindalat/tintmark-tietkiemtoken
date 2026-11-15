@@ -80,6 +80,22 @@ class TestHookSau(Goc):
             with self.subTest(lenh=lenh, kw=kw):
                 self.assertIsNone(self.sau(lenh, **kw))
 
+    def test_output_toi_nguong_cat_cua_cc(self):
+        """stdout ≥ ngưỡng cắt của Claude Code (30000 ký tự hoặc BASH_MAX_OUTPUT_LENGTH): CC cất output gốc ra tệp,
+        bản nén không tới model => không nén, không ghi thống kê."""
+        self.env.pop("BASH_MAX_OUTPUT_LENGTH", None)
+        to = "".join("/a/b/tep_%05d.md\n" % i for i in range(2000))    # 36000 ký tự
+        self.assertGreaterEqual(len(to), 30000)
+        self.assertIsNone(self.sau("find /a -name x", out=to))
+        self.assertIsNone(self.sau("find /a -name x", out=to[:29990], err="e" * 20))
+        self.assertFalse(os.path.exists(self.du_lieu("thong_ke.jsonl")))
+        self.assertIsNotNone(self.sau("find /a -name x", out=to[:29000]))
+        self.assertTrue(os.path.exists(self.du_lieu("thong_ke.jsonl")))
+        self.env["BASH_MAX_OUTPUT_LENGTH"] = "50000"
+        self.assertIsNotNone(self.sau("find /a -name x", out=to))
+        self.env["BASH_MAX_OUTPUT_LENGTH"] = "5000"
+        self.assertIsNone(self.sau("find /a -name x"))      # DAI ~9,5 KB > 5000
+
     def test_cd_roi_lenh(self):
         for lenh in ("cd /a/b && find . -name x", 'cd "/a b" && find .', "cd x &&find ."):
             with self.subTest(lenh=lenh):

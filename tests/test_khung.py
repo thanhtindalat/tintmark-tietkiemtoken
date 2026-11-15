@@ -117,6 +117,20 @@ class TestModule(GocKhung):
         r = subprocess.run([sys.executable, os.path.join(S, "module.py"), "tat", "khong_co"], capture_output=True, env=env)
         self.assertEqual(r.returncode, 1)
 
+    def test_thu_khoi_khong_ghi_du_lieu_that(self):
+        """Thử khói một thư mục plugin chỉ dùng dữ liệu tạm: không tạo / ghi gì trong HOME (sổ thống kê thật)."""
+        nha = os.path.join(self.d, "nha")
+        os.makedirs(nha)
+        env = dict(os.environ, HOME=nha)
+        for b in ((kc.khung().get("test") or {}).get("bien_tam") or []) + [BIEN]:
+            if b:
+                env.pop(b, None)
+        r = subprocess.run([sys.executable, os.path.join(S, "cap_nhat.py"), "thu-khoi", GOC], capture_output=True, env=env,
+                           timeout=60)
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        con = [os.path.join(g, t) for g, _, ts in os.walk(nha) for t in ts]
+        self.assertEqual(con, [])
+
 
 def _khoa(nd, ck=b"chu-ky-dung"):
     return {"noi_dung": base64.b64encode(json.dumps(nd).encode()).decode(), "chu_ky": base64.b64encode(ck).decode()}

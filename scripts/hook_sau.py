@@ -25,6 +25,21 @@ def bo_cd(lenh):
     return m.group(2).strip() if m else lenh
 
 
+def tran_cc():
+    """Ngưỡng ký tự Claude Code tự cắt output Bash (cất ra tệp, model chỉ thấy bản xem trước của output GỐC).
+    Mặc định 30000; theo BASH_MAX_OUTPUT_LENGTH nếu đặt."""
+    try:
+        return max(1000, int(os.environ.get("BASH_MAX_OUTPUT_LENGTH") or 30000))
+    except ValueError:
+        return 30000
+
+
+def bi_cc_cat(tr):
+    """Output đã tới ngưỡng cắt của Claude Code: bản nén không tới model => không nén, không ghi thống kê."""
+    n = sum(len(tr.get(k)) for k in ("stdout", "stderr") if isinstance(tr.get(k), str))
+    return n >= tran_cc()
+
+
 def xu_ly(d):
     import hook
     import nen_loi
@@ -42,6 +57,8 @@ def xu_ly(d):
         return None
     tr = d.get("tool_response")
     if not isinstance(tr, dict) or tr.get("interrupted") or tr.get("isImage"):
+        return None
+    if bi_cc_cat(tr):
         return None
     lenh = bo_cd(lenh)
     if (d.get("tool_input") or {}).get("run_in_background") or not hook.co_the_boc(lenh):

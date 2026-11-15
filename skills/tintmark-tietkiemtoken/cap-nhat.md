@@ -19,7 +19,7 @@ Kênh cập nhật trên máy là **thư mục kho bản cục bộ** (`cap_nhat
 | Về bản ngay trước lần cập nhật gần nhất | `python3 $P/scripts/cap_nhat.py quay-lui` |
 | Xem lịch sử cập nhật | `python3 $P/scripts/cap_nhat.py lich-su` |
 
-`ap-dung` làm theo thứ tự: kiểm băm bản mới → chạy test của bản mới → sao lưu `settings.json` vào `~/.claude/plugin-tintmark-tietkiemtoken/sao_luu/` → chép bản mới vào thư mục cài → thử khói. Sai băm hoặc test hỏng thì giữ bản cũ. Thử khói hỏng thì tự quay lui. Cập nhật xong, phiên đang mở nhận bản mới khi mở lại hoặc `/reload-plugins`.
+`ap-dung` làm theo thứ tự: kiểm băm bản mới → chạy test của bản mới → sao lưu `settings.json` vào `~/.claude/plugin-tintmark-tietkiemtoken/sao_luu/` → chép bản mới vào thư mục cài → thử khói. Sai băm hoặc test hỏng thì giữ bản cũ. Thử khói hỏng thì tự quay lui. Cập nhật xong, phiên đang mở nhận bản mới khi mở lại hoặc `/reload-plugins`. Kiểm hook của bản đã cài: `python3 $P/scripts/cap_nhat.py thu-khoi` (dữ liệu tạm). Không gọi tay `hook_sau.py` với dữ liệu mẫu: lần gọi đó ghi vào sổ thống kê thật.
 
 ## Tự cập nhật
 

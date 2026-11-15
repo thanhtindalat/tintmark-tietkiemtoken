@@ -22,6 +22,8 @@ P=~/.claude/skills/tintmark-tietkiemtoken/../..
 
 Tác dụng: phiên phình chậm hơn. Không thay được việc đổi phiên theo ngưỡng (`ban-giao.md`). Mức giảm tuỳ lệnh: danh sách dài (`find`, log) giảm nhiều, output ngắn gần như không đổi. Số "~token" plugin báo là byte / 4, là ước tính, không phải hoá đơn.
 
+Output từ 30.000 ký tự trở lên (hoặc `BASH_MAX_OUTPUT_LENGTH` nếu đặt): Claude Code tự cất output gốc ra tệp và chỉ đưa model bản xem trước khoảng 2 KB, bản nén không tới model. Plugin bỏ qua các lệnh này (không nén, không ghi thống kê). Muốn gọn thì tự lọc trước (`find … -name "*.md" | head -50`, `-maxdepth`).
+
 ## Lệnh dùng
 
 | Việc | Lệnh |

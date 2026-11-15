@@ -7,6 +7,8 @@
   cap_nhat.py quay-lui             về bản ngay trước lần cập nhật gần nhất
   cap_nhat.py tu-dong              hook gọi nền mỗi 24 giờ; làm theo cấu hình tu_dong: ap_dung | bao | tat
   cap_nhat.py lich-su
+  cap_nhat.py thu-khoi [thư mục]   thử khói một thư mục plugin (mặc định thư mục cài) với dữ liệu TẠM;
+                                   dùng thay cho gọi tay hook của bản cài (gọi tay ghi vào sổ thống kê thật)
 
 Cấu hình: <dữ liệu>/cap_nhat.json {"kenh": ".../kenh.json", "lien_ket": "<thư mục cài trong marketplace>", "tu_dong": "bao"}
 "lien_ket" là tên cũ của thư mục cài: từ khung 0.1.0 đây là BẢN SAO THẬT (không còn liên kết tượng trưng);
@@ -266,6 +268,11 @@ def main(argv=None):
             else:
                 kc.them_thong_bao("có bản %s (đang %s): python3 <plugin>/scripts/cap_nhat.py ap-dung" % (moi, hien))
             return 0
+        if a[0] == "thu-khoi":
+            tm = a[1] if len(a) > 1 else cau_hinh().get("lien_ket")
+            if not tm or not os.path.isdir(tm):
+                print("Lỗi: không thấy thư mục plugin %s" % tm); return 1
+            dat, tin = thu_khoi(tm); print(tin); return 0 if dat else 1
         print(__doc__); return 2
     except Exception as e:
         if a[0] == "tu-dong":
