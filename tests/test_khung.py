@@ -51,16 +51,30 @@ class TestBanQuyen(unittest.TestCase):
             self.assertIn("Copyright (c)", f.read())
 
     def test_dong_ban_quyen_moi_tep_ma(self):
-        thieu = []
-        for goc, con, tep in os.walk(GOC):
-            con[:] = [c for c in con if c not in ("__pycache__", ".git", "mau")]
-            for t in tep:
-                if t.endswith((".py", ".sh")):
-                    with open(os.path.join(goc, t), encoding="utf-8") as f:
-                        dau = "".join(f.readline() for _ in range(3))
-                    if "Copyright (c)" not in dau:
-                        thieu.append(os.path.relpath(os.path.join(goc, t), GOC))
-        self.assertEqual(thieu, [])
+        self.assertEqual(kc.thieu_ban_quyen(), [])
+
+    def test_mien_ban_quyen_ma_ben_thu_ba(self):
+        """Mã bên thứ ba chỉ được miễn khi khai trong khung.json "ma_ben_thu_ba" VÀ có NOTICE ở thư mục cha."""
+        d = tempfile.mkdtemp()
+        try:
+            os.makedirs(os.path.join(d, ".claude-plugin"))
+            for rel in ("skills/a/x/m.py", "skills/b/m.py", "scripts/m.sh"):
+                os.makedirs(os.path.join(d, os.path.dirname(rel)), exist_ok=True)
+                with open(os.path.join(d, rel), "w") as f:
+                    f.write("#!/bin/sh\n# MIT License, tác giả khác\n")
+            with open(os.path.join(d, "NOTICE"), "w") as f:
+                f.write("gốc")
+            with open(os.path.join(d, ".claude-plugin", "khung.json"), "w") as f:
+                json.dump({"ten": "thu", "ma_ben_thu_ba": ["skills/*/"]}, f)
+            self.assertEqual(kc.thieu_ban_quyen(d), ["scripts/m.sh", "skills/a/x/m.py", "skills/b/m.py"])  # NOTICE gốc không tính
+            with open(os.path.join(d, "skills", "a", "NOTICE"), "w") as f:
+                f.write("MIT")
+            self.assertEqual(kc.thieu_ban_quyen(d), ["scripts/m.sh", "skills/b/m.py"])
+            with open(os.path.join(d, ".claude-plugin", "khung.json"), "w") as f:
+                json.dump({"ten": "thu"}, f)
+            self.assertIn("skills/a/x/m.py", kc.thieu_ban_quyen(d))                                          # không khai => vẫn đòi
+        finally:
+            shutil.rmtree(d, ignore_errors=True)
 
     def test_plugin_json(self):
         p = kc.plugin_json()

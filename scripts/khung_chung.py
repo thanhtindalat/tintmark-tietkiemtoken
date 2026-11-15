@@ -7,13 +7,16 @@
    "du_lieu": {"ten": "plugin-<tên>", "ten_cu": ["..."], "bien": "<BIẾN_MÔI_TRƯỜNG đổi thư mục dữ liệu>"},
    "bien_tat_module": "<BIẾN chứa danh sách module tắt, cách nhau dấu phẩy>",
    "test": {"bien_tam": ["BIẾN", ...], "bo_bien": ["BIẾN", ...]},
-   "thu_khoi": {"dau_vao": {...}, "kich": [{"tep": "scripts/x.py", "phai_in": "chuỗi"}, {"mau": "skills/*/y.py"}]}}
+   "thu_khoi": {"dau_vao": {...}, "kich": [{"tep": "scripts/x.py", "phai_in": "chuỗi"}, {"mau": "skills/*/y.py"}]},
+   "ma_ben_thu_ba": ["skills/ten-*/", ...]}   mã của tác giả khác (MIT/Apache…): miễn dòng bản quyền Tintmark
+                                              nếu khớp mẫu VÀ có tệp NOTICE ở một thư mục cha (không tính gốc plugin)
 Thiếu khung.json thì dùng mặc định theo tên thư mục plugin. Không gọi mạng, không in gì.
 """
+import fnmatch
 import json
 import os
 
-PHIEN_BAN_KHUNG = "0.2.0"
+PHIEN_BAN_KHUNG = "0.2.1"
 GOC = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -36,6 +39,38 @@ def ghi_json(duong, du_lieu):
 def khung(goc=None):
     d = doc_json(os.path.join(goc or GOC, ".claude-plugin", "khung.json"), {})
     return d if isinstance(d, dict) else {}
+
+
+def ma_ben_thu_ba(rel, goc=None):
+    """Tệp `rel` (đường tương đối từ gốc plugin) là mã bên thứ ba được miễn dòng bản quyền Tintmark:
+    khớp một mẫu trong khung.json "ma_ben_thu_ba" (mẫu kết thúc "/" = cả thư mục) và có NOTICE ở thư mục cha."""
+    rel = rel.replace(os.sep, "/")
+    mau = khung(goc).get("ma_ben_thu_ba") or []
+    if not any(fnmatch.fnmatch(rel, m) or fnmatch.fnmatch(rel, m.rstrip("/") + "/*") for m in mau if isinstance(m, str) and m):
+        return False
+    d = os.path.dirname(rel)
+    while d:
+        if os.path.isfile(os.path.join(goc or GOC, d, "NOTICE")):
+            return True
+        d = os.path.dirname(d)
+    return False
+
+
+def thieu_ban_quyen(goc=None):
+    """Tệp .py/.sh của plugin thiếu dòng "Copyright (c)" trong 3 dòng đầu (trừ mã bên thứ ba hợp lệ)."""
+    goc = goc or GOC
+    thieu = []
+    for g, con, tep in os.walk(goc):
+        con[:] = [c for c in con if c not in ("__pycache__", ".git", "mau")]
+        for t in tep:
+            if not t.endswith((".py", ".sh")):
+                continue
+            rel = os.path.relpath(os.path.join(g, t), goc)
+            with open(os.path.join(g, t), encoding="utf-8", errors="replace") as f:
+                dau = "".join(f.readline() for _ in range(3))
+            if "Copyright (c)" not in dau and not ma_ben_thu_ba(rel, goc):
+                thieu.append(rel)
+    return sorted(thieu)
 
 
 def plugin_json(goc=None):

@@ -1,5 +1,8 @@
 # Nhật ký thay đổi — tintmark-tietkiemtoken
 
+## 0.5.2 — 15/11/2026
+- Khung 0.2.1: miễn dòng bản quyền cho mã bên thứ ba khai trong khung.json ma_ben_thu_ba kèm NOTICE ở thư mục cha (cho gói khác dùng khung); plugin này không có mã bên thứ ba, hành vi không đổi.
+
 ## 0.5.1 — 15/11/2026
 - Bỏ tên người trong ghi chú mã (bộ quét công khai chặn); không đổi hành vi.
 
