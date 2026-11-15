@@ -1,5 +1,11 @@
 # Nhật ký thay đổi — tintmark-tietkiemtoken
 
+## 0.7.1 — 15/11/2026
+- Dữ liệu mẫu trong test_cau_noi trung tính (bộ quét công khai); không đổi hành vi.
+
+## 0.7.0 — 15/11/2026
+- Module cau_noi: phê duyệt bằng giọng nói qua thư mục Google Drive đồng bộ (scripts/cau_noi.py tao / ban-sao / canh / chua-doc / da-doc; tài khoản Drive đặt trong cau_hinh.json, không đoán), hook đầu lượt báo kết quả phê duyệt chưa đọc (tối đa 1 lần / 6 giờ mỗi tệp). Luật bàn giao: mỗi dự án một sổ hỏi đáp, ghi sổ trước khi trả lời, phiên kế nhiệm đọc sổ trước (ban-giao.md mục 2b, lệnh bàn giao mẫu). Kế nhiệm 250k/300k: lượt người dùng gõ mở thẳng user_asked (kể cả việc theo luật thường trực), lượt tự động nhờ phiên điều phối mở hộ thay vì để thẻ chờ bấm, list_sessions chống mở trùng; dieu-phoi.md mục mở hộ. Skill: phe-duyet-giong-noi.md, claude-chat.md mục 6. Test 91.
+
 ## 0.6.0 — 15/11/2026
 - Luật đổi phiên: (1) module ban_giao — hook PostToolUse báo [tintmark-tietkiemtoken] BÀN GIAO DÀI khi ghi ban_giao_phien/*.md (Write/Edit/Bash) quá ban_giao_chu (mặc định 1.500 chữ, 0 = tắt), không chặn; (2) ở 300k lời nhắc đổi thành 'lưu trữ phiên TRƯỚC ĐÓ nếu có, GIỮ phiên này' (trước: lưu trữ phiên này, trái luật 2 phiên mới nhất); (3) phiên kế nhiệm detach_session "self" trước mọi bước lưu trữ (lệnh bàn giao mẫu, lời nhắc hook, SKILL.md). Test 80.
 

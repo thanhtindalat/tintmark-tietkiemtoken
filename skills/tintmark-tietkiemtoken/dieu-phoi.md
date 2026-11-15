@@ -26,6 +26,8 @@ Phiên điều phối sắp xếp các phiên làm việc của một hoặc nhi
 
 Phiên đó tự làm theo `ban-giao.md` (hook nhắc nó). Điều phối chỉ: nhận dòng báo "cũ → mới", sửa sổ phiên, từ đó chỉ nhắn phiên mới. Phiên con không tự làm được (treo, hết hạn mức): điều phối mở phiên kế nhiệm bằng **lệnh bàn giao** ở dòng đầu tệp bàn giao của nó.
 
+**Mở hộ phiên kế nhiệm** (phiên con nhắn "nhờ mở hộ"): ghi lại yêu cầu; ở **lượt người dùng gõ kế tiếp** tại phiên điều phối, `list_sessions` tìm tên mới — chưa có thì `start_session` "user_asked", "fresh", tên mới, lời giao = lệnh bàn giao ở dòng đầu tệp bàn giao; đã có thì thôi. Không tạo thẻ chờ bấm. Ghi id mới vào sổ phiên. Hai nơi cùng mở (điều phối và người dùng bấm thẻ cũ) thì giữ phiên đã nhận việc, phiên kia dừng và lưu trữ.
+
 ## 4. Khi chính phiên điều phối đầy
 
 Như `ban-giao.md`, thêm:

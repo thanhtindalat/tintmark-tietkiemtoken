@@ -32,12 +32,19 @@ MAC_DINH = {
     'ban_giao_chu': 1500,    # tep ban_giao_phien/*.md vua ghi dai hon chung nay chu thi nhac cat (0 = tat)
 }
 CAU_MOI = 'Mở phiên mới để làm việc hiệu quả hơn. Ngữ cảnh đã đưa vào phiên mới.'
-LUOT_DAU = ('lượt đầu phiên mới: detach_session "self" TRƯỚC, rồi lưu trữ phiên cũ theo dòng Chuỗi phiên '
+LUOT_DAU = ('lượt đầu phiên mới: đọc sổ hỏi đáp dự án + tệp bàn giao, detach_session "self" TRƯỚC, rồi lưu trữ phiên cũ theo dòng Chuỗi phiên '
             '(archive_session, chỉ giữ 2 phiên mới nhất), ghi id mới vào sổ phiên')
 SAU_DO = ('Sau đó lưu trữ phiên TRƯỚC ĐÓ nếu có (phiên ngay trước phiên này trong dòng Chuỗi phiên; '
           'tách phiên con còn dùng trước); GIỮ phiên này, không nhận việc mới.')
-THE = ('tạo MỘT thẻ kế nhiệm (start_session "own_initiative", "fresh", tên cũ + số; lời giao = lệnh bàn giao (%s); '
-       'mô tả có câu "%s")' % (LUOT_DAU, CAU_MOI))
+CHONG_TRUNG = 'TRƯỚC khi mở: list_sessions tìm tên "<tên cũ + số>" — đã có (kể cả thẻ chờ) thì dùng phiên đó, KHÔNG mở thêm.'
+NHO_DIEU_PHOI = ('KHÔNG tạo thẻ chờ người dùng bấm: SendMessage phiên điều phối của dự án (id trong sổ phiên) nhờ mở hộ ở lượt '
+                 'người dùng gõ bên đó (kèm tên mới, đường dẫn tệp bàn giao, id phiên này); chỉ khi dự án không có phiên điều phối mới tạo MỘT thẻ '
+                 '(start_session "own_initiative", "fresh", tên cũ + số; mô tả có câu "%s")' % CAU_MOI)
+NHO_DIEU_PHOI_GON = ('KHÔNG tạo thẻ chờ người dùng bấm; SendMessage phiên điều phối của dự án nhờ mở hộ ở lượt người dùng gõ bên đó '
+                     '(đã gửi rồi thì không gửi lại)')
+THE = ('mở kế nhiệm. %s Lượt người dùng gõ (kể cả việc làm theo luật thường trực CLAUDE.md / bộ nhớ = lệnh của người dùng): '
+       'start_session "user_asked", "fresh", tên cũ + số, lời giao = lệnh bàn giao (%s). Lượt do phiên khác / sự kiện tự động: %s'
+       % (CHONG_TRUNG, LUOT_DAU, NHO_DIEU_PHOI))
 
 
 def doc_json(duong, mac_dinh):
@@ -125,7 +132,7 @@ def nhac_nguong(vao, c, su_kien='UserPromptSubmit'):
         da_muc, da_n = 0, 0
     nay = time.time()
     k = n // 1000
-    the = '' if tt.get('the_da_tao') else ' Chưa có thẻ thì %s.' % THE
+    the = '' if tt.get('the_da_tao') else ' Chưa có phiên kế nhiệm thì %s.' % THE
     if muc == 2 and su_kien == 'UserPromptSubmit':
         # Tin gui len khi da qua nguong doi: nhac o MOI luot (khong chi mot lan), va giu tin lai vai giay.
         if nay - float(tt.get('luc_doi') or 0) < 3:     # hook noi trung (settings + plugin) chay cung luc: mot cai noi
@@ -138,21 +145,24 @@ def nhac_nguong(vao, c, su_kien='UserPromptSubmit'):
         except Exception:
             pass
         return ('[tintmark-tietkiemtoken] ĐỔI PHIÊN: %dk token (> %dk). KHÔNG làm việc vừa gửi ở phiên này; chốt tệp bàn giao (ban-giao.md). '
-                '(a) Người dùng gõ: start_session "user_asked", "fresh", tên cũ + số; lời giao CHỈ gồm lệnh bàn giao '
+                '%s (a) Người dùng gõ (kể cả việc theo luật thường trực CLAUDE.md / bộ nhớ): start_session "user_asked", "fresh", tên cũ + số; lời giao CHỈ gồm lệnh bàn giao '
                 '(%s; id phiên này: %s) + NGUYÊN VĂN tin vừa gửi; trả lời một dòng "%s" kèm link. '
-                '(b) Tin do phiên khác gửi / sự kiện tự động:%s Trả lời một dòng "phiên đã đầy, gửi lại cho phiên <tên mới> sau khi người dùng bấm Bắt đầu". '
-                % (k, c['doi'] // 1000, LUOT_DAU, phien, CAU_MOI, the)) + SAU_DO
+                '(b) Tin do phiên khác gửi / sự kiện tự động: %s; trả lời phiên gửi một dòng "phiên đã đầy, gửi lại cho phiên <tên mới>". '
+                % (k, c['doi'] // 1000, CHONG_TRUNG, LUOT_DAU, phien, CAU_MOI,
+                   NHO_DIEU_PHOI_GON if tt.get('the_da_tao') else NHO_DIEU_PHOI)) + SAU_DO
     if muc <= da_muc and n < da_n + c['buoc_nhac_lai']:
         return None
     ghi_json(tep, dict(tt, muc=muc, n=n, luc=int(nay), the_da_tao=True))
     if muc == 1:
         return ('[tintmark-tietkiemtoken] NHẮC: %dk token (nhắc %dk, đổi %dk). Câu đầu trả lời: "Phiên đã %dk token. %s" '
-                'Cập nhật tệp bàn giao (ban-giao.md: dưới ~1.500 chữ, chỉ trỏ đường dẫn); dòng Chuỗi phiên có id thật, id phiên này: %s.%s '
-                'Xong việc dở, không mở việc lớn mới.'
+                'Cập nhật tệp bàn giao (ban-giao.md: dưới ~1.500 chữ, chỉ trỏ đường dẫn); dòng Chuỗi phiên có id thật, id phiên này: %s. '
+                'Xong phần việc dở của lượt này, không mở việc lớn mới.%s'
                 % (k, c['nhac'] // 1000, c['doi'] // 1000, k, CAU_MOI, phien, the))
     return ('[tintmark-tietkiemtoken] ĐỔI PHIÊN: %dk token (> %dk). Không nhận việc mới; dừng ở điểm an toàn, chốt tệp bàn giao.%s Báo: "%s" '
-            'Lượt người dùng gõ: mở phiên kế nhiệm mới hoàn toàn (fresh, không fork), lời giao = lệnh bàn giao (%s), tên cũ + số. '
-            % (k, c['doi'] // 1000, the, CAU_MOI, LUOT_DAU)) + SAU_DO
+            '%s Lượt người dùng gõ: start_session "user_asked" (fresh, không fork), lời giao = lệnh bàn giao (%s), tên cũ + số. '
+            'Lượt do phiên khác / sự kiện tự động: %s. '
+            % (k, c['doi'] // 1000, the, CAU_MOI, CHONG_TRUNG, LUOT_DAU,
+               NHO_DIEU_PHOI_GON if tt.get('the_da_tao') else NHO_DIEU_PHOI)) + SAU_DO
 
 
 def dem_chu(duong):
@@ -341,6 +351,17 @@ def mo_dun(ten, cwd):
         return True
 
 
+def nhac_cau_noi(cwd):
+    """Ket qua phe duyet giong noi (scripts/cau_noi.py) ve khi phien da tat: bao o dau luot."""
+    s = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))), 'scripts')
+    if not os.path.isfile(os.path.join(s, 'cau_noi.py')):
+        return None
+    if s not in sys.path:
+        sys.path.insert(0, s)
+    import cau_noi
+    return cau_noi.nhac_hook(cwd)
+
+
 def main():
     try:
         vao = json.loads(sys.stdin.read() or '{}')
@@ -370,6 +391,8 @@ def main():
         ds = [thong_bao_plugin, nhac_phan_hoi_cu]
         if mo_dun('vong_lap', cwd):
             ds.insert(0, lambda: nhac_vong_lap(vao, c))
+        if mo_dun('cau_noi', cwd):
+            ds.insert(0, lambda: nhac_cau_noi(cwd))
         for ham in ds:
             try:
                 b = ham()

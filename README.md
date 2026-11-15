@@ -81,7 +81,7 @@ python3 $P/scripts/cap_nhat.py quay-lui
 ```bash
 python3 $P/scripts/module.py ds
 ```
-Module: `nen` (nén output), `tu_sua` (tự tắt bộ lọc hỏng), `nguong` (nhắc 250k / 300k), `vong_lap` (nhắc vòng lặp), `tu_cap_nhat` (kiểm bản mới mỗi 24 giờ). Tắt cả máy: `module.py tat <id>` (bật lại: `module.py bat <id>`). Tắt riêng một dự án: `<dự án>/.claude/tintmark-tietkiemtoken.json` có `{"module": {"<id>": false}}`. Tắt tạm: biến môi trường `TIETKIEM_TAT_MODULE=nen,nguong`. Module tắt chỉ làm hook của nó im, không chặn lệnh.
+Module: `nen` (nén output), `tu_sua` (tự tắt bộ lọc hỏng), `nguong` (nhắc 250k / 300k), `vong_lap` (nhắc vòng lặp), `tu_cap_nhat` (kiểm bản mới mỗi 24 giờ), `cau_noi` (phê duyệt bằng giọng nói qua thư mục Google Drive: `scripts/cau_noi.py`, xem `skills/tintmark-tietkiemtoken/phe-duyet-giong-noi.md`). Tắt cả máy: `module.py tat <id>` (bật lại: `module.py bat <id>`). Tắt riêng một dự án: `<dự án>/.claude/tintmark-tietkiemtoken.json` có `{"module": {"<id>": false}}`. Tắt tạm: biến môi trường `TIETKIEM_TAT_MODULE=nen,nguong`. Module tắt chỉ làm hook của nó im, không chặn lệnh.
 
 ## Hội viên
 
@@ -116,7 +116,7 @@ Phát bản luôn chạy từ nguồn. Không sửa tệp trong kho bản (sai b
 
 ## English summary
 
-`tintmark-tietkiemtoken` is a Claude Code plugin that saves tokens: it shortens the output of common bash commands (git, test runners, build, ls/find/grep, docker, adb, long logs) after they run (PostToolUse `updatedToolOutput`, the command itself is never changed), warns at 250k / 300k context and guides a hand-off to a new session, keeps a local feedback log, can disable a misbehaving filter on its own, and updates from a local release store with hash check, tests, smoke test and rollback. Pure Python 3 standard library, runs locally, sends nothing off the machine. Hooks are fail-open: any error returns the original output. Each part (compression, self-repair, context warnings, loop reminders, auto-update) can be switched off with `scripts/module.py`. A local, signature-based membership check exists but is OFF in this release; it never calls a server and never blocks a command. Documentation is in Vietnamese.
+`tintmark-tietkiemtoken` is a Claude Code plugin that saves tokens: it shortens the output of common bash commands (git, test runners, build, ls/find/grep, docker, adb, long logs) after they run (PostToolUse `updatedToolOutput`, the command itself is never changed), warns at 250k / 300k context and guides a hand-off to a new session, keeps a local feedback log, can disable a misbehaving filter on its own, and updates from a local release store with hash check, tests, smoke test and rollback. Pure Python 3 standard library, runs locally, sends nothing off the machine. Hooks are fail-open: any error returns the original output. Each part (compression, self-repair, context warnings, loop reminders, auto-update, voice-approval bridge via a synced Google Drive folder) can be switched off with `scripts/module.py`. A local, signature-based membership check exists but is OFF in this release; it never calls a server and never blocks a command. Documentation is in Vietnamese.
 
 **License:** proprietary, all rights reserved (see `LICENSE`): free to read, install and use for your own personal or internal work; no copying, redistribution or resale without written permission.
 

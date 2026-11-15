@@ -5,12 +5,14 @@
 | Ngữ cảnh | Việc phải làm |
 |---|---|
 | < 250k | Làm bình thường; cập nhật tệp bàn giao ở mỗi mốc việc |
-| ≥ 250k (hook báo `[tintmark-tietkiemtoken] NHẮC`) | **Câu đầu tiên** của câu trả lời báo người dùng: "Phiên đã <n>k token. Mở phiên mới để làm việc hiệu quả hơn. Ngữ cảnh đã đưa vào phiên mới." Viết / cập nhật ngay tệp bàn giao, rồi tạo **một** thẻ đề xuất phiên kế nhiệm (mục 3) để người dùng chỉ cần bấm Bắt đầu. Vẫn được hoàn tất việc đang dở |
+| ≥ 250k (hook báo `[tintmark-tietkiemtoken] NHẮC`) | **Câu đầu tiên** của câu trả lời báo người dùng: "Phiên đã <n>k token. Mở phiên mới để làm việc hiệu quả hơn. Ngữ cảnh đã đưa vào phiên mới." Viết / cập nhật ngay tệp bàn giao, xong phần việc dở của lượt này, rồi **mở thẳng** phiên kế nhiệm (mục 3) — không để thẻ chờ người dùng bấm |
 | ≥ 300k (hook báo `[tintmark-tietkiemtoken] ĐỔI PHIÊN`) | Không nhận việc mới, kể cả tin vừa gửi. Chốt tệp bàn giao, mở phiên kế nhiệm kèm nguyên văn tin đó (mục 3), trả lời một dòng có link phiên mới |
 
 Từ 300k, hook nhắc ở **mọi** lượt người dùng gửi tin và giữ tin lại vài giây trước khi cho qua (`cho_giay`, mặc định 8, tối đa 30; đặt 0 để tắt). Tin không bị chặn, không bị xoá.
 
 Ngưỡng mặc định 250k / 300k. Phiên chỉ ghi sổ, chuyển tin nên đặt 150k / 200k trong `<gốc dự án>/.claude/tintmark-tietkiemtoken.json`. Không có hook (Claude Chat, máy khác): xem `claude-chat.md`.
+
+**Sổ hỏi đáp:** xem mục 2b.
 
 Không đổi phiên khi < 100k trừ khi đổi hẳn chủ đề. Không dùng tự nén (compact) thay cho đổi phiên: bản nén hay rơi luật và phiên vẫn tiếp tục phình.
 
@@ -18,13 +20,21 @@ Không đổi phiên khi < 100k trừ khi đổi hẳn chủ đề. Không dùng
 
 Vị trí: `<gốc dự án>/ban_giao_phien/<ten_phien_khong_dau>.md` (chữ thường, không dấu, gạch dưới; bỏ số kế nhiệm — một dòng phiên dùng chung một tệp, ghi đè). Không có gốc dự án ghi được thì dùng `~/.claude/tintmark-tietkiemtoken/ban_giao/`. **Dưới khoảng 1.500 chữ.** Chỉ trỏ đường dẫn (tệp, commit, nhánh, mục sổ), không chép nội dung tệp khác, không chép lịch sử việc đã xong (lịch sử có ở nhật ký / git). Mục 2 chỉ giữ việc xong còn ảnh hưởng bước kế tiếp; mục 7 chỉ giữ cạm bẫy còn gặp được. Vượt 1.500 chữ thì cắt trước khi giao. Plugin kiểm tự động: ghi tệp `ban_giao_phien/*.md` (Write / Edit / lệnh bash) mà quá ngưỡng thì hook báo `[tintmark-tietkiemtoken] BÀN GIAO DÀI: N chữ` — cắt ngay. Ngưỡng `ban_giao_chu` trong cấu hình (0 = tắt), tắt hẳn bằng module `ban_giao`.
 
+## 2b. Sổ hỏi đáp (mọi dự án)
+
+- Mỗi dự án có **một** sổ hỏi đáp, mặc định `<gốc dự án>/HOI_DAP.md` (dự án đã có sổ ở chỗ khác thì ghi đường dẫn đó vào tệp luật / bàn giao). Mới nhất ở trên; mẫu một mục: `## <ngày> — <câu hỏi gọn>` · hỏi ở phiên nào · trả lời ≤10 dòng · nguồn kiểm (tệp / lệnh).
+- Người dùng hỏi hoặc quyết điều gì có kết luận: **ghi sổ TRƯỚC, rồi mới trả lời** trong chat. Chat có thể trôi / bị tóm tắt; sổ thì không.
+- Kết quả phê duyệt giọng nói (`phe-duyet-giong-noi.md`) cũng ghi vào sổ này trước khi làm.
+- Phiên kế nhiệm đọc sổ (các mục mới nhất) **trước** tệp bàn giao. Tệp bàn giao chỉ trỏ tới sổ, không chép lại.
+
 Mẫu:
 
 ```markdown
 # Bàn giao: <tên phiên, không số>
-> LỆNH BÀN GIAO: Đọc `<đường dẫn tệp này>` rồi làm tiếp từ mục 3. Phiên này là `<tên phiên> <số kế tiếp>`. Lượt đầu: xác nhận 3 dòng, gọi `detach_session "self"` TRƯỚC, rồi gọi archive_session lưu trữ mọi phiên cũ hơn 2 phiên mới nhất trong dòng `Chuỗi phiên` (ban-giao.md mục 4), thêm id của mình vào dòng đó và vào sổ phiên của dự án.
+> LỆNH BÀN GIAO: Đọc sổ hỏi đáp `<đường dẫn HOI_DAP.md>` (các mục mới nhất) và `<đường dẫn tệp này>` rồi làm tiếp từ mục 3. Phiên này là `<tên phiên> <số kế tiếp>`. Lượt đầu: xác nhận 3 dòng, gọi `detach_session "self"` TRƯỚC, rồi gọi archive_session lưu trữ mọi phiên cũ hơn 2 phiên mới nhất trong dòng `Chuỗi phiên` (ban-giao.md mục 4), thêm id của mình vào dòng đó và vào sổ phiên của dự án.
 Cập nhật: <ngày giờ> · Phiên đang giữ: `<tên> <số>` (id <id nếu biết>) · Số phiên đã tạo: <n> · Model: <model>
 Chuỗi phiên: <id phiên 1> (đã lưu trữ), <id phiên 2> (giữ), <id phiên hiện tại>
+Sổ hỏi đáp: `<đường dẫn>`
 
 ## 1. Mục tiêu
 ## 2. Việc đã xong            (kèm commit / tệp / link)
@@ -45,8 +55,9 @@ Cập nhật tệp khi: xong một việc; trước khi dừng chờ người d�
 
 1. Chốt tệp bàn giao (đủ 7 mục, tăng "Số phiên đã tạo").
 2. Mở phiên **mới hoàn toàn**, không fork (fork mang theo cả lịch sử). Cùng thư mục làm việc; model theo `chon-model.md`; lời mở đầu = lệnh bàn giao.
-   - **Lượt do người dùng gõ** (app cho mở phiên): `start_session` kiểu `user_asked`, ngữ cảnh "fresh". Đã ≥ 300k thì lời giao = lệnh bàn giao + NGUYÊN VĂN tin người dùng vừa gửi; không làm việc đó ở phiên cũ; trả lời một dòng: "Mở phiên mới để làm việc hiệu quả hơn. Ngữ cảnh đã đưa vào phiên mới." kèm link phiên mới.
-   - **Lượt do phiên khác gửi hoặc sự kiện tự động**: app từ chối mở phiên kiểu `user_asked`. Tạo thẻ đề xuất (`start_session` kiểu `own_initiative`, "fresh", tên cũ + số, mô tả có câu trên) chờ người dùng bấm Bắt đầu; trả lời phiên gửi một dòng: "phiên đã đầy, gửi lại việc này cho phiên `<tên mới>` sau khi người dùng bấm Bắt đầu". Mỗi phiên chỉ một thẻ.
+   - **Chống mở trùng (bắt buộc):** trước khi mở, `list_sessions` tìm đúng tên `<tên cũ + số>` (cả phiên đang chạy và thẻ chờ). Đã có thì dùng phiên đó, không mở thêm; đã nhờ phiên điều phối mở hộ thì không tự mở nữa.
+   - **Lượt do người dùng gõ** (app cho mở phiên): `start_session` kiểu `user_asked`, ngữ cảnh "fresh" — mở thẳng, không tạo thẻ. Việc làm theo luật thường trực của người dùng (CLAUDE.md, bộ nhớ) trong lượt đó cũng tính là lệnh của người dùng. Đã ≥ 300k thì lời giao = lệnh bàn giao + NGUYÊN VĂN tin người dùng vừa gửi; không làm việc đó ở phiên cũ; trả lời một dòng: "Mở phiên mới để làm việc hiệu quả hơn. Ngữ cảnh đã đưa vào phiên mới." kèm link phiên mới.
+   - **Lượt do phiên khác gửi hoặc sự kiện tự động**: app chỉ cho tạo thẻ, mà thẻ bắt người dùng bấm "Bắt đầu" (gián đoạn). **Không tạo thẻ.** `SendMessage` phiên điều phối của dự án (id trong sổ phiên) **một** tin: "nhờ mở hộ `<tên mới>` ở lượt người dùng gõ bên đó; lệnh bàn giao ở `<tệp>`; phiên đầy: `<id>`". Trả lời phiên gửi một dòng: "phiên đã đầy, gửi lại việc này cho phiên `<tên mới>`". Chỉ khi dự án không có phiên điều phối mới tạo **một** thẻ (`own_initiative`, "fresh", tên cũ + số, mô tả có câu trên).
    - Hook không phân biệt được hai loại lượt; phiên tự xét từ nội dung lượt.
    - Claude Code app máy tính: công cụ mở phiên (`start_session`, ngữ cảnh "fresh"), rồi đặt tên bằng công cụ đổi tên phiên.
    - CLI: in lệnh bàn giao để người dùng dán vào `claude` mới.
@@ -76,8 +87,10 @@ Có, thường tốt hơn: ngữ cảnh ngắn thì model bám luật tốt hơn
 
 ## 6. Kiểm nhanh trước khi rời phiên cũ
 
+- [ ] Sổ hỏi đáp đã ghi mọi câu người dùng hỏi / quyết trong phiên; lệnh bàn giao trỏ tới sổ
 - [ ] Tệp bàn giao đủ 7 mục, dưới ~1.500 chữ (`wc -w`), chỉ trỏ đường dẫn, bước kế tiếp làm được ngay
 - [ ] Mọi thay đổi mã đã commit hoặc ghi rõ "chưa commit" kèm đường dẫn
+- [ ] Không có hai phiên kế nhiệm cùng tên (`list_sessions`)
 - [ ] Phiên mới đã xác nhận 3 dòng và đã `detach_session "self"`
 - [ ] Sổ phiên đã sửa id, vòng lặp đã chuyển chủ
 - [ ] Phiên đầy đã lưu trữ phiên trước đó của nó; chuỗi chỉ còn hiện 2 phiên mới nhất (lưu trữ từ cũ nhất, tách phiên con còn dùng trước, gọi lại khi lỗi hook); dòng `Chuỗi phiên` và sổ phiên có id phiên mới

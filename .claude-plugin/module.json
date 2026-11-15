@@ -9,7 +9,9 @@
                "hoi_vien": false, "tep": ["skills/tintmark-tietkiemtoken/cong_cu/nguong_token.py"]},
   "vong_lap": {"mo_ta": "Nhắc sổ vòng lặp / lịch tự chạy chờ quyết", "mac_dinh": true, "hoi_vien": false,
                "tep": ["skills/tintmark-tietkiemtoken/cong_cu/vong_lap.py"]},
-  "tu_cap_nhat": {"mo_ta": "Kiểm bản mới mỗi 24 giờ (cap_nhat.py tu-dong)", "mac_dinh": true, "hoi_vien": false,
+  "cau_noi": {"mo_ta": "Phê duyệt bằng giọng nói qua Google Drive: tạo tệp phê duyệt, canh nền, báo kết quả chưa đọc ở đầu lượt",
+              "mac_dinh": true, "hoi_vien": false, "tep": ["scripts/cau_noi.py"]},
+  "tu_cap_nhat":{"mo_ta": "Kiểm bản mới mỗi 24 giờ (cap_nhat.py tu-dong)", "mac_dinh": true, "hoi_vien": false,
                   "tep": ["scripts/cap_nhat.py"]}
  }
 }

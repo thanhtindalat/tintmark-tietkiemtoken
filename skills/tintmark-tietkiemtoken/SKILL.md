@@ -1,6 +1,6 @@
 ---
 name: tintmark-tietkiemtoken
-description: Tiết kiệm token cho mọi dự án Claude Code và Chat. Dùng khi nói tiết kiệm token, hết token, phiên dài, đổi phiên, bàn giao, đặt tên phiên, sắp xếp / tìm phiên, vòng lặp, chọn model, nén output, nén sai, đo token, cập nhật plugin; khi hook báo [tintmark-tietkiemtoken]; lượt đầu phiên dài hạn.
+description: Tiết kiệm token cho mọi dự án Claude Code và Chat. Dùng khi nói tiết kiệm token, hết token, phiên dài, đổi phiên, bàn giao, đặt tên phiên, sắp xếp / tìm phiên, vòng lặp, chọn model, nén output, nén sai, đo token, cập nhật plugin, phê duyệt giọng nói; khi hook báo [tintmark-tietkiemtoken]; lượt đầu phiên dài hạn.
 ---
 
 # tintmark-tietkiemtoken
@@ -10,7 +10,7 @@ Quy trình chính về token cho mọi dự án (gồm cả trả lời gọn, n
 ## 8 luật vàng
 
 1. **Phiên to là tốn nhất.** Mỗi lượt gọi model đọc lại cả phiên. Nhắc ở 250k, đổi phiên trước 300k. Không chờ tự nén.
-2. **Trạng thái nằm ngoài chat, viết gọn.** Mục tiêu, việc dở, quyết định ghi ra tệp bàn giao ở mỗi mốc việc. Tệp bàn giao dưới khoảng 1.500 chữ (hook báo `BÀN GIAO DÀI` khi vượt), chỉ trỏ đường dẫn, không chép nội dung; lời giao phiên kế nhiệm chỉ gồm lệnh bàn giao + việc mới nguyên văn.
+2. **Trạng thái nằm ngoài chat, viết gọn.** Câu người dùng hỏi / quyết: ghi sổ hỏi đáp dự án trước rồi mới trả lời. Mục tiêu, việc dở, quyết định ghi ra tệp bàn giao ở mỗi mốc việc. Tệp bàn giao dưới khoảng 1.500 chữ (hook báo `BÀN GIAO DÀI` khi vượt), chỉ trỏ đường dẫn, không chép nội dung; lời giao phiên kế nhiệm chỉ gồm lệnh bàn giao + việc mới nguyên văn.
 3. **Không đánh thức phiên đã nghỉ quá 1 giờ khi không có việc thật.** Bộ đệm đã hết hạn: lượt đầu nạp lại cả ngữ cảnh với giá ghi gấp đôi. Mở phiên mới nhỏ, hoặc đọc tệp trạng thái của nó.
 4. **Kết quả ra tệp, ngữ cảnh chính chỉ nhận kết luận.** Giữa các phiên chỉ gửi "xong X, xem `<tệp>`"; gom nhiều ý vào một tin. Dò tìm / đọc nhiều tệp: giao subagent. Gom nhiều lệnh vào một lượt; truy bảng luôn lọc + giới hạn dòng; không in cả tệp, cả nhật ký. Không đọc bản luật đầy đủ / tệp tham chiếu dài trừ khi thật cần.
 5. **Model theo việc.** Phiên yêu cầu / ghi sổ, báo cáo, điều phối: Sonnet hoặc Haiku. Opus (model mạnh) cho mã khó, kiến trúc, phát hành. Xem `chon-model.md`.
@@ -36,14 +36,15 @@ Quy trình chính về token cho mọi dự án (gồm cả trả lời gọn, n
 | Output nén thiếu dòng / sai, hook nhắc sai: ghi phản hồi, bộ lọc tự tắt | `phan-hoi.md` |
 | Có phản hồi mở hoặc bộ lọc bị tắt: tái hiện, sửa luật, phát bản vá | `tu-sua.md` |
 | Cập nhật, quay lui, phát bản, gộp skill vào plugin, gỡ | `cap-nhat.md` |
-| Làm việc trên Claude Chat (claude.ai) | `claude-chat.md` |
+| Xin người dùng duyệt / nhận chỉ đạo bằng giọng nói qua Google Drive (tạo tệp phê duyệt, canh nền, đọc kết quả) | `phe-duyet-giong-noi.md` |
+| Làm việc trên Claude Chat (claude.ai), chạy giao thức phê duyệt giọng nói | `claude-chat.md` |
 | Giải thích vì sao tốn, cách tính tiền | `thuat-toan.md` |
 
 ## Việc làm ngay ở lượt đầu của phiên dài hạn
 
 1. Xác định tên phiên đúng quy tắc (`dat-ten-phien.md`); sai thì đề xuất tên đúng.
 2. Tạo / cập nhật tệp bàn giao của phiên với **lệnh bàn giao** ở dòng đầu (`ban-giao.md` mục 2) — để lúc nào cũng mở được phiên kế nhiệm bằng một câu.
-3. Phiên kế nhiệm: đọc tệp bàn giao, xác nhận 3 dòng (mục tiêu, bước kế tiếp, tệp đang sửa), `detach_session "self"` trước, rồi gọi `archive_session` lưu trữ mọi phiên cũ hơn 2 phiên mới nhất của chuỗi (bắt buộc; `ban-giao.md` mục 4), ghi id mới vào sổ phiên, rồi làm.
+3. Phiên kế nhiệm: đọc sổ hỏi đáp dự án rồi tệp bàn giao, xác nhận 3 dòng (mục tiêu, bước kế tiếp, tệp đang sửa), `detach_session "self"` trước, rồi gọi `archive_session` lưu trữ mọi phiên cũ hơn 2 phiên mới nhất của chuỗi (bắt buộc; `ban-giao.md` mục 4), ghi id mới vào sổ phiên, rồi làm.
 
 ## Công cụ
 
