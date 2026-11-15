@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 Tintmark. All rights reserved. Xem LICENSE / NOTICE.
 """Xem tổng tiết kiệm. Ước lượng token ≈ byte/4.
 
   thong_ke.py [--days N] [--theo lenh|luat|ngay]
@@ -47,6 +48,7 @@ def main():
     print("-" * 76)
     print("%-28s %6d %10d %10d %6.0f%% %9d" % ("TỔNG", n, v, r, 100.0 * (v - r) / v if v else 0, (v - r) // 4))
     print("(~token = byte/4, ước lượng — không phải hoá đơn)")
+    print("tintmark-tietkiemtoken · by Tintmark")
 
 
 if __name__ == "__main__":

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 Tintmark. All rights reserved. Xem LICENSE / NOTICE.
 """Cập nhật plugin tintmark-tietkiemtoken có kiểm, sao lưu và quay lui. Chỉ dùng kênh CỤC BỘ (thư mục trên máy).
 
   cap_nhat.py kiem                 so bản đang cài với bản mới nhất của kênh

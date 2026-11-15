@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 Tintmark. All rights reserved. Xem LICENSE / NOTICE.
 """Gộp skill token vào plugin trên máy này, có sao lưu và gỡ được.
 
   cai_dat.py trang-thai

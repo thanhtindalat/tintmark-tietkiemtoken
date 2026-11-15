@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 Tintmark. All rights reserved. Xem LICENSE / NOTICE.
 """Hook PostToolUse (Bash): nén output SAU khi lệnh đã chạy (chế độ "sau", mặc định từ 0.2.0).
 
 Không đổi lệnh => không đụng bộ duyệt quyền / auto mode; lệnh lỗi (mã thoát khác 0) đi theo

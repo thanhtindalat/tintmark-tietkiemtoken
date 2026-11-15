@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 Tintmark. All rights reserved. Xem LICENSE / NOTICE.
 """Chạy lệnh thật, nén output, giữ nguyên mã thoát.
 
   nen.py -c "git status"        chạy chuỗi lệnh qua bash -c

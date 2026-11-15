@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 Tintmark. All rights reserved. Xem LICENSE / NOTICE.
 """Hook PreToolUse (Bash): bọc lệnh đơn giản có luật nén qua nen.py.
 
 Chỉ hoạt động khi cấu hình che_do = "truoc" (dự phòng cho Claude Code cũ không có

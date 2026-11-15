@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Tintmark. All rights reserved. Xem LICENSE / NOTICE.
 """Đổi tên plugin (nen-token -> tintmark-tietkiem -> tintmark-tietkiemtoken): dữ liệu không mất, quay lui được."""
 import json
 import os

@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Tintmark. All rights reserved. Xem LICENSE / NOTICE.
 """Lõi nén output lệnh — Python 3 thư viện chuẩn. Mã riêng, không dùng mã rtk.
 
 Luồng: loại ANSI -> sửa dòng (replace) -> bỏ dòng (drop, trừ dòng 'keep') ->

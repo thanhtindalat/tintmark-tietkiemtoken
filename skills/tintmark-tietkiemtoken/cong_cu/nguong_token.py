@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 Tintmark. All rights reserved. Xem LICENSE / NOTICE.
 """Hook tintmark-tietkiemtoken: do nguong ngu canh cua phien va nhac vong lap cho quyet.
 
 Noi vao ~/.claude/settings.json cho su kien UserPromptSubmit va PostToolUse.

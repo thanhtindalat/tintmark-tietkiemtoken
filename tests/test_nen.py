@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Tintmark. All rights reserved. Xem LICENSE / NOTICE.
 import json, os, shlex, subprocess, sys, tempfile, unittest
 
 GOC = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

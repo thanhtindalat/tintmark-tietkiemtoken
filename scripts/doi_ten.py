@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 Tintmark. All rights reserved. Xem LICENSE / NOTICE.
 """Chuyển máy từ plugin tên cũ sang tên mới (và quay lui). Python 3 thư viện chuẩn.
 Mặc định (15/11/2026, ): plugin `tintmark-tietkiem` -> `tintmark-tietkiemtoken`,
 skill `tintmark-token` -> `tintmark-tietkiemtoken`. Lần trước: `--tu nen-token --sang tintmark-tietkiem

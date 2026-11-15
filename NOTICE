@@ -1,0 +1,15 @@
+tintmark-tietkiemtoken
+Copyright (c) 2026 Tintmark. All rights reserved.
+Bản quyền © 2026 Tintmark. Điều khoản sử dụng: xem tệp LICENSE.
+
+Tác giả: Tintmark.
+
+Thành phần bên thứ ba: không có. Mã chỉ dùng thư viện chuẩn của Python 3
+(Python Software Foundation License, đi kèm trình thông dịch, không chép
+vào kho này). Không có mã, luật lọc hay mẫu nào chép từ dự án khác.
+
+Mẫu kiểm thử trong `mau/` là dữ liệu tự tạo hoặc tổng hợp, không chứa dữ
+liệu của người dùng hay dự án khác.
+
+"Claude" và "Claude Code" là nhãn hiệu của Anthropic. Plugin này do
+Tintmark làm, không phải sản phẩm của Anthropic.

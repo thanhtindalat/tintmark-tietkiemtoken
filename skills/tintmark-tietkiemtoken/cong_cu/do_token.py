@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 Tintmark. All rights reserved. Xem LICENSE / NOTICE.
 """Bao cao token theo phien tu nhat ky Claude Code tren may (~/.claude/projects).
 
   python3 do_token.py [so_ngay=7] [--du-an CHUOI_LOC_DUONG_DAN]
@@ -81,7 +82,7 @@ def main():
         return
     T = sum(p['q'] for p in ds)
     S = lambda k: sum(p[k] for p in ds)
-    print('== tintmark-tietkiemtoken: %g ngay, %d phien, %d luot goi model' % (so_ngay, len(ds), S('luot')))
+    print('== tintmark-tietkiemtoken (by Tintmark): %g ngay, %d phien, %d luot goi model' % (so_ngay, len(ds), S('luot')))
     print('Ty trong chi phi quy doi: doc cache %.0f%% | ghi cache %.0f%% | dau ra %.0f%% | vao moi %.0f%%' % (
         10 * S('cr') / T, 125 * S('cw') / T, 500 * S('out') / T, 100 * S('inp') / T))
     print('Luot co ngu canh > %dk: %.0f%% so luot, %.0f%% chi phi; phan vuot nguong (tran tiet kiem uoc tinh): %.0f%%' % (

@@ -107,3 +107,6 @@ Phát bản luôn chạy từ nguồn. Không sửa tệp trong kho bản (sai b
 `tintmark-tietkiemtoken` is a Claude Code plugin that saves tokens: it shortens the output of common bash commands (git, test runners, build, ls/find/grep, docker, adb, long logs) after they run (PostToolUse `updatedToolOutput`, the command itself is never changed), warns at 250k / 300k context and guides a hand-off to a new session, keeps a local feedback log, can disable a misbehaving filter on its own, and updates from a local release store with hash check, tests, smoke test and rollback. Pure Python 3 standard library, runs locally, sends nothing off the machine. Hooks are fail-open: any error returns the original output. Documentation is in Vietnamese.
 
 **License:** not licensed for reuse; all rights reserved. The source is public for reading only.
+
+---
+Bản quyền © 2026 Tintmark. Bảo lưu mọi quyền. Điều khoản: `LICENSE`; tác giả và thành phần bên thứ ba: `NOTICE`.

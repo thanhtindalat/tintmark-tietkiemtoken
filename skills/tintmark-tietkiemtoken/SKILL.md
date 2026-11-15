@@ -52,3 +52,6 @@ Quy trình chính về token cho mọi dự án (gồm cả trả lời gọn, n
 - `cong_cu/vong_lap.py` — sổ vòng lặp chờ quyết, có hạn tự tắt.
 - Cấu hình chung `~/.claude/tintmark-tietkiemtoken/cau_hinh.json`; riêng dự án `<gốc dự án>/.claude/tintmark-tietkiemtoken.json` (ví dụ `{"nhac":150000,"doi":200000}`).
 - Plugin tintmark-tietkiemtoken (chỉ Claude Code), `P=~/.claude/skills/tintmark-tietkiemtoken/../..`: `$P/scripts/thong_ke.py` (đã nén bao nhiêu), `phan_hoi.py` (báo nén sai), `tu_sua.py` (sửa bộ lọc), `cap_nhat.py` (cập nhật / quay lui), `cai_dat.py` (trạng thái / gộp / gỡ). Bản skill dùng trên Claude Chat không có các script này.
+
+---
+Bản quyền © 2026 Tintmark. Bảo lưu mọi quyền.

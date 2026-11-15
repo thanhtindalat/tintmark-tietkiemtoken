@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Tintmark. All rights reserved. Xem LICENSE / NOTICE.
 set -e
 R=$1/du_an_mau; rm -rf $R; mkdir -p $R; cd $R
 export GIT_AUTHOR_NAME="Vi Du" GIT_AUTHOR_EMAIL="vidu@example.com" GIT_COMMITTER_NAME="Vi Du" GIT_COMMITTER_EMAIL="vidu@example.com"

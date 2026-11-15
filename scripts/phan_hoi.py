@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 Tintmark. All rights reserved. Xem LICENSE / NOTICE.
 """Sổ phản hồi cục bộ của plugin tintmark-tietkiemtoken. KHÔNG gửi gì ra ngoài máy.
 
   phan_hoi.py bao --loai nen-sai|mat-dong|nhac-sai|khac --lenh "LỆNH GỐC" [--mo-ta "..."]

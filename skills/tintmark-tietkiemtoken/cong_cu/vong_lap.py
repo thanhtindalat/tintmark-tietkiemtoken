@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 Tintmark. All rights reserved. Xem LICENSE / NOTICE.
 """So vong lap cho quyet cua tintmark-tietkiemtoken (~/.claude/tintmark-tietkiemtoken/vong_lap.json).
 
   vong_lap.py de-xuat --id ID --ten "..." --loai lich|cron|nen|khac --tan-suat "..." --ly-do "..." [--du-an DUONG_DAN] [--han-gio 48]

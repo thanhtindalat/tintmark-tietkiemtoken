@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Tintmark. All rights reserved. Xem LICENSE / NOTICE.
 """Test bản 0.2.x: hook sau (PostToolUse), phản hồi, tự tắt bộ lọc, hook ngưỡng gộp, phát bản, cập nhật, quay lui."""
 import json
 import os

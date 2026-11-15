@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 Tintmark. All rights reserved. Xem LICENSE / NOTICE.
 """Quy trình tự sửa bộ lọc nén từ sổ phản hồi.
 
   tu_sua.py quet                          phản hồi đang mở theo bộ lọc + bộ lọc đang tắt

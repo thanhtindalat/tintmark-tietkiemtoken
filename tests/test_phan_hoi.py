@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Tintmark. All rights reserved. Xem LICENSE / NOTICE.
 """Ca tái hiện từ sổ phản hồi: tests/phan_hoi/<ID>/{goc.txt, ca.json}. Mỗi chuỗi `giu` phải còn sau khi nén."""
 import json
 import os

@@ -1,5 +1,8 @@
 # Nhật ký thay đổi — tintmark-tietkiemtoken
 
+## 0.3.10 — 15/11/2026
+- Bản quyền: LICENSE độc quyền (được xem, cài dùng cá nhân; cấm sao chép / phân phối lại / bán khi chưa có văn bản), NOTICE, dòng bản quyền đầu mọi tệp mã, chân SKILL.md / README, 'by Tintmark' ở thong_ke.py và do_token.py, plugin.json license SEE LICENSE IN LICENSE; test kiểm.
+
 ## 0.3.9 — 15/11/2026
 - Mô tả SKILL.md rút còn 292 ký tự / 351 byte (trước ~1.000 ký tự / ~1.240 byte, vượt giới hạn 1.024 của claude.ai); test giới hạn 320 ký tự và 1.024 byte.
 

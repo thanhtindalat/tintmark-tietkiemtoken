@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Tintmark. All rights reserved. Xem LICENSE / NOTICE.
 """Kiểm SKILL.md trước khi phát bản: mô tả ≤ 320 ký tự (≤ 1024 byte cho claude.ai), mọi tệp .md được nhắc đều có thật."""
 import os
 import re
@@ -42,6 +43,25 @@ class KiemSkillMd(unittest.TestCase):
             nd = f.read()
         for chu in ("parentSessionId", "unarchive_session", "detach_session", "get_session"):
             self.assertIn(chu, nd)
+
+
+class KiemBanQuyen(unittest.TestCase):
+    def test_license_notice_va_dong_ban_quyen(self):
+        for t in ("LICENSE", "NOTICE"):
+            with open(os.path.join(GOC, t), encoding="utf-8") as f:
+                self.assertIn("Copyright (c) 2026 Tintmark. All rights reserved.", f.read())
+        thieu = []
+        for d, ds, fs in os.walk(GOC):
+            ds[:] = [x for x in ds if x not in ("__pycache__", ".git")]
+            for f in fs:
+                if f.endswith((".py", ".sh")):
+                    with open(os.path.join(d, f), encoding="utf-8") as g:
+                        if "Copyright (c) 2026 Tintmark" not in "".join(g.readlines()[:4]):
+                            thieu.append(os.path.relpath(os.path.join(d, f), GOC))
+        self.assertEqual(thieu, [], "thiếu dòng bản quyền")
+        for t in ("README.md", os.path.join("skills", "tintmark-tietkiemtoken", "SKILL.md")):
+            with open(os.path.join(GOC, t), encoding="utf-8") as f:
+                self.assertIn("Bản quyền © 2026 Tintmark", f.read())
 
 
 if __name__ == "__main__":

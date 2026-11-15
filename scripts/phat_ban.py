@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 Tintmark. All rights reserved. Xem LICENSE / NOTICE.
 """Phát một bản mới vào kho bản CỤC BỘ (không đẩy git, không ra ngoài máy).
 
   phat_ban.py --loai va|nho|lon --ghi-chu "đã sửa gì" [--kho THƯ_MỤC] [--nguon THƯ_MỤC_NGUỒN]
