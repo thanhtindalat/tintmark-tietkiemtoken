@@ -1,6 +1,6 @@
 # Cập nhật, quay lui, cài và gỡ plugin tintmark-tietkiem
 
-Kênh cập nhật là **thư mục trên máy** (kho bản cục bộ). Kênh từ xa chưa bật. `P` là thư mục plugin (xem `nen-lenh.md`).
+Kênh cập nhật trên máy là **thư mục kho bản cục bộ** (`cap_nhat.py`, chỉ nhận thư mục, từ chối kênh `http…`). Kênh từ xa chính thức là **marketplace GitHub**: cài `claude plugin marketplace add <chủ>/tintmark-tietkiem` rồi `claude plugin install tintmark-tietkiem@tintmark-tietkiem`; cập nhật `claude plugin marketplace update tintmark-tietkiem` rồi `claude plugin update tintmark-tietkiem@tintmark-tietkiem`. `P` là thư mục plugin (xem `nen-lenh.md`).
 
 ## Các thành phần
 

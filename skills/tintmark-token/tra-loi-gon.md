@@ -10,7 +10,9 @@
 4. **Một ý một câu, mỗi thứ một tên gọi.** Viết tắt chuẩn được (DB, API); không tự chế viết tắt. Câu gọn mà hiểu được hai cách thì viết câu đầy đủ.
 5. **Sửa mã trong chat:** chỉ dòng đổi kèm 1–2 dòng ngữ cảnh, không dán cả tệp (trừ tệp mới hoặc được hỏi).
 6. **Khi chạy công cụ:** một dòng trước chuỗi nhiều bước, một dòng mỗi lần đổi pha, một dòng kết quả. Không viết chữ giữa các lệnh thường lệ.
-7. **Giữ ngôn ngữ của người dùng.** Gọn là nén cách nói, không đổi ngôn ngữ, không đổi tên gọi chuẩn của dự án.
+7. **Diễn giải việc ngắn gọn, đủ ngữ cảnh.** Lời giao việc, tin cho phiên khác: mục tiêu, tệp, tiêu chí xong; trỏ đường dẫn thay vì chép.
+8. **Mục xin duyệt đủ ý trong một dòng:** cần gì, vì sao, hệ quả (mỗi phương án). Người duyệt không phải mở thêm tệp hay hỏi lại.
+9. **Giữ ngôn ngữ của người dùng.** Gọn là nén cách nói, không đổi ngôn ngữ, không đổi tên gọi chuẩn của dự án.
 
 ## Viết đầy đủ (không nén) khi
 

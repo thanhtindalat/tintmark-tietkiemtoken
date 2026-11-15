@@ -2,6 +2,8 @@
 
 Kết quả subagent được chèn nguyên văn vào ngữ cảnh chính và bị đọc lại ở mọi lượt sau: 2k token văn xuôi tốn 2k mỗi lượt; cùng phát hiện trả dạng `đường_dẫn:dòng` còn khoảng một phần ba (ước tính của bản gốc, chưa đo trên máy này).
 
+**Luật chính:** dò tìm, đọc nhiều tệp (từ khoảng 4 tệp, hoặc tệp dài chỉ cần một kết luận) thì giao subagent, ngữ cảnh chính chỉ nhận kết luận. Lệnh có output dài (test, build, log, `find` rộng) chạy trong subagent hoặc ghi ra tệp rồi đọc phần cần (`tail`, `grep`), không để vào ngữ cảnh chính.
+
 Khi nào giao và chọn model nào: `chon-model.md` mục 5 (mỗi subagent tốn 20–30k khởi động; không giao việc vài lệnh).
 
 ## Giao gì

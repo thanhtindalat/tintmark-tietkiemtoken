@@ -44,6 +44,6 @@ class TestBanGiao(unittest.TestCase):
     def test_mau_lenh_ban_giao_co_buoc_luu_tru(self):
         s = open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "skills", "tintmark-token", "ban-giao.md"), encoding="utf-8").read()
         dong = [l for l in s.splitlines() if l.startswith("> LỆNH BÀN GIAO")][0]
-        self.assertIn("lưu trữ các phiên cũ", dong)
-        for y in ("a hook changed this call's input", "cũ nhất", "đang ghim"):
+        self.assertIn("archive_session lưu trữ mọi phiên cũ hơn 2 phiên mới nhất", dong); self.assertIn("sổ phiên", dong)
+        for y in ("a hook changed this call's input", "cũ nhất", "đang ghim", "detach_session", "2 phiên mới nhất"):
             self.assertIn(y, s)

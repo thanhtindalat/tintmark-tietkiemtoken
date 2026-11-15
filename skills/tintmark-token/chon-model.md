@@ -4,9 +4,9 @@
 
 | Loại việc | Dấu hiệu | Model | Nỗ lực |
 |---|---|---|---|
-| Sổ sách | ghi sổ yêu cầu, chuyển tin, cập nhật bảng, tổng hợp báo cáo từ dữ liệu có sẵn, đổi tên / sắp xếp | Sonnet (Haiku nếu chỉ chép / lọc) | thấp |
+| Sổ sách: phiên Yêu cầu, Báo cáo | ghi sổ yêu cầu, chuyển tin, cập nhật bảng, tổng hợp báo cáo từ dữ liệu có sẵn, đổi tên / sắp xếp | Sonnet (Haiku nếu chỉ chép / lọc) | thấp |
 | Lịch tự chạy | kiểm có việc mới không, chép dữ liệu, rà soát theo danh sách | Haiku / Sonnet | thấp |
-| Điều phối | đọc tệp trạng thái, chia việc, soạn lời giao việc | Sonnet | vừa |
+| Điều phối | đọc tệp trạng thái, chia việc, soạn lời giao việc | Sonnet (Haiku nếu chỉ chuyển tin) | vừa |
 | Viết nội dung, kịch bản, tài liệu | có mẫu, có giọng sẵn | Sonnet | vừa |
 | Kiểm thử theo kịch bản | bước rõ, tiêu chí đạt rõ | Sonnet | vừa |
 | Dò tìm / đọc rộng | tìm tệp, gom thông tin nhiều nơi | subagent model nhỏ, chỉ nhận kết luận | — |
@@ -18,6 +18,7 @@ Tên model thay theo đời (Haiku / Sonnet / Opus / Fable…): hiểu là **nh�
 
 ## 2. Luật
 
+0. **Mặc định:** phiên Yêu cầu, Báo cáo, Điều phối (và mọi phiên chủ yếu ghi sổ / chuyển tin) chạy Sonnet hoặc Haiku. Opus chỉ cho mã khó, kiến trúc, phát hành. Phiên sổ sách đang chạy Opus thì đổi khi kế nhiệm (luật 5).
 1. Việc khó không hạ model. Sai một lần ở việc khó đắt hơn mọi khoản tiết kiệm.
 2. Hạ model chỉ khi: việc lặp, tiêu chí kiểm rõ, ngữ cảnh nhỏ, sai thì phát hiện được ngay.
 3. Nghi ngờ: thử model nhỏ trên 1 việc có tiêu chí kiểm; đạt thì chuyển cả loại việc đó.

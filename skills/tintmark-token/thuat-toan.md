@@ -4,7 +4,7 @@
 
 1. **Mỗi lượt gọi model gửi lại toàn bộ phiên** (lời hệ thống + công cụ + toàn bộ lịch sử). Chi phí một lượt tỉ lệ với kích thước ngữ cảnh. Phiên 900k đắt khoảng 4,5 lần phiên 200k cho cùng một việc.
 2. **Một tin người dùng không phải một lượt gọi.** Mỗi lần dùng công cụ là thêm một lượt đọc lại. Đo thật: trung bình khoảng 10 lượt cho 1 tin. Việc 10 bước trong phiên 600k = 6 triệu token đọc lại.
-3. **Cache.** Phần đã gửi ở lượt trước được tính 0,1 giá (đọc cache). Cache hết hạn sau một khoảng nghỉ (5 phút, có nơi 1 giờ). Lượt đầu sau khi cache nguội phải **ghi lại toàn bộ với giá 1,25**. Đánh thức phiên 800k đã nguội ≈ 1 triệu token quy đổi chỉ để nó nhớ lại.
+3. **Cache.** Phần đã gửi ở lượt trước được tính 0,1 giá (đọc cache). Cache hết hạn sau một khoảng nghỉ (5 phút, có nơi 1 giờ). Lượt đầu sau khi cache nguội phải **ghi lại toàn bộ** (giá 1,25 với cache 5 phút, gấp đôi với cache 1 giờ). Đánh thức phiên 800k đã nguội ≈ 1 triệu token quy đổi chỉ để nó nhớ lại.
 4. **Đầu ra đắt gấp 5 đầu vào** nhưng thường chỉ chiếm dưới 10% tổng. Trả lời gọn có ích, không phải đòn chính.
 5. **Chi phí nền.** Lời hệ thống, định nghĩa công cụ, công cụ của connector (MCP), danh sách skill được gửi ở **mọi lượt của mọi phiên**. Thường 40–70k. Cắt connector / skill thừa lợi hơn tưởng.
 6. **Phiên mới không miễn phí.** Chi phí nền + đọc bàn giao (5–10k) + đọc lại tệp cần. Đổi phiên khi chưa tới 100k là lỗ.

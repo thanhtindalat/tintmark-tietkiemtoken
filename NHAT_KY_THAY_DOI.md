@@ -1,5 +1,17 @@
 # Nhật ký thay đổi — tintmark-tietkiem
 
+## 0.3.5 — 15/11/2026
+- cap-nhat.md: kênh từ xa chính thức là marketplace GitHub (cài / cập nhật bằng claude plugin marketplace)
+
+## 0.3.4 — 15/11/2026
+- Mỗi chuỗi phiên (tên cũ + số, dòng Chuỗi phiên, các lần chạy của một lịch) chỉ hiện 2 phiên mới nhất, còn lại archive_session ngay; ghi chú detach_session phiên con còn dùng trước khi lưu trữ cha, gọi lại khi hook thêm trường session, phiên đang chạy / đang mở để lần sau
+
+## 0.3.3 — 15/11/2026
+- Đổi phiên: phiên kế nhiệm bắt buộc gọi archive_session lưu trữ mọi phiên cũ trong Chuỗi phiên (kể cả phiên ngay trước) và ghi id mới vào sổ phiên
+
+## 0.3.2 — 15/11/2026
+- Luật gọn (15/11): tệp bàn giao dưới ~1.500 chữ chỉ trỏ đường dẫn; lời giao kế nhiệm = lệnh bàn giao + việc mới nguyên văn; dò tìm / đọc nhiều tệp giao subagent; gom lệnh, truy bảng lọc + giới hạn dòng; mục xin duyệt một dòng; không đánh thức phiên nghỉ quá 1 giờ (luật vàng 3); phiên Yêu cầu / Báo cáo / Điều phối chạy Sonnet / Haiku; rút gọn lời nhắc hook
+
 ## 0.3.1 — 15/11/2026
 - Lưu trữ phiên cũ: mẫu lệnh bàn giao có bước lưu trữ theo dòng Chuỗi phiên; hook NHẮC đòi id thật và báo id phiên hiện tại; lời giao phiên kế nhiệm có bước lưu trữ; ban-giao.md ghi thứ tự từ cũ nhất (kéo theo phiên con), gọi lại khi lỗi hook ở auto mode, cách báo khi công cụ từ chối; cai_dat.py trang-thai báo bản Claude Code ghi nhận và cảnh báo lệch; test mới
 

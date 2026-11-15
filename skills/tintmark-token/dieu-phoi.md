@@ -6,7 +6,8 @@ Phiên điều phối sắp xếp các phiên làm việc của một hoặc nhi
 
 - Nguồn sự thật là **sổ phiên** của dự án (một tệp, ví dụ `tham_chieu/phien.md` hoặc `ban_giao_phien/SO_PHIEN.md`): tên, id, phạm vi, model, tệp bàn giao, trạng thái (đang làm / rảnh / tạm dừng / đã lưu trữ), số token lần đo cuối.
 - Muốn biết phiên X đang ở đâu: đọc tệp bàn giao của X. Không nhắn hỏi.
-- Giao việc: một tin, đủ để làm (mục tiêu, tệp, tiêu chí xong, nơi ghi kết quả). Không nhắn rồi nhắn bổ sung.
+- Giao việc: một tin ngắn, đủ ngữ cảnh (mục tiêu, tệp, tiêu chí xong, nơi ghi kết quả); trỏ đường dẫn thay vì chép nội dung. Không nhắn rồi nhắn bổ sung.
+- Mục xin người dùng duyệt: đủ ý trong một dòng — cần gì, vì sao, hệ quả (mỗi phương án).
 - Nhận kết quả: phiên con ghi ra tệp, nhắn một dòng trỏ tệp.
 - Không gửi thông báo chung cho mọi phiên. Luật chung ghi vào tệp luật của dự án; phiên tự đọc khi có việc.
 - Không ghi cứng id phiên trong tệp luật (CLAUDE.md). Tệp luật chỉ nói "tra sổ phiên"; nếu không, mỗi lần đổi phiên phải sửa luật.
@@ -16,7 +17,8 @@ Phiên điều phối sắp xếp các phiên làm việc của một hoặc nhi
 | Phiên nhận | Làm gì |
 |---|---|
 | < 250k, vừa hoạt động | Nhắn bình thường |
-| > 300k hoặc đã nghỉ lâu | Không nhắn. Mở phiên kế nhiệm từ tệp bàn giao của nó rồi giao việc cho phiên mới |
+| Đã nghỉ quá 1 giờ, không có việc thật | Không nhắn (bộ đệm hết hạn, nạp lại cả ngữ cảnh giá gấp đôi). Có việc thật mà phiên nhỏ thì gom mọi ý vào một tin |
+| > 300k hoặc đã nghỉ lâu mà phiên to | Không nhắn. Mở phiên kế nhiệm từ tệp bàn giao của nó rồi giao việc cho phiên mới |
 | Không có tệp bàn giao, > 300k | Nhắn **một** tin duy nhất: "viết bàn giao theo tintmark-token rồi dừng"; sau đó mở phiên kế nhiệm |
 | Việc nhỏ, độc lập | Không dùng phiên dài hạn; mở phiên `Tạm` model nhỏ hoặc subagent |
 
@@ -30,7 +32,7 @@ Như `ban-giao.md`, thêm:
 1. Tệp bàn giao của điều phối kèm đường dẫn sổ phiên và danh sách việc đã giao chưa có kết quả.
 2. Sửa dòng "Điều phối" trong sổ phiên sang id mới. Không báo từng phiên con — chúng đọc sổ khi cần liên hệ.
 3. Lịch tự chạy đang báo về phiên điều phối cũ: chuyển sang phiên mới.
-4. Phiên điều phối nên đặt ngưỡng thấp (150k / 200k) vì việc của nó là đọc tệp và chuyển tin.
+4. Phiên điều phối nên đặt ngưỡng thấp (150k / 200k) và chạy Sonnet / Haiku vì việc của nó là đọc tệp và chuyển tin; đọc rộng thì giao subagent.
 
 ## 5. Khi dự án càng ngày càng tốn
 
