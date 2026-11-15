@@ -267,6 +267,20 @@ def kiem_cap_nhat():
                      stderr=subprocess.DEVNULL, start_new_session=True)
 
 
+def mo_dun(ten, cwd):
+    """Module `ten` cua plugin co bat khong (scripts/module.py). Skill chay rieng (khong co plugin) hoac loi => bat."""
+    try:
+        s = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))), 'scripts')
+        if not os.path.isfile(os.path.join(s, 'module.py')):
+            return True
+        if s not in sys.path:
+            sys.path.insert(0, s)
+        import module
+        return module.bat(ten, cwd)
+    except Exception:
+        return True
+
+
 def main():
     try:
         vao = json.loads(sys.stdin.read() or '{}')
@@ -279,13 +293,17 @@ def main():
         chuyen_du_lieu_cu()
     except Exception:
         pass
-    c = cau_hinh(vao.get('cwd') or '')
+    cwd = vao.get('cwd') or ''
+    c = cau_hinh(cwd)
     tin = []
-    a = nhac_nguong(vao, c, su_kien)
+    a = nhac_nguong(vao, c, su_kien) if mo_dun('nguong', cwd) else None
     if a:
         tin.append(a)
     if su_kien == 'UserPromptSubmit':
-        for ham in (lambda: nhac_vong_lap(vao, c), thong_bao_plugin, nhac_phan_hoi_cu):
+        ds = [thong_bao_plugin, nhac_phan_hoi_cu]
+        if mo_dun('vong_lap', cwd):
+            ds.insert(0, lambda: nhac_vong_lap(vao, c))
+        for ham in ds:
             try:
                 b = ham()
             except Exception:
@@ -293,7 +311,8 @@ def main():
             if b:
                 tin.append(b)
         try:
-            kiem_cap_nhat()
+            if mo_dun('tu_cap_nhat', cwd):
+                kiem_cap_nhat()
         except Exception:
             pass
     if tin:

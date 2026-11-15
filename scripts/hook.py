@@ -67,6 +67,9 @@ def main():
         che_do = nen_loi.cau_hinh()["che_do"]
         if che_do != "truoc":
             return
+        import module
+        if not module.bat("nen", d.get("cwd")):
+            return
         if lenh.startswith("NEN_OFF=1 "):
             import hook_sau
             hook_sau.ghi_nghi(nen_loi, lenh[len("NEN_OFF=1 "):].strip(), str(d.get("session_id") or ""))

@@ -17,19 +17,10 @@ LUAT_MAC_DINH = os.path.join(GOC, "luat", "luat.json")
 TEN_DU_LIEU = "plugin-tintmark-tietkiemtoken"
 TEN_DU_LIEU_CU = ("plugin-tintmark-tietkiem", "plugin-nen-token")   # các tên trước khi đổi tên plugin (15/11/2026)
 
-
-def thu_muc_du_lieu():
-    """Thư mục dữ liệu máy. Chưa chuyển dữ liệu thì đọc tiếp thư mục tên cũ, không mất thống kê / phản hồi / sao lưu."""
-    if os.environ.get("NEN_DATA_DIR"):
-        return os.environ["NEN_DATA_DIR"]
-    nha = os.path.join(os.path.expanduser("~"), ".claude")
-    moi = os.path.join(nha, TEN_DU_LIEU)
-    if not os.path.exists(moi):
-        for ten in TEN_DU_LIEU_CU:
-            cu = os.path.join(nha, ten)
-            if os.path.isdir(cu):
-                return cu
-    return moi
+# Thư mục dữ liệu, đọc / ghi JSON, hàng thông báo, số bản: dùng lớp chung của khung (khai báo ở .claude-plugin/khung.json)
+import sys as _sys  # noqa: E402
+_sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from khung_chung import doc_json, ghi_json, thu_muc_du_lieu, tep, them_thong_bao, phien_ban  # noqa: E402,F401
 
 
 ANSI = re.compile(r"\x1b\[[0-9;?]*[ -/]*[@-~]|\x1b\][^\x07\x1b]*(?:\x07|\x1b\\)|\x1b[()][A-Za-z0-9]")
@@ -86,26 +77,6 @@ CAU_HINH_MAC_DINH = {
 }
 
 
-def doc_json(duong, mac_dinh=None):
-    try:
-        with open(duong, encoding="utf-8") as f:
-            return json.load(f)
-    except Exception:
-        return mac_dinh
-
-
-def ghi_json(duong, du_lieu):
-    os.makedirs(os.path.dirname(duong), exist_ok=True)
-    tam = "%s.tam%d" % (duong, os.getpid())
-    with open(tam, "w", encoding="utf-8") as f:
-        json.dump(du_lieu, f, ensure_ascii=False, indent=1)
-    os.replace(tam, duong)
-
-
-def tep(*ten):
-    return os.path.join(thu_muc_du_lieu(), *ten)
-
-
 def cau_hinh():
     c = dict(CAU_HINH_MAC_DINH)
     d = doc_json(tep("cau_hinh.json"), {})
@@ -140,18 +111,6 @@ def bat_bo_loc(luat_id):
         ghi_json(tep("tat_bo_loc.json"), d)
         return True
     return False
-
-
-def them_thong_bao(tin):
-    """Hàng chờ thông báo một dòng; hook ngưỡng (UserPromptSubmit) in ra một lần rồi xoá."""
-    try:
-        ds = doc_json(tep("thong_bao.json"), [])
-        ds = ds if isinstance(ds, list) else []
-        if tin not in ds:
-            ds.append(tin)
-            ghi_json(tep("thong_bao.json"), ds[-10:])
-    except Exception:
-        pass
 
 
 def khoa_lenh(lenh):
@@ -231,6 +190,9 @@ def xet_tu_tat(luat_id):
     """Bộ lọc bị báo hỏng lặp lại (trong 7 ngày) thì tự tắt riêng bộ lọc đó."""
     if not luat_id or luat_id in bo_loc_tat():
         return False
+    import module
+    if not module.bat("tu_sua"):
+        return False
     c = cau_hinh()
     moc = time.time() - 7 * 86400
     ds = [m for m in ds_phan_hoi() if m.get("luat") == luat_id and m.get("luc", 0) >= moc
@@ -241,13 +203,6 @@ def xet_tu_tat(luat_id):
         return tat_bo_loc(luat_id, "%d phản hồi, %d dấu hiệu nghi hỏng trong 7 ngày" % (len(bao), len(nghi)),
                           [m["id"] for m in ds])
     return False
-
-
-def phien_ban():
-    try:
-        return doc_json(os.path.join(GOC, ".claude-plugin", "plugin.json"), {}).get("version", "?")
-    except Exception:
-        return "?"
 
 
 def _bo_cr(text):

@@ -1,5 +1,8 @@
 # Nhật ký thay đổi — tintmark-tietkiemtoken
 
+## 0.4.0 — 15/11/2026
+- Dùng khung plugin bản quyền 0.1.0: bật/tắt module (module.py: nen, tu_sua, nguong, vong_lap, tu_cap_nhat), cơ chế hội viên mặc định tắt (hoi_vien.py, kiểm cục bộ, fail-open), cập nhật cài bằng bản sao thật thay liên kết, thử khói đọc khung.json; README tóm tắt tiếng Anh khớp LICENSE.
+
 ## 0.3.10 — 15/11/2026
 - Bản quyền: LICENSE độc quyền (được xem, cài dùng cá nhân; cấm sao chép / phân phối lại / bán khi chưa có văn bản), NOTICE, dòng bản quyền đầu mọi tệp mã, chân SKILL.md / README, 'by Tintmark' ở thong_ke.py và do_token.py, plugin.json license SEE LICENSE IN LICENSE; test kiểm.
 

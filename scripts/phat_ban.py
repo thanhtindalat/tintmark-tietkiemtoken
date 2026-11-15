@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2026 Tintmark. All rights reserved. Xem LICENSE / NOTICE.
-"""Phát một bản mới vào kho bản CỤC BỘ (không đẩy git, không ra ngoài máy).
+"""Phát một bản mới vào kho bản CỤC BỘ (khung plugin bản quyền Tintmark; không đẩy git, không ra ngoài máy).
 
   phat_ban.py --loai va|nho|lon --ghi-chu "đã sửa gì" [--kho THƯ_MỤC] [--nguon THƯ_MỤC_NGUỒN]
 
@@ -15,7 +15,7 @@ import time
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import cap_nhat  # noqa: E402
-import nen_loi  # noqa: E402
+import khung_chung as kc  # noqa: E402
 
 
 def main(argv=None):
@@ -24,9 +24,9 @@ def main(argv=None):
     p.add_argument("--ghi-chu", required=True)
     p.add_argument("--kho"); p.add_argument("--nguon")
     o = p.parse_args(argv)
-    nguon = os.path.abspath(o.nguon or nen_loi.GOC)
+    nguon = os.path.abspath(o.nguon or kc.GOC)
     mf = os.path.join(nguon, ".claude-plugin", "plugin.json")
-    d = nen_loi.doc_json(mf)
+    d = kc.doc_json(mf)
     if not d:
         print("Không đọc được", mf); return 1
     kho = os.path.abspath(o.kho or os.path.join(os.path.dirname(nguon), "kho_ban", d["name"]))
@@ -43,7 +43,7 @@ def main(argv=None):
         print("Bản %s đã có trong kho." % moi); return 1
     cu = d["version"]
     d["version"] = moi
-    nen_loi.ghi_json(mf, d)
+    kc.ghi_json(mf, d)
     nk = os.path.join(nguon, "NHAT_KY_THAY_DOI.md")
     dau = "# Nhật ký thay đổi — " + d["name"] + "\n"
     than = open(nk, encoding="utf-8").read().replace(dau, "", 1) if os.path.isfile(nk) else ""
@@ -51,12 +51,12 @@ def main(argv=None):
         f.write("%s\n## %s — %s\n- %s\n%s" % (dau, moi, time.strftime("%d/%m/%Y"), o.ghi_chu, than))
     shutil.copytree(nguon, dich, ignore=shutil.ignore_patterns("__pycache__", ".DS_Store", "*.pyc"))
     tk = os.path.join(kho, "kenh.json")
-    k = nen_loi.doc_json(tk, {}) or {}
+    k = kc.doc_json(tk, {}) or {}
     k.setdefault("ten", d["name"]); k.setdefault("ban", {})
     k["ban"][moi] = {"duong": moi, "sha256": cap_nhat.bam_cay(dich), "ngay": time.strftime("%Y-%m-%d"),
                      "ghi_chu": o.ghi_chu, "tu_ban": cu}
     k["ban_moi_nhat"] = moi
-    nen_loi.ghi_json(tk, k)
+    kc.ghi_json(tk, k)
     print("Đã phát bản %s (từ %s) vào %s · test: %s" % (moi, cu, dich, tin))
     return 0
 

@@ -1,16 +1,19 @@
 #!/usr/bin/env python3
 # Copyright (c) 2026 Tintmark. All rights reserved. Xem LICENSE / NOTICE.
-"""Cập nhật plugin tintmark-tietkiemtoken có kiểm, sao lưu và quay lui. Chỉ dùng kênh CỤC BỘ (thư mục trên máy).
+"""Cập nhật plugin có kiểm, sao lưu và quay lui (khung plugin bản quyền Tintmark). Chỉ dùng kênh CỤC BỘ.
 
   cap_nhat.py kiem                 so bản đang cài với bản mới nhất của kênh
-  cap_nhat.py ap-dung [--ban X]    kiểm băm -> chạy test của bản mới -> sao lưu -> đổi liên kết -> thử khói
+  cap_nhat.py ap-dung [--ban X]    kiểm băm -> chạy test của bản mới -> sao lưu -> cài bản sao thật -> thử khói
   cap_nhat.py quay-lui             về bản ngay trước lần cập nhật gần nhất
   cap_nhat.py tu-dong              hook gọi nền mỗi 24 giờ; làm theo cấu hình tu_dong: ap_dung | bao | tat
   cap_nhat.py lich-su
 
-Cấu hình: <dữ liệu>/cap_nhat.json {"kenh": ".../kenh.json", "lien_ket": "<liên kết cài đặt>", "tu_dong": "bao"}
+Cấu hình: <dữ liệu>/cap_nhat.json {"kenh": ".../kenh.json", "lien_ket": "<thư mục cài trong marketplace>", "tu_dong": "bao"}
+"lien_ket" là tên cũ của thư mục cài: từ khung 0.1.0 đây là BẢN SAO THẬT (không còn liên kết tượng trưng);
+gặp liên kết cũ thì lần cập nhật kế thay bằng bản sao. Thư mục thật của plugin khác => từ chối ghi đè.
 Bản mới test hỏng / sai băm / thử khói hỏng => KHÔNG ghi đè, giữ bản cũ, báo qua hàng thông báo.
-Kênh từ xa (http…) chưa bật trong bản này (xem kế hoạch triển khai, giai đoạn 3).
+Thử khói và biến môi trường của test đọc từ `.claude-plugin/khung.json` của bản đang kiểm.
+Kênh từ xa (http…) chưa bật.
 """
 import hashlib
 import glob
@@ -23,7 +26,7 @@ import tempfile
 import time
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import nen_loi  # noqa: E402
+import khung_chung as kc  # noqa: E402
 
 BO_QUA = ("__pycache__", ".DS_Store")
 
@@ -50,16 +53,22 @@ def so(v):
 
 
 def cau_hinh():
-    c = nen_loi.doc_json(nen_loi.tep("cap_nhat.json"), {}) or {}
+    c = kc.doc_json(kc.tep("cap_nhat.json"), {}) or {}
     c.setdefault("tu_dong", "bao")
     c.setdefault("lich_su", [])
     return c
 
 
 def ban_dang_cai(c):
+    """(bản, thư mục nguồn của bản đó trong kho). Cài bằng bản sao thì nguồn là `dang_cai_tu` đã ghi."""
     lk = c.get("lien_ket") or ""
-    d = os.path.realpath(lk) if lk else nen_loi.GOC
-    return (nen_loi.doc_json(os.path.join(d, ".claude-plugin", "plugin.json"), {}) or {}).get("version", "?"), d
+    if not lk:
+        return kc.phien_ban(), kc.GOC
+    d = os.path.realpath(lk)
+    ban = (kc.doc_json(os.path.join(d, ".claude-plugin", "plugin.json"), {}) or {}).get("version", "?")
+    if not os.path.islink(lk) and c.get("dang_cai_tu") and os.path.isdir(c["dang_cai_tu"]):
+        d = c["dang_cai_tu"]
+    return ban, d
 
 
 def doc_kenh(c):
@@ -68,16 +77,25 @@ def doc_kenh(c):
         raise RuntimeError("chưa cấu hình kênh (chạy cai_dat.py gop)")
     if k.startswith(("http://", "https://")):
         raise RuntimeError("kênh từ xa chưa bật: bản này chỉ nhận kênh cục bộ")
-    d = nen_loi.doc_json(k)
+    d = kc.doc_json(k)
     if not isinstance(d, dict) or "ban" not in d:
         raise RuntimeError("không đọc được kênh %s" % k)
     return d, os.path.dirname(os.path.abspath(k))
 
 
+def _env_tam(thu_muc, tam, tach=True):
+    t = kc.khung(thu_muc).get("test") or {}
+    env = dict(os.environ)
+    for b in t.get("bien_tam") or []:
+        env[b] = os.path.join(tam, b.lower()) if tach else tam
+    for b in t.get("bo_bien") or []:
+        env.pop(b, None)
+    return env
+
+
 def chay_test(thu_muc):
     tam = tempfile.mkdtemp()
-    env = dict(os.environ, NEN_DATA_DIR=os.path.join(tam, "nen"), TINTMARK_TOKEN_DIR=os.path.join(tam, "tt"))
-    env.pop("NEN_OFF", None); env.pop("NEN_LUAT", None)
+    env = _env_tam(thu_muc, tam)
     try:
         r = subprocess.run([sys.executable, "-W", "ignore", "-m", "unittest", "discover", "-s",
                             os.path.join(thu_muc, "tests")], capture_output=True, env=env, timeout=300, cwd=thu_muc)
@@ -90,24 +108,33 @@ def chay_test(thu_muc):
 
 
 def thu_khoi(thu_muc):
-    """Bản vừa đổi phải chạy được hai hook với dữ liệu mẫu và thoát 0."""
+    """Các hook ghi trong khung.json "thu_khoi" phải chạy với dữ liệu mẫu, thoát 0, không in stderr.
+    "thu_khoi": {"dau_vao": {...}, "lap": {"đường.tới.chuỗi": số lần}, "kich": [{"tep"|"mau": ..., "phai_in": ...}]}"""
+    tk = kc.khung(thu_muc).get("thu_khoi") or {}
     tam = tempfile.mkdtemp()
-    env = dict(os.environ, NEN_DATA_DIR=tam, TINTMARK_TOKEN_DIR=tam)
-    mau = json.dumps({"tool_name": "Bash", "session_id": "khoi", "hook_event_name": "PostToolUse",
-                      "tool_input": {"command": "find . -name x"},
-                      "tool_response": {"stdout": "a\n" * 2000, "stderr": "", "interrupted": False, "isImage": False}})
+    env = _env_tam(thu_muc, tam, tach=False)
+    vao = json.loads(json.dumps(tk.get("dau_vao") or {}))
+    for duong, lan in (tk.get("lap") or {}).items():   # {"tool_response.stdout": 2000}: nhân chuỗi lên cho đủ dài
+        cha, khoa = vao, duong.split(".")
+        for k in khoa[:-1]:
+            cha = cha[k]
+        cha[khoa[-1]] = cha[khoa[-1]] * int(lan)
+    mau = json.dumps(vao)
     try:
-        # hook ngưỡng: tên thư mục skill đổi theo bản (tintmark-token -> tintmark-tietkiemtoken), tìm theo mẫu
-        nguong = sorted(os.path.relpath(x, thu_muc) for x in glob.glob(os.path.join(thu_muc, "skills", "*", "cong_cu", "nguong_token.py")))
-        if not nguong:
-            return False, "thiếu skills/*/cong_cu/nguong_token.py"
-        for kich in ["scripts/hook_sau.py", "scripts/hook.py"] + nguong[:1]:
-            r = subprocess.run([sys.executable, os.path.join(thu_muc, kich)], input=mau.encode(), capture_output=True,
-                               env=env, timeout=20)
+        for muc in tk.get("kich") or []:
+            if muc.get("mau"):
+                tim = sorted(glob.glob(os.path.join(thu_muc, muc["mau"])))
+                if not tim:
+                    return False, "thiếu %s" % muc["mau"]
+                kich = tim[0]
+            else:
+                kich = os.path.join(thu_muc, muc.get("tep") or "")
+            ten_kich = os.path.relpath(kich, thu_muc)
+            r = subprocess.run([sys.executable, kich], input=mau.encode(), capture_output=True, env=env, timeout=20)
             if r.returncode != 0 or r.stderr.strip():
-                return False, "%s: mã %d %s" % (kich, r.returncode, r.stderr.decode("utf-8", "replace")[:200])
-            if kich.endswith("hook_sau.py") and "updatedToolOutput" not in r.stdout.decode("utf-8", "replace"):
-                return False, "hook_sau không nén mẫu"
+                return False, "%s: mã %d %s" % (ten_kich, r.returncode, r.stderr.decode("utf-8", "replace")[:200])
+            if muc.get("phai_in") and muc["phai_in"] not in r.stdout.decode("utf-8", "replace"):
+                return False, "%s không in %s" % (ten_kich, muc["phai_in"])
         return True, "ok"
     except Exception as e:
         return False, str(e)
@@ -115,19 +142,30 @@ def thu_khoi(thu_muc):
         shutil.rmtree(tam, ignore_errors=True)
 
 
-def doi_lien_ket(lien_ket, dich):
-    if os.path.exists(lien_ket) and not os.path.islink(lien_ket):
-        raise RuntimeError("%s không phải liên kết; không ghi đè thư mục thật" % lien_ket)
-    tam = lien_ket + ".moi%d" % os.getpid()
-    if os.path.lexists(tam):
-        os.remove(tam)
-    os.symlink(os.path.relpath(os.path.realpath(dich), os.path.realpath(os.path.dirname(lien_ket))), tam)
-    os.replace(tam, lien_ket)
+def dat_ban(dich_cai, nguon):
+    """Cài BẢN SAO THẬT của `nguon` vào `dich_cai` (thay liên kết cũ nếu có). Chép xong mới tráo."""
+    if os.path.isdir(dich_cai) and not os.path.islink(dich_cai):
+        ten_cu = kc.plugin_json(dich_cai).get("name")
+        if ten_cu not in (kc.ten(), kc.ten(nguon)):
+            raise RuntimeError("%s là thư mục thật của plugin khác (%s): không ghi đè" % (dich_cai, ten_cu))
+    os.makedirs(os.path.dirname(os.path.abspath(dich_cai)), exist_ok=True)
+    moi = "%s.moi%d" % (dich_cai, os.getpid())
+    cu = "%s.cu%d" % (dich_cai, os.getpid())
+    for x in (moi, cu):
+        if os.path.lexists(x):
+            shutil.rmtree(x) if os.path.isdir(x) and not os.path.islink(x) else os.remove(x)
+    shutil.copytree(os.path.realpath(nguon), moi, ignore=shutil.ignore_patterns("__pycache__", ".DS_Store", "*.pyc"))
+    if os.path.lexists(dich_cai):
+        os.rename(dich_cai, cu)
+    os.rename(moi, dich_cai)
+    if os.path.lexists(cu):
+        shutil.rmtree(cu, ignore_errors=True) if os.path.isdir(cu) and not os.path.islink(cu) else os.remove(cu)
 
 
 def nhat_ky(viec, **kw):
     try:
-        with open(nen_loi.tep("cap_nhat_nhat_ky.jsonl"), "a", encoding="utf-8") as f:
+        os.makedirs(kc.thu_muc_du_lieu(), exist_ok=True)
+        with open(kc.tep("cap_nhat_nhat_ky.jsonl"), "a", encoding="utf-8") as f:
             f.write(json.dumps(dict(kw, viec=viec, luc=int(time.time())), ensure_ascii=False) + "\n")
     except Exception:
         pass
@@ -156,20 +194,22 @@ def ap_dung(ban=None, im=False):
     lk = c.get("lien_ket")
     if not lk:
         return False, "chưa cấu hình lien_ket"
-    sl = nen_loi.tep("sao_luu")
+    sl = kc.tep("sao_luu")
     os.makedirs(sl, exist_ok=True)
     st = os.path.expanduser("~/.claude/settings.json")
-    if os.path.isfile(st) and not os.environ.get("NEN_DATA_DIR"):
+    bien = (kc.khung().get("du_lieu") or {}).get("bien")
+    if os.path.isfile(st) and not (bien and os.environ.get(bien)):
         shutil.copy2(st, os.path.join(sl, "settings.json.truoc-%s-%s" % (dich, time.strftime("%y%m%d-%H%M%S"))))
-    doi_lien_ket(lk, thu_muc)
+    dat_ban(lk, thu_muc)
     dat, tin = thu_khoi(lk)
     if not dat:
-        doi_lien_ket(lk, thu_muc_hien)
+        dat_ban(lk, thu_muc_hien)
         nhat_ky("tu-quay-lui", ban=dich, ly_do=tin)
         return False, "bản %s thử khói hỏng (%s): ĐÃ TỰ QUAY LUI về %s" % (dich, tin, hien)
     c = cau_hinh()
     c["lich_su"] = (c["lich_su"] + [{"tu": hien, "tu_duong": thu_muc_hien, "den": dich, "luc": int(time.time())}])[-20:]
-    nen_loi.ghi_json(nen_loi.tep("cap_nhat.json"), c)
+    c["dang_cai_tu"] = os.path.realpath(thu_muc)
+    kc.ghi_json(kc.tep("cap_nhat.json"), c)
     nhat_ky("cap-nhat", tu=hien, den=dich)
     return True, "đã cập nhật %s -> %s (%s). Phiên đang mở nhận hook mới khi mở lại hoặc /reload-plugins. " \
                  "Quay lui: python3 %s quay-lui" % (hien, dich, tt.get("ghi_chu") or "", os.path.join(lk, "scripts", "cap_nhat.py"))
@@ -183,14 +223,15 @@ def quay_lui():
     hien, thu_muc_hien = ban_dang_cai(c)
     if not os.path.isdir(cuoi["tu_duong"]):
         return False, "bản cũ %s không còn ở %s" % (cuoi["tu"], cuoi["tu_duong"])
-    doi_lien_ket(c["lien_ket"], cuoi["tu_duong"])
-    dat, tin = thu_khoi(c["lien_ket"]) if os.path.isfile(os.path.join(cuoi["tu_duong"], "scripts", "hook_sau.py")) else (True, "")
+    dat_ban(c["lien_ket"], cuoi["tu_duong"])
+    dat, tin = thu_khoi(c["lien_ket"])
     if not dat:
-        doi_lien_ket(c["lien_ket"], thu_muc_hien)
+        dat_ban(c["lien_ket"], thu_muc_hien)
         return False, "bản cũ %s thử khói hỏng (%s): giữ %s" % (cuoi["tu"], tin, hien)
     c["lich_su"] = c["lich_su"][:-1]
     c["khong_tu_len"] = hien   # không tự cập nhật lại đúng bản vừa bị quay lui
-    nen_loi.ghi_json(nen_loi.tep("cap_nhat.json"), c)
+    c["dang_cai_tu"] = os.path.realpath(cuoi["tu_duong"])
+    kc.ghi_json(kc.tep("cap_nhat.json"), c)
     nhat_ky("quay-lui", tu=hien, den=cuoi["tu"])
     return True, "đã quay lui %s -> %s" % (hien, cuoi["tu"])
 
@@ -221,9 +262,9 @@ def main(argv=None):
                 return 0
             if c["tu_dong"] == "ap_dung":
                 dat, tin = ap_dung()
-                nen_loi.them_thong_bao(tin)
+                kc.them_thong_bao(tin)
             else:
-                nen_loi.them_thong_bao("có bản %s (đang %s): python3 <plugin>/scripts/cap_nhat.py ap-dung" % (moi, hien))
+                kc.them_thong_bao("có bản %s (đang %s): python3 <plugin>/scripts/cap_nhat.py ap-dung" % (moi, hien))
             return 0
         print(__doc__); return 2
     except Exception as e:

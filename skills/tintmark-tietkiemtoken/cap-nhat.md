@@ -6,7 +6,7 @@ Kênh cập nhật trên máy là **thư mục kho bản cục bộ** (`cap_nhat
 
 - **Nguồn**: thư mục đang sửa mã.
 - **Kho bản**: `<cạnh nguồn>/kho_ban/tintmark-tietkiemtoken/<số bản>/` + `kenh.json` (danh sách bản, băm sha256 từng bản, bản mới nhất).
-- **Liên kết cài đặt**: một liên kết trỏ vào một bản trong kho; Claude Code nạp plugin qua liên kết này. Cập nhật = đổi liên kết.
+- **Thư mục cài** (cấu hình `lien_ket`): bản sao thật của một bản trong kho, đặt trong marketplace; Claude Code nạp plugin từ đây. Cập nhật = chép bản mới ra thư mục tạm rồi tráo (từ 0.4.0; bản trước dùng liên kết tượng trưng, lần cập nhật đầu bằng `cap_nhat.py` 0.4.0 trở lên tự thay bằng bản sao). Thư mục thật của plugin khác thì từ chối ghi đè. `cap_nhat.json` ghi `dang_cai_tu` = bản trong kho đang cài, dùng để quay lui.
 - **Cấu hình**: `~/.claude/plugin-tintmark-tietkiemtoken/cap_nhat.json` có `kenh`, `lien_ket`, `nguon`, `tu_dong` (`ap_dung` | `bao` | `tat`).
 
 ## Lệnh
@@ -19,7 +19,7 @@ Kênh cập nhật trên máy là **thư mục kho bản cục bộ** (`cap_nhat
 | Về bản ngay trước lần cập nhật gần nhất | `python3 $P/scripts/cap_nhat.py quay-lui` |
 | Xem lịch sử cập nhật | `python3 $P/scripts/cap_nhat.py lich-su` |
 
-`ap-dung` làm theo thứ tự: kiểm băm bản mới → chạy test của bản mới → sao lưu `settings.json` vào `~/.claude/plugin-tintmark-tietkiemtoken/sao_luu/` → đổi liên kết → thử khói. Sai băm hoặc test hỏng thì giữ bản cũ. Thử khói hỏng thì tự quay lui. Cập nhật xong, phiên đang mở nhận bản mới khi mở lại hoặc `/reload-plugins`.
+`ap-dung` làm theo thứ tự: kiểm băm bản mới → chạy test của bản mới → sao lưu `settings.json` vào `~/.claude/plugin-tintmark-tietkiemtoken/sao_luu/` → chép bản mới vào thư mục cài → thử khói. Sai băm hoặc test hỏng thì giữ bản cũ. Thử khói hỏng thì tự quay lui. Cập nhật xong, phiên đang mở nhận bản mới khi mở lại hoặc `/reload-plugins`.
 
 ## Tự cập nhật
 

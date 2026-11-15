@@ -201,6 +201,12 @@ class TestNguongGop(Goc):
         self.assertEqual((r.returncode, r.stderr), (0, b""))
         return r.stdout.decode()
 
+    def test_tat_module_nguong_khong_nhac_bat_lai_thi_nhac(self):
+        self.env["TIETKIEM_TAT_MODULE"] = "nguong"
+        self.assertNotIn("NHẮC", self.goi())
+        del self.env["TIETKIEM_TAT_MODULE"]
+        self.assertIn("NHẮC", self.goi())
+
     def test_hai_hook_trung_chi_nhac_mot_lan(self):
         self.assertIn("NHẮC", self.goi())
         self.assertEqual(self.goi(), "")                  # hook thứ hai (settings + plugin cùng nối) im lặng

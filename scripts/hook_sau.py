@@ -37,6 +37,9 @@ def xu_ly(d):
         return None
     if os.environ.get("NEN_OFF") == "1" or nen_loi.cau_hinh()["che_do"] != "sau":
         return None
+    import module
+    if not module.bat("nen", d.get("cwd")):
+        return None
     tr = d.get("tool_response")
     if not isinstance(tr, dict) or tr.get("interrupted") or tr.get("isImage"):
         return None

@@ -17,13 +17,13 @@ Python 3 thư viện chuẩn. Không cài thêm gì, không API trả phí, khô
 | `skills/tintmark-tietkiemtoken/` | skill + `cong_cu/` (`nguong_token.py`, `do_token.py`, `vong_lap.py`) |
 | `mau/`, `tests/` | output mẫu (từ kho mẫu tổng hợp `tests/tao_mau.sh` hoặc viết tay) và test; `tests/phan_hoi/` là ca test sinh từ phản hồi |
 
-Trên máy cần 3 chỗ: **nguồn** (thư mục này), **kho bản** (`../kho_ban/tintmark-tietkiemtoken/<số bản>/` + `kenh.json`), **liên kết cài đặt** (trỏ vào một bản trong kho; Claude Code nạp plugin qua liên kết). Dữ liệu chạy: `~/.claude/plugin-tintmark-tietkiemtoken/`.
+Trên máy cần 3 chỗ: **nguồn** (thư mục này), **kho bản** (`../kho_ban/tintmark-tietkiemtoken/<số bản>/` + `kenh.json`), **thư mục cài** (bản sao thật của một bản trong kho, đặt trong marketplace; tên cấu hình vẫn là `lien_ket`; bản cũ hơn 0.4.0 dùng liên kết tượng trưng, lần cập nhật đầu tự thay bằng bản sao). Dữ liệu chạy: `~/.claude/plugin-tintmark-tietkiemtoken/`.
 
 ## Cài
 
 1. Phát bản đầu vào kho bản (chạy trong nguồn): `python3 scripts/phat_ban.py --loai va --ghi-chu "bản đầu"`.
    Cài thẳng từ kho này (marketplace GitHub): `claude plugin marketplace add <chủ>/tintmark-tietkiemtoken` rồi `claude plugin install tintmark-tietkiemtoken@tintmark-tietkiemtoken`.
-2. Hoặc tạo liên kết cài đặt trỏ vào bản đó, đặt trong một marketplace cục bộ, rồi `claude plugin install tintmark-tietkiemtoken@<tên marketplace>`. Thử nhanh không cài: `claude --plugin-dir <thư mục bản>`.
+2. Hoặc chép bản đó thành thư mục cài, đặt trong một marketplace cục bộ, rồi `claude plugin install tintmark-tietkiemtoken@<tên marketplace>`. Thử nhanh không cài: `claude --plugin-dir <thư mục bản>`.
 3. Gộp skill và hook ngưỡng cũ (nếu máy đã có skill `tintmark-tietkiemtoken` riêng), đồng thời ghi cấu hình cập nhật:
 
 ```bash
@@ -74,7 +74,18 @@ python3 $P/scripts/cap_nhat.py ap-dung
 python3 $P/scripts/cap_nhat.py quay-lui
 ```
 
-`ap-dung` kiểm băm, chạy test của bản mới, sao lưu, đổi liên kết, thử khói; hỏng bước nào thì giữ hoặc tự về bản cũ. Tự cập nhật nền mỗi 24 giờ theo `tu_dong` trong `~/.claude/plugin-tintmark-tietkiemtoken/cap_nhat.json` (`ap_dung` | `bao` | `tat`). Chi tiết: `skills/tintmark-tietkiemtoken/cap-nhat.md`.
+`ap-dung` kiểm băm, chạy test của bản mới, sao lưu, chép bản mới vào thư mục cài (chép xong mới tráo), thử khói; hỏng bước nào thì giữ hoặc tự về bản cũ. Tự cập nhật nền mỗi 24 giờ theo `tu_dong` trong `~/.claude/plugin-tintmark-tietkiemtoken/cap_nhat.json` (`ap_dung` | `bao` | `tat`). Chi tiết: `skills/tintmark-tietkiemtoken/cap-nhat.md`.
+
+## Module (bật / tắt từng phần)
+
+```bash
+python3 $P/scripts/module.py ds
+```
+Module: `nen` (nén output), `tu_sua` (tự tắt bộ lọc hỏng), `nguong` (nhắc 250k / 300k), `vong_lap` (nhắc vòng lặp), `tu_cap_nhat` (kiểm bản mới mỗi 24 giờ). Tắt cả máy: `module.py tat <id>` (bật lại: `module.py bat <id>`). Tắt riêng một dự án: `<dự án>/.claude/tintmark-tietkiemtoken.json` có `{"module": {"<id>": false}}`. Tắt tạm: biến môi trường `TIETKIEM_TAT_MODULE=nen,nguong`. Module tắt chỉ làm hook của nó im, không chặn lệnh.
+
+## Hội viên
+
+Cơ chế khoá hội viên có sẵn nhưng **đang tắt** (`.claude-plugin/hoi_vien.json` `"bat": false`): mọi module chạy miễn phí. Khi bật ở bản sau, khoá được kiểm trên máy bằng chữ ký, không gọi mạng, không gửi dữ liệu ra ngoài; khoá thiếu / hết hạn chỉ làm module hội viên im, không bao giờ chặn lệnh. Xem: `python3 $P/scripts/hoi_vien.py trang-thai`.
 
 ## Test và phát bản (trong nguồn)
 
@@ -89,6 +100,7 @@ Phát bản luôn chạy từ nguồn. Không sửa tệp trong kho bản (sai b
 
 ## Tắt và gỡ
 
+- Tắt một phần: xem mục Module.
 - Tắt nén cho một lệnh: tiền tố `NEN_OFF=1 `. Cho cả máy: `{"che_do": "tat"}` trong `~/.claude/plugin-tintmark-tietkiemtoken/cau_hinh.json`.
 - Trả `settings.json` và skill về trước khi gộp: `python3 $P/scripts/cai_dat.py go`.
 - Tắt plugin: `claude plugin disable tintmark-tietkiemtoken@<tên marketplace>`.
@@ -104,9 +116,9 @@ Phát bản luôn chạy từ nguồn. Không sửa tệp trong kho bản (sai b
 
 ## English summary
 
-`tintmark-tietkiemtoken` is a Claude Code plugin that saves tokens: it shortens the output of common bash commands (git, test runners, build, ls/find/grep, docker, adb, long logs) after they run (PostToolUse `updatedToolOutput`, the command itself is never changed), warns at 250k / 300k context and guides a hand-off to a new session, keeps a local feedback log, can disable a misbehaving filter on its own, and updates from a local release store with hash check, tests, smoke test and rollback. Pure Python 3 standard library, runs locally, sends nothing off the machine. Hooks are fail-open: any error returns the original output. Documentation is in Vietnamese.
+`tintmark-tietkiemtoken` is a Claude Code plugin that saves tokens: it shortens the output of common bash commands (git, test runners, build, ls/find/grep, docker, adb, long logs) after they run (PostToolUse `updatedToolOutput`, the command itself is never changed), warns at 250k / 300k context and guides a hand-off to a new session, keeps a local feedback log, can disable a misbehaving filter on its own, and updates from a local release store with hash check, tests, smoke test and rollback. Pure Python 3 standard library, runs locally, sends nothing off the machine. Hooks are fail-open: any error returns the original output. Each part (compression, self-repair, context warnings, loop reminders, auto-update) can be switched off with `scripts/module.py`. A local, signature-based membership check exists but is OFF in this release; it never calls a server and never blocks a command. Documentation is in Vietnamese.
 
-**License:** not licensed for reuse; all rights reserved. The source is public for reading only.
+**License:** proprietary, all rights reserved (see `LICENSE`): free to read, install and use for your own personal or internal work; no copying, redistribution or resale without written permission.
 
 ---
 Bản quyền © 2026 Tintmark. Bảo lưu mọi quyền. Điều khoản: `LICENSE`; tác giả và thành phần bên thứ ba: `NOTICE`.

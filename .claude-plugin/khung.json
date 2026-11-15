@@ -1,0 +1,56 @@
+{
+ "ten": "tintmark-tietkiemtoken",
+ "khung": "0.1.0",
+ "du_lieu": {
+  "ten": "plugin-tintmark-tietkiemtoken",
+  "ten_cu": [
+   "plugin-tintmark-tietkiem",
+   "plugin-nen-token"
+  ],
+  "bien": "NEN_DATA_DIR"
+ },
+ "bien_tat_module": "TIETKIEM_TAT_MODULE",
+ "test": {
+  "bien_tam": [
+   "NEN_DATA_DIR",
+   "TINTMARK_TOKEN_DIR"
+  ],
+  "bo_bien": [
+   "NEN_OFF",
+   "NEN_LUAT",
+   "NEN_CHE_DO",
+   "TIETKIEM_TAT_MODULE"
+  ]
+ },
+ "thu_khoi": {
+  "dau_vao": {
+   "tool_name": "Bash",
+   "session_id": "khoi",
+   "hook_event_name": "PostToolUse",
+   "tool_input": {
+    "command": "find . -name x"
+   },
+   "tool_response": {
+    "stdout": "a\n",
+    "stderr": "",
+    "interrupted": false,
+    "isImage": false
+   }
+  },
+  "lap": {
+   "tool_response.stdout": 2000
+  },
+  "kich": [
+   {
+    "tep": "scripts/hook_sau.py",
+    "phai_in": "updatedToolOutput"
+   },
+   {
+    "tep": "scripts/hook.py"
+   },
+   {
+    "mau": "skills/*/cong_cu/nguong_token.py"
+   }
+  ]
+ }
+}
