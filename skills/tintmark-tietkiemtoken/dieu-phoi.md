@@ -19,7 +19,7 @@ Phiên điều phối sắp xếp các phiên làm việc của một hoặc nhi
 | < 250k, vừa hoạt động | Nhắn bình thường |
 | Đã nghỉ quá 1 giờ, không có việc thật | Không nhắn (bộ đệm hết hạn, nạp lại cả ngữ cảnh giá gấp đôi). Có việc thật mà phiên nhỏ thì gom mọi ý vào một tin |
 | > 300k hoặc đã nghỉ lâu mà phiên to | Không nhắn. Mở phiên kế nhiệm từ tệp bàn giao của nó rồi giao việc cho phiên mới |
-| Không có tệp bàn giao, > 300k | Nhắn **một** tin duy nhất: "viết bàn giao theo tintmark-token rồi dừng"; sau đó mở phiên kế nhiệm |
+| Không có tệp bàn giao, > 300k | Nhắn **một** tin duy nhất: "viết bàn giao theo tintmark-tietkiemtoken rồi dừng"; sau đó mở phiên kế nhiệm |
 | Việc nhỏ, độc lập | Không dùng phiên dài hạn; mở phiên `Tạm` model nhỏ hoặc subagent |
 
 ## 3. Khi phiên làm việc đầy

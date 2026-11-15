@@ -1,4 +1,4 @@
-# tintmark-token trên Claude Chat (claude.ai, app điện thoại)
+# tintmark-tietkiemtoken trên Claude Chat (claude.ai, app điện thoại)
 
 Chat không có hook, không có đồng hồ token, không tự mở chat mới, không nhắn được sang chat khác. Vì vậy mọi thứ dựa vào **dấu hiệu** và **tệp**.
 

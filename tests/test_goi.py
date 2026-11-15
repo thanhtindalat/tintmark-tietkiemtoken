@@ -10,7 +10,7 @@ import unittest
 
 GOC = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 S = os.path.join(GOC, "scripts")
-NGUONG = os.path.join(GOC, "skills", "tintmark-token", "cong_cu", "nguong_token.py")
+NGUONG = os.path.join(GOC, "skills", "tintmark-tietkiemtoken", "cong_cu", "nguong_token.py")
 DAI = "".join("/a/b/tep_%d.md\n" % i for i in range(600))
 
 
@@ -53,7 +53,7 @@ class TestNhacPhanHoiCu(Goc):
             os.makedirs(self.du_lieu("phan_hoi", ten))
             with open(self.du_lieu("phan_hoi", ten, "meta.json"), "w") as f:
                 json.dump({"id": ten, "luc": luc, "trang_thai": tt}, f)
-        ng = os.path.join(S, "..", "skills", "tintmark-token", "cong_cu", "nguong_token.py")
+        ng = os.path.join(S, "..", "skills", "tintmark-tietkiemtoken", "cong_cu", "nguong_token.py")
         inp = {"hook_event_name": "UserPromptSubmit", "session_id": "p9", "transcript_path": ""}
         r1 = chay(ng, inp, self.env).stdout.decode()
         self.assertIn("1 phản hồi mở quá 3 ngày (PH-cu)", r1)
@@ -251,7 +251,7 @@ class TestNguongGop(Goc):
         with open(self.du_lieu("thong_bao.json"), "w") as f:
             json.dump(["bộ lọc `find` đã TỰ TẮT"], f)
         self.assertEqual(self.goi("PostToolUse", n=1000), "")       # chỉ báo ở UserPromptSubmit
-        self.assertIn("[tintmark-tietkiem] bộ lọc `find`", self.goi(n=1000))
+        self.assertIn("[tintmark-tietkiemtoken] bộ lọc `find`", self.goi(n=1000))
         self.assertEqual(self.goi(n=1000), "")
 
     def test_rac_khong_no(self):
@@ -270,7 +270,7 @@ class TestPhatBanCapNhat(Goc):
         os.makedirs(os.path.join(self.nguon, "tests"))
         self.dat_test(True)
         self.kho = os.path.join(self.d, "kho")
-        self.lk = os.path.join(self.d, "cai", "tintmark-tietkiem")
+        self.lk = os.path.join(self.d, "cai", "tintmark-tietkiemtoken")
         os.makedirs(os.path.dirname(self.lk))
 
     def dat_test(self, dat):
@@ -362,10 +362,10 @@ class TestPhatBanCapNhat(Goc):
 
     def test_gop_va_go(self):
         nha = self.env["NEN_NHA"]
-        os.makedirs(os.path.join(nha, "skills", "tintmark-token", "cong_cu"))
-        with open(os.path.join(nha, "skills", "tintmark-token", "SKILL.md"), "w") as f:
+        os.makedirs(os.path.join(nha, "skills", "tintmark-tietkiemtoken", "cong_cu"))
+        with open(os.path.join(nha, "skills", "tintmark-tietkiemtoken", "SKILL.md"), "w") as f:
             f.write("cũ")
-        lenh = "f=~/.claude/skills/tintmark-token/cong_cu/nguong_token.py; [ -f $f ] && python3 $f || true"
+        lenh = "f=~/.claude/skills/tintmark-tietkiemtoken/cong_cu/nguong_token.py; [ -f $f ] && python3 $f || true"
         st = {"model": "x", "hooks": {
             "PostToolUse": [{"matcher": "ArtifactData", "hooks": [{"type": "command", "command": "khac"}]},
                             {"matcher": "", "hooks": [{"type": "command", "command": lenh}]}],
@@ -378,7 +378,7 @@ class TestPhatBanCapNhat(Goc):
             moi = json.load(f)
         self.assertEqual(moi["hooks"], {"PostToolUse": [st["hooks"]["PostToolUse"][0]]})
         self.assertEqual(moi["model"], "x")
-        sk = os.path.join(nha, "skills", "tintmark-token")
+        sk = os.path.join(nha, "skills", "tintmark-tietkiemtoken")
         self.assertTrue(os.path.islink(sk)); self.assertTrue(os.path.isfile(os.path.join(sk, "cong_cu", "nguong_token.py")))
         self.assertEqual(self.k("cai_dat.py", "go").returncode, 0)
         with open(os.path.join(nha, "settings.json")) as f:

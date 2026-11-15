@@ -1,5 +1,5 @@
 {
-  "ghi_chu": "Thêm lệnh mới = thêm một mục vào 'luat'. Luật riêng cá nhân: ~/.claude/plugin-tintmark-tietkiem/luat_rieng.json (đứng trước). Trường: id, match (regex trên cả chuỗi lệnh), exclude, strip_ansi, replace [[regex, thay]], drop [regex], keep [regex: luôn giữ + giữ khi cắt giữa], dedupe none|consecutive|all, mask (số -> #), max_line_len, max_lines, max_lines_fail (khi lệnh lỗi), min_bytes, on_empty.",
+  "ghi_chu": "Thêm lệnh mới = thêm một mục vào 'luat'. Luật riêng cá nhân: ~/.claude/plugin-tintmark-tietkiemtoken/luat_rieng.json (đứng trước). Trường: id, match (regex trên cả chuỗi lệnh), exclude, strip_ansi, replace [[regex, thay]], drop [regex], keep [regex: luôn giữ + giữ khi cắt giữa], dedupe none|consecutive|all, mask (số -> #), max_line_len, max_lines, max_lines_fail (khi lệnh lỗi), min_bytes, on_empty.",
   "luat": [
     {
       "id": "git-status",

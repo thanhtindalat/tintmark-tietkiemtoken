@@ -78,7 +78,7 @@ def main():
         out = {"hookSpecificOutput": {"hookEventName": "PreToolUse", "updatedInput": ti}}
         if os.environ.get("NEN_AUTO_ALLOW") == "1" and d.get("permission_mode") != "auto":
             out["hookSpecificOutput"]["permissionDecision"] = "allow"
-            out["hookSpecificOutput"]["permissionDecisionReason"] = "tintmark-tietkiem: bọc nén"
+            out["hookSpecificOutput"]["permissionDecisionReason"] = "tintmark-tietkiemtoken: bọc nén"
         sys.stdout.write(json.dumps(out, ensure_ascii=False))
     except Exception:
         return

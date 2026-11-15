@@ -1,6 +1,6 @@
 # Phản hồi khi nén sai
 
-Sổ phản hồi nằm trên máy (`~/.claude/plugin-tintmark-tietkiem/phan_hoi/`). Không gửi gì ra ngoài máy. `P` là thư mục plugin (xem `nen-lenh.md`).
+Sổ phản hồi nằm trên máy (`~/.claude/plugin-tintmark-tietkiemtoken/phan_hoi/`). Không gửi gì ra ngoài máy. `P` là thư mục plugin (xem `nen-lenh.md`).
 
 ## Khi nào ghi
 
@@ -47,4 +47,4 @@ Một bộ lọc bị tắt riêng (các bộ lọc khác vẫn chạy) khi tron
 
 Bộ lọc đang tắt thì lệnh đó trả output gốc. `liet-ke` in dòng "Bộ lọc đang tắt". Bật lại sau khi sửa: `tu_sua.py xong` tự bật; bật tay: `python3 $P/scripts/tu_sua.py bat <mã bộ lọc>`.
 
-Ngưỡng đổi được trong `~/.claude/plugin-tintmark-tietkiem/cau_hinh.json`: `nguong_bao` (mặc định 2), `nguong_nghi` (3), `cua_so_nghi_phut` (15), `so_gan_day` (8).
+Ngưỡng đổi được trong `~/.claude/plugin-tintmark-tietkiemtoken/cau_hinh.json`: `nguong_bao` (mặc định 2), `nguong_nghi` (3), `cua_so_nghi_phut` (15), `so_gan_day` (8).

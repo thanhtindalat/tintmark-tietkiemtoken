@@ -1,4 +1,10 @@
-# Nhật ký thay đổi — tintmark-tietkiem
+# Nhật ký thay đổi — tintmark-tietkiemtoken
+
+## 0.3.7 — 15/11/2026
+- cap_nhat.py thử khói tìm hook ngưỡng theo mẫu skills/*/cong_cu/nguong_token.py (bản cũ 0.3.5 kiểm đường skill cũ nên tự quay lui khi lên 0.3.6).
+
+## 0.3.6 — 15/11/2026
+- Đổi tên thống nhất: plugin, skill, thư mục, thẻ hook -> tintmark-tietkiemtoken; vẫn đọc dữ liệu tên cũ (plugin-tintmark-tietkiem, plugin-nen-token, ~/.claude/tintmark-token, .claude/tintmark-token.json); doi_ten.py có --tu/--sang/--skill-tu/--skill-sang.
 
 ## 0.3.5 — 15/11/2026
 - cap-nhat.md: kênh từ xa chính thức là marketplace GitHub (cài / cập nhật bằng claude plugin marketplace)

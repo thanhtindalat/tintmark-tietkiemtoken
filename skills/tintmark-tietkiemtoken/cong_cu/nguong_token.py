@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Hook tintmark-token: do nguong ngu canh cua phien va nhac vong lap cho quyet.
+"""Hook tintmark-tietkiemtoken: do nguong ngu canh cua phien va nhac vong lap cho quyet.
 
 Noi vao ~/.claude/settings.json cho su kien UserPromptSubmit va PostToolUse.
 Doc JSON cua hook tu stdin (session_id, transcript_path, cwd, hook_event_name).
@@ -11,11 +11,16 @@ import os
 import sys
 import time
 
-GOC = os.environ.get('TINTMARK_TOKEN_DIR') or os.path.expanduser('~/.claude/tintmark-token')
+GOC = os.environ.get('TINTMARK_TOKEN_DIR') or os.path.expanduser('~/.claude/tintmark-tietkiemtoken')
+if not os.environ.get('TINTMARK_TOKEN_DIR') and not os.path.exists(GOC) and os.path.isdir(os.path.expanduser('~/.claude/tintmark-token')):
+    GOC = os.path.expanduser('~/.claude/tintmark-token')   # chua chuyen du lieu sau khi doi ten skill tintmark-token (15/11/2026)
 GOC_CU = os.path.expanduser('~/.claude/ti-token')   # ten thu muc truoc khi doi ten skill (15/11/2026)
-NEN = os.environ.get('NEN_DATA_DIR') or os.path.expanduser('~/.claude/plugin-tintmark-tietkiem')
-if not os.environ.get('NEN_DATA_DIR') and not os.path.exists(NEN) and os.path.isdir(os.path.expanduser('~/.claude/plugin-nen-token')):
-    NEN = os.path.expanduser('~/.claude/plugin-nen-token')   # chua chuyen du lieu sau khi doi ten plugin (15/11/2026)
+NEN = os.environ.get('NEN_DATA_DIR') or os.path.expanduser('~/.claude/plugin-tintmark-tietkiemtoken')
+if not os.environ.get('NEN_DATA_DIR') and not os.path.exists(NEN):
+    for _ten in ('plugin-tintmark-tietkiem', 'plugin-nen-token'):   # chua chuyen du lieu sau khi doi ten plugin (15/11/2026)
+        if os.path.isdir(os.path.expanduser('~/.claude/' + _ten)):
+            NEN = os.path.expanduser('~/.claude/' + _ten)
+            break
 MAC_DINH = {
     'nhac': 250000,          # bao nguoi dung, viet ban giao
     'doi': 300000,           # khong nhan viec moi, mo phien ke nhiem
@@ -53,7 +58,9 @@ def cau_hinh(cwd):
     for _ in range(8):
         if not d or d == os.path.dirname(d):
             break
-        rieng = doc_json(os.path.join(d, '.claude', 'tintmark-token.json'), None)
+        rieng = doc_json(os.path.join(d, '.claude', 'tintmark-tietkiemtoken.json'), None)
+        if rieng is None:
+            rieng = doc_json(os.path.join(d, '.claude', 'tintmark-token.json'), None)   # ten cu
         if isinstance(rieng, dict):
             c.update({k: v for k, v in rieng.items() if k in MAC_DINH})
             break
@@ -124,7 +131,7 @@ def nhac_nguong(vao, c, su_kien='UserPromptSubmit'):
                 time.sleep(cho)
         except Exception:
             pass
-        return ('[tintmark-token] ĐỔI PHIÊN: %dk token (> %dk). KHÔNG làm việc vừa gửi ở phiên này; chốt tệp bàn giao (ban-giao.md). '
+        return ('[tintmark-tietkiemtoken] ĐỔI PHIÊN: %dk token (> %dk). KHÔNG làm việc vừa gửi ở phiên này; chốt tệp bàn giao (ban-giao.md). '
                 '(a) Người dùng gõ: start_session "user_asked", "fresh", tên cũ + số; lời giao CHỈ gồm lệnh bàn giao '
                 '(lưu trữ phiên cũ theo dòng Chuỗi phiên, id phiên này: %s) + NGUYÊN VĂN tin vừa gửi; trả lời một dòng "%s" kèm link. '
                 '(b) Tin do phiên khác gửi / sự kiện tự động:%s Trả lời một dòng "phiên đã đầy, gửi lại cho phiên <tên mới> sau khi người dùng bấm Bắt đầu". '
@@ -134,11 +141,11 @@ def nhac_nguong(vao, c, su_kien='UserPromptSubmit'):
         return None
     ghi_json(tep, dict(tt, muc=muc, n=n, luc=int(nay), the_da_tao=True))
     if muc == 1:
-        return ('[tintmark-token] NHẮC: %dk token (nhắc %dk, đổi %dk). Câu đầu trả lời: "Phiên đã %dk token. %s" '
+        return ('[tintmark-tietkiemtoken] NHẮC: %dk token (nhắc %dk, đổi %dk). Câu đầu trả lời: "Phiên đã %dk token. %s" '
                 'Cập nhật tệp bàn giao (ban-giao.md: dưới ~1.500 chữ, chỉ trỏ đường dẫn); dòng Chuỗi phiên có id thật, id phiên này: %s.%s '
                 'Xong việc dở, không mở việc lớn mới.'
                 % (k, c['nhac'] // 1000, c['doi'] // 1000, k, CAU_MOI, phien, the))
-    return ('[tintmark-token] ĐỔI PHIÊN: %dk token (> %dk). Không nhận việc mới; dừng ở điểm an toàn, chốt tệp bàn giao.%s Báo: "%s" '
+    return ('[tintmark-tietkiemtoken] ĐỔI PHIÊN: %dk token (> %dk). Không nhận việc mới; dừng ở điểm an toàn, chốt tệp bàn giao.%s Báo: "%s" '
             'Lượt người dùng gõ: mở phiên kế nhiệm mới hoàn toàn (fresh, không fork), lời giao = lệnh bàn giao, tên cũ + số. '
             'Sau đó lưu trữ phiên này, không nhắn nữa.'
             % (k, c['doi'] // 1000, the, CAU_MOI))
@@ -182,7 +189,7 @@ def nhac_vong_lap(vao, c):
     nhac_quet = float(so.get('lan_nhac_quet') or 0)
     ngay = float(c['quet_vong_lap_ngay']) * 86400
     if quet and nay - quet > ngay and nay - nhac_quet > ngay:
-        dong.append('Đã hơn %d ngày chưa quét vòng lặp / lịch tự chạy. Khi xong việc đang làm, quét theo tintmark-token (don-ngu-canh.md mục 2).'
+        dong.append('Đã hơn %d ngày chưa quét vòng lặp / lịch tự chạy. Khi xong việc đang làm, quét theo tintmark-tietkiemtoken (don-ngu-canh.md mục 2).'
                     % int(c['quet_vong_lap_ngay']))
         so['lan_nhac_quet'] = nay
         doi = True
@@ -190,7 +197,7 @@ def nhac_vong_lap(vao, c):
         ghi_json(tep, so)
     if not dong:
         return None
-    return '[tintmark-token] VÒNG LẶP: ' + ' | '.join(dong)
+    return '[tintmark-tietkiemtoken] VÒNG LẶP: ' + ' | '.join(dong)
 
 
 def chuyen_du_lieu_cu():
@@ -206,13 +213,13 @@ def chuyen_du_lieu_cu():
 
 
 def thong_bao_plugin():
-    """Hang cho thong bao cua plugin tintmark-tietkiem (bo loc tu tat, ban moi, cap nhat hong): in mot lan roi xoa."""
+    """Hang cho thong bao cua plugin tintmark-tietkiemtoken (bo loc tu tat, ban moi, cap nhat hong): in mot lan roi xoa."""
     tep = os.path.join(NEN, 'thong_bao.json')
     ds = doc_json(tep, None)
     if not isinstance(ds, list) or not ds:
         return None
     ghi_json(tep, [])
-    return '[tintmark-tietkiem] ' + ' | '.join(str(x) for x in ds[:5]) + ' (Báo người dùng một dòng.)'
+    return '[tintmark-tietkiemtoken] ' + ' | '.join(str(x) for x in ds[:5]) + ' (Báo người dùng một dòng.)'
 
 
 def nhac_phan_hoi_cu():
@@ -235,7 +242,7 @@ def nhac_phan_hoi_cu():
         return None
     with open(moc, 'w') as f:
         f.write(str(int(time.time())))
-    return ('[tintmark-tietkiem] %d phản hồi mở quá 3 ngày (%s). Xử lý theo tu-sua.md hoặc đóng bằng phan_hoi.py dong. '
+    return ('[tintmark-tietkiemtoken] %d phản hồi mở quá 3 ngày (%s). Xử lý theo tu-sua.md hoặc đóng bằng phan_hoi.py dong. '
             '(Báo người dùng một dòng.)' % (len(cu), ', '.join(cu[:3])))
 
 

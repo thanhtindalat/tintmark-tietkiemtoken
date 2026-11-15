@@ -13,8 +13,8 @@ GOC = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LUAT_MAC_DINH = os.path.join(GOC, "luat", "luat.json")
 
 
-TEN_DU_LIEU = "plugin-tintmark-tietkiem"
-TEN_DU_LIEU_CU = "plugin-nen-token"   # tên trước khi đổi tên plugin (15/11/2026)
+TEN_DU_LIEU = "plugin-tintmark-tietkiemtoken"
+TEN_DU_LIEU_CU = ("plugin-tintmark-tietkiem", "plugin-nen-token")   # các tên trước khi đổi tên plugin (15/11/2026)
 
 
 def thu_muc_du_lieu():
@@ -22,9 +22,12 @@ def thu_muc_du_lieu():
     if os.environ.get("NEN_DATA_DIR"):
         return os.environ["NEN_DATA_DIR"]
     nha = os.path.join(os.path.expanduser("~"), ".claude")
-    moi, cu = os.path.join(nha, TEN_DU_LIEU), os.path.join(nha, TEN_DU_LIEU_CU)
-    if not os.path.exists(moi) and os.path.isdir(cu):
-        return cu
+    moi = os.path.join(nha, TEN_DU_LIEU)
+    if not os.path.exists(moi):
+        for ten in TEN_DU_LIEU_CU:
+            cu = os.path.join(nha, ten)
+            if os.path.isdir(cu):
+                return cu
     return moi
 
 
@@ -125,7 +128,7 @@ def tat_bo_loc(luat_id, ly_do, phan_hoi=()):
     d[luat_id] = {"luc": int(time.time()), "ly_do": ly_do, "phan_hoi": list(phan_hoi)}
     ghi_json(tep("tat_bo_loc.json"), d)
     them_thong_bao("bộ lọc nén `%s` đã TỰ TẮT (%s); lệnh loại này giờ trả output gốc. "
-                   "Sửa: skill tintmark-token, tệp tu-sua.md (scripts/tu_sua.py quet)." % (luat_id, ly_do))
+                   "Sửa: skill tintmark-tietkiemtoken, tệp tu-sua.md (scripts/tu_sua.py quet)." % (luat_id, ly_do))
     return True
 
 

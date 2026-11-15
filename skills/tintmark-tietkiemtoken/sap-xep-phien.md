@@ -14,7 +14,7 @@ Một phiên riêng lo việc dọn danh sách phiên: xếp phiên vào đúng 
 1. Liệt kê mọi phiên **một lần duy nhất** bằng công cụ liệt kê phiên với giới hạn lớn và cả phiên đã lưu trữ. Công cụ chỉ lọc được theo nhóm thanh bên và theo họ phiên, không lọc theo thư mục hay ngày, nên kết quả rất dài (máy vài trăm phiên là vài trăm nghìn ký tự) và app tự lưu ra tệp: xử lý tệp đó bằng script (`python3`, `jq`), chỉ in số đếm và bảng đã gom. Không gọi lại nhiều lần, không in danh sách vào chat. Phiên đang gọi không nằm trong danh sách.
 2. Với mỗi phiên ghi: id, tên hiện tại, thư mục làm việc, nhóm thanh bên, hoạt động cuối, đang chạy hay rảnh, đã lưu trữ chưa, phiên nào mở ra nó. Danh sách không có nhánh git và không cho biết phiên nào đang chờ người dùng trả lời.
 3. Xếp nhóm theo **dự án** = gốc thư mục làm việc sau khi chuẩn hoá: đường dẫn cũ / lối tắt của cùng một dự án gộp về đường dẫn mới; thư mục worktree gộp về gốc kho; thư mục tạm do app sinh (scratch) không phải dự án, xếp vào "Việc tự sinh" hoặc "Việc lẻ" theo tên. Trong dự án xếp theo **phạm vi** (khung / phòng ban / giải pháp) suy từ tên. Phiên không rõ dự án để vào nhóm "Chưa rõ" và hỏi, không đoán.
-4. Ghi kết quả ra sổ `~/.claude/tintmark-token/so_phien.md` (bảng: dự án · phạm vi · tên · id · hoạt động cuối · trạng thái · từ khoá chính). Sổ này là thứ để tìm kiếm về sau; trả lời trong chat chỉ tóm tắt số lượng.
+4. Ghi kết quả ra sổ `~/.claude/tintmark-tietkiemtoken/so_phien.md` (bảng: dự án · phạm vi · tên · id · hoạt động cuối · trạng thái · từ khoá chính). Sổ này là thứ để tìm kiếm về sau; trả lời trong chat chỉ tóm tắt số lượng.
 5. Dự án có sổ phiên riêng (ví dụ `tham_chieu/phien.md`) thì sổ riêng là chuẩn về id và tên; phiên này chỉ đề xuất sửa, không tự ghi đè.
 
 ## 3. Thẻ đề xuất
@@ -35,7 +35,7 @@ Quy tắc duyệt:
 - **Xoá luôn phải có người dùng đồng ý rõ ràng cho đúng danh sách đó**, không bao giờ tự làm, không suy từ lần đồng ý trước. App cũng tự hỏi người dùng ở mỗi lần xoá, dù đang ở chế độ quyền nào.
 - Đổi tên, xếp nhóm, lưu trữ: mặc định cũng chờ đồng ý. Người dùng đã dặn trước "việc sắp xếp / đổi tên / lưu trữ tự làm" (trong luật dự án hay bộ nhớ) thì làm luôn rồi báo một bảng tóm tắt.
 - Không đụng: phiên đang chạy việc, phiên vừa hoạt động trong 24 giờ (danh sách không cho biết phiên nào đang chờ trả lời, nên coi phiên mới hoạt động là đang chờ), phiên điều phối và các phiên có tên trong sổ phiên của dự án (chỉ đề xuất, nêu rõ là phiên có vai trò).
-- Mỗi việc đã làm ghi một dòng vào `~/.claude/tintmark-token/so_phien_nhat_ky.md` (giờ, việc, id, tên cũ → mới) để hoàn tác được: đổi tên lại, bỏ lưu trữ. Xoá thì không hoàn tác được.
+- Mỗi việc đã làm ghi một dòng vào `~/.claude/tintmark-tietkiemtoken/so_phien_nhat_ky.md` (giờ, việc, id, tên cũ → mới) để hoàn tác được: đổi tên lại, bỏ lưu trữ. Xoá thì không hoàn tác được.
 
 ## 4. Đặt tên cho khoa học, dễ tìm
 
@@ -83,5 +83,5 @@ Người dùng hỏi "phiên nào làm X", "tìm phiên về Y", "hôm trước 
 - Xếp nhóm ở thanh bên phụ thuộc app; app không có công cụ nhóm thì dùng tiền tố tên (`<Dự án> · <Phạm vi> - <Việc>`) thay cho nhóm.
 - Tên công cụ trong app máy tính (bản 11/2026, kiểm bằng tìm công cụ trước khi dùng vì có thể đổi): liệt kê `list_sessions`, tìm `search_session_transcripts`, đổi tên `set_session_title`, lưu trữ `archive_session` / `unarchive_session`, xoá `delete_session` (nhóm `ccd_session_mgmt`); nhóm thanh bên `list_groups`, `create_group`, `move_sessions`, `set_pinned` (nhóm `ccd_sidebar`).
 - Lưu trữ một phiên có thể kéo theo các phiên con đã xong của nó: trước khi lưu trữ phiên từng mở phiên khác, xem phiên con nào cần giữ.
-- Hai tệp sổ nằm ở `~/.claude/tintmark-token/`, ngoài thư mục dự án. Dự án có luật "chỉ ghi trong thư mục dự án" thì hỏi người dùng một lần nơi đặt sổ, rồi ghi nơi đó vào `cau_hinh.json`.
+- Hai tệp sổ nằm ở `~/.claude/tintmark-tietkiemtoken/`, ngoài thư mục dự án. Dự án có luật "chỉ ghi trong thư mục dự án" thì hỏi người dùng một lần nơi đặt sổ, rồi ghi nơi đó vào `cau_hinh.json`.
 - Phiên `Sắp xếp - tìm kiếm` cũng theo ngưỡng 250k / 300k như mọi phiên; trạng thái nằm ở hai tệp sổ nên đổi phiên không mất gì.

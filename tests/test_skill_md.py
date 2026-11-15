@@ -4,7 +4,7 @@ import re
 import unittest
 
 GOC = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-THU_MUC = os.path.join(GOC, "skills", "tintmark-token")
+THU_MUC = os.path.join(GOC, "skills", "tintmark-tietkiemtoken")
 
 
 class KiemSkillMd(unittest.TestCase):
@@ -22,7 +22,7 @@ class KiemSkillMd(unittest.TestCase):
 
     def test_ten_khop_thu_muc(self):
         m = re.search(r"^name:\s*(\S+)\s*$", self.noi_dung, re.M)
-        self.assertEqual(m.group(1), "tintmark-token")
+        self.assertEqual(m.group(1), "tintmark-tietkiemtoken")
 
     def test_tep_duoc_nhac_deu_co(self):
         for thu_muc, _, tep in os.walk(THU_MUC):
@@ -42,7 +42,7 @@ if __name__ == "__main__":
 
 class TestBanGiao(unittest.TestCase):
     def test_mau_lenh_ban_giao_co_buoc_luu_tru(self):
-        s = open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "skills", "tintmark-token", "ban-giao.md"), encoding="utf-8").read()
+        s = open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "skills", "tintmark-tietkiemtoken", "ban-giao.md"), encoding="utf-8").read()
         dong = [l for l in s.splitlines() if l.startswith("> LỆNH BÀN GIAO")][0]
         self.assertIn("archive_session lưu trữ mọi phiên cũ hơn 2 phiên mới nhất", dong); self.assertIn("sổ phiên", dong)
         for y in ("a hook changed this call's input", "cũ nhất", "đang ghim", "detach_session", "2 phiên mới nhất"):

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Cập nhật plugin tintmark-tietkiem có kiểm, sao lưu và quay lui. Chỉ dùng kênh CỤC BỘ (thư mục trên máy).
+"""Cập nhật plugin tintmark-tietkiemtoken có kiểm, sao lưu và quay lui. Chỉ dùng kênh CỤC BỘ (thư mục trên máy).
 
   cap_nhat.py kiem                 so bản đang cài với bản mới nhất của kênh
   cap_nhat.py ap-dung [--ban X]    kiểm băm -> chạy test của bản mới -> sao lưu -> đổi liên kết -> thử khói
@@ -12,6 +12,7 @@ Bản mới test hỏng / sai băm / thử khói hỏng => KHÔNG ghi đè, gi�
 Kênh từ xa (http…) chưa bật trong bản này (xem kế hoạch triển khai, giai đoạn 3).
 """
 import hashlib
+import glob
 import json
 import os
 import shutil
@@ -95,7 +96,11 @@ def thu_khoi(thu_muc):
                       "tool_input": {"command": "find . -name x"},
                       "tool_response": {"stdout": "a\n" * 2000, "stderr": "", "interrupted": False, "isImage": False}})
     try:
-        for kich in ("scripts/hook_sau.py", "scripts/hook.py", "skills/tintmark-token/cong_cu/nguong_token.py"):
+        # hook ngưỡng: tên thư mục skill đổi theo bản (tintmark-token -> tintmark-tietkiemtoken), tìm theo mẫu
+        nguong = sorted(os.path.relpath(x, thu_muc) for x in glob.glob(os.path.join(thu_muc, "skills", "*", "cong_cu", "nguong_token.py")))
+        if not nguong:
+            return False, "thiếu skills/*/cong_cu/nguong_token.py"
+        for kich in ["scripts/hook_sau.py", "scripts/hook.py"] + nguong[:1]:
             r = subprocess.run([sys.executable, os.path.join(thu_muc, kich)], input=mau.encode(), capture_output=True,
                                env=env, timeout=20)
             if r.returncode != 0 or r.stderr.strip():

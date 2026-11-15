@@ -28,9 +28,9 @@ Model: Haiku rẻ hơn Sonnet, Sonnet rẻ hơn Opus nhiều lần; hệ số tr
 | Không đánh thức phiên to nguội; gom tin | ghi cache | lớn |
 | Model nhỏ cho việc sổ sách, lịch, dò tìm | giá mỗi token | lớn |
 | Cắt connector / skill thừa | chi phí nền mọi lượt | vừa |
-| Nén kết quả lệnh (plugin tintmark-tietkiem, cắt đuôi log) | tốc độ phình của phiên | vừa |
+| Nén kết quả lệnh (plugin tintmark-tietkiemtoken, cắt đuôi log) | tốc độ phình của phiên | vừa |
 | Trả lời gọn | đầu ra | nhỏ |
 
 ## Số đo trên máy bạn
 
-Chạy `cong_cu/do_token.py 7` để biết chi phí nằm ở đâu (đọc cache, ghi cache, đầu ra, phiên lớn). Số đo riêng của máy (nếu đã lưu) để ở `~/.claude/tintmark-token/so_do_mau.md`, không đưa vào skill.
+Chạy `cong_cu/do_token.py 7` để biết chi phí nằm ở đâu (đọc cache, ghi cache, đầu ra, phiên lớn). Số đo riêng của máy (nếu đã lưu) để ở `~/.claude/tintmark-tietkiemtoken/so_do_mau.md`, không đưa vào skill.

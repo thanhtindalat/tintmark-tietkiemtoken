@@ -1,6 +1,6 @@
 # Tự sửa bộ lọc nén
 
-Dùng khi có phản hồi đang mở hoặc bộ lọc bị tự tắt. Cần thư mục **nguồn** của plugin (nơi sửa mã, khác bản đang cài): khai ở `"nguon"` trong `~/.claude/plugin-tintmark-tietkiem/cap_nhat.json`, hoặc đưa `--nguon <thư mục>` ngay sau `tu_sua.py`. Máy không có nguồn thì chỉ ghi phản hồi, không sửa được. `P` là thư mục plugin (xem `nen-lenh.md`).
+Dùng khi có phản hồi đang mở hoặc bộ lọc bị tự tắt. Cần thư mục **nguồn** của plugin (nơi sửa mã, khác bản đang cài): khai ở `"nguon"` trong `~/.claude/plugin-tintmark-tietkiemtoken/cap_nhat.json`, hoặc đưa `--nguon <thư mục>` ngay sau `tu_sua.py`. Máy không có nguồn thì chỉ ghi phản hồi, không sửa được. `P` là thư mục plugin (xem `nen-lenh.md`).
 
 ## 4 bước
 

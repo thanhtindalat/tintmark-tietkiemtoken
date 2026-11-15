@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Sổ phản hồi cục bộ của plugin tintmark-tietkiem. KHÔNG gửi gì ra ngoài máy.
+"""Sổ phản hồi cục bộ của plugin tintmark-tietkiemtoken. KHÔNG gửi gì ra ngoài máy.
 
   phan_hoi.py bao --loai nen-sai|mat-dong|nhac-sai|khac --lenh "LỆNH GỐC" [--mo-ta "..."]
                   [--goc TỆP_OUTPUT_GỐC] [--nen TỆP_OUTPUT_ĐÃ_NÉN] [--chay-lai] [--luat ID] [--ma 0]

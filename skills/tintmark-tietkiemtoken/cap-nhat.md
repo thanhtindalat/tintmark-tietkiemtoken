@@ -1,13 +1,13 @@
-# Cập nhật, quay lui, cài và gỡ plugin tintmark-tietkiem
+# Cập nhật, quay lui, cài và gỡ plugin tintmark-tietkiemtoken
 
-Kênh cập nhật trên máy là **thư mục kho bản cục bộ** (`cap_nhat.py`, chỉ nhận thư mục, từ chối kênh `http…`). Kênh từ xa chính thức là **marketplace GitHub**: cài `claude plugin marketplace add <chủ>/tintmark-tietkiem` rồi `claude plugin install tintmark-tietkiem@tintmark-tietkiem`; cập nhật `claude plugin marketplace update tintmark-tietkiem` rồi `claude plugin update tintmark-tietkiem@tintmark-tietkiem`. `P` là thư mục plugin (xem `nen-lenh.md`).
+Kênh cập nhật trên máy là **thư mục kho bản cục bộ** (`cap_nhat.py`, chỉ nhận thư mục, từ chối kênh `http…`). Kênh từ xa chính thức là **marketplace GitHub**: cài `claude plugin marketplace add <chủ>/tintmark-tietkiemtoken` rồi `claude plugin install tintmark-tietkiemtoken@tintmark-tietkiemtoken`; cập nhật `claude plugin marketplace update tintmark-tietkiemtoken` rồi `claude plugin update tintmark-tietkiemtoken@tintmark-tietkiemtoken`. `P` là thư mục plugin (xem `nen-lenh.md`).
 
 ## Các thành phần
 
 - **Nguồn**: thư mục đang sửa mã.
-- **Kho bản**: `<cạnh nguồn>/kho_ban/tintmark-tietkiem/<số bản>/` + `kenh.json` (danh sách bản, băm sha256 từng bản, bản mới nhất).
+- **Kho bản**: `<cạnh nguồn>/kho_ban/tintmark-tietkiemtoken/<số bản>/` + `kenh.json` (danh sách bản, băm sha256 từng bản, bản mới nhất).
 - **Liên kết cài đặt**: một liên kết trỏ vào một bản trong kho; Claude Code nạp plugin qua liên kết này. Cập nhật = đổi liên kết.
-- **Cấu hình**: `~/.claude/plugin-tintmark-tietkiem/cap_nhat.json` có `kenh`, `lien_ket`, `nguon`, `tu_dong` (`ap_dung` | `bao` | `tat`).
+- **Cấu hình**: `~/.claude/plugin-tintmark-tietkiemtoken/cap_nhat.json` có `kenh`, `lien_ket`, `nguon`, `tu_dong` (`ap_dung` | `bao` | `tat`).
 
 ## Lệnh
 
@@ -19,7 +19,7 @@ Kênh cập nhật trên máy là **thư mục kho bản cục bộ** (`cap_nhat
 | Về bản ngay trước lần cập nhật gần nhất | `python3 $P/scripts/cap_nhat.py quay-lui` |
 | Xem lịch sử cập nhật | `python3 $P/scripts/cap_nhat.py lich-su` |
 
-`ap-dung` làm theo thứ tự: kiểm băm bản mới → chạy test của bản mới → sao lưu `settings.json` vào `~/.claude/plugin-tintmark-tietkiem/sao_luu/` → đổi liên kết → thử khói. Sai băm hoặc test hỏng thì giữ bản cũ. Thử khói hỏng thì tự quay lui. Cập nhật xong, phiên đang mở nhận bản mới khi mở lại hoặc `/reload-plugins`.
+`ap-dung` làm theo thứ tự: kiểm băm bản mới → chạy test của bản mới → sao lưu `settings.json` vào `~/.claude/plugin-tintmark-tietkiemtoken/sao_luu/` → đổi liên kết → thử khói. Sai băm hoặc test hỏng thì giữ bản cũ. Thử khói hỏng thì tự quay lui. Cập nhật xong, phiên đang mở nhận bản mới khi mở lại hoặc `/reload-plugins`.
 
 ## Tự cập nhật
 
@@ -37,7 +37,7 @@ Test hỏng thì dừng, không đổi gì. Đạt thì tăng số bản trong `
 
 ## Gộp skill vào plugin (một lần mỗi máy)
 
-Trước khi gộp, skill `tintmark-token` và 2 hook ngưỡng nằm riêng ở `~/.claude/`. Gộp để chỉ còn một bản, cập nhật cùng plugin:
+Trước khi gộp, skill `tintmark-tietkiemtoken` và 2 hook ngưỡng nằm riêng ở `~/.claude/`. Gộp để chỉ còn một bản, cập nhật cùng plugin:
 
 ```bash
 python3 <liên kết>/scripts/cai_dat.py gop --lien-ket <liên kết> --kenh <kho bản>/kenh.json --nguon <nguồn> --tu-dong ap_dung
@@ -54,9 +54,9 @@ Phải ra "Hook ngưỡng cũ trong settings.json: 0" và "Skill người dùng:
 ## Gỡ
 
 - Trả `settings.json` và skill về trước khi gộp: `python3 $P/scripts/cai_dat.py go`. Thay đổi `settings.json` làm sau lần gộp sẽ mất (bản ngay trước khi gỡ lưu ở `settings.json.truoc-go-<ngày giờ>`).
-- Tắt plugin: `claude plugin disable tintmark-tietkiem@<marketplace>`.
-- Xoá dữ liệu: xoá thư mục `~/.claude/plugin-tintmark-tietkiem/`.
+- Tắt plugin: `claude plugin disable tintmark-tietkiemtoken@<marketplace>`.
+- Xoá dữ liệu: xoá thư mục `~/.claude/plugin-tintmark-tietkiemtoken/`.
 
 ## Bản Claude Code ghi nhận
 
-Marketplace dạng thư mục: phiên mới nạp plugin qua liên kết cài đặt (bản `cap_nhat.py` vừa đặt), còn `~/.claude/plugins/installed_plugins.json` chỉ ghi bản lúc `claude plugin install` / `update`. Hai số có thể lệch; `cai_dat.py trang-thai` in cả hai và báo `⚠ LỆCH`. Đồng bộ ghi chép bằng lệnh, không sửa tay JSON: `claude plugin marketplace update <marketplace>` rồi `claude plugin update tintmark-tietkiem@<marketplace>`. Kiểm thành phần đang nạp: `claude plugin details tintmark-tietkiem@<marketplace>` (phải có Hooks PostToolUse + UserPromptSubmit).
+Marketplace dạng thư mục: phiên mới nạp plugin qua liên kết cài đặt (bản `cap_nhat.py` vừa đặt), còn `~/.claude/plugins/installed_plugins.json` chỉ ghi bản lúc `claude plugin install` / `update`. Hai số có thể lệch; `cai_dat.py trang-thai` in cả hai và báo `⚠ LỆCH`. Đồng bộ ghi chép bằng lệnh, không sửa tay JSON: `claude plugin marketplace update <marketplace>` rồi `claude plugin update tintmark-tietkiemtoken@<marketplace>`. Kiểm thành phần đang nạp: `claude plugin details tintmark-tietkiemtoken@<marketplace>` (phải có Hooks PostToolUse + UserPromptSubmit).

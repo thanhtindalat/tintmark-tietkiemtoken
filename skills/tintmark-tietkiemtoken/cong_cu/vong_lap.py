@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""So vong lap cho quyet cua tintmark-token (~/.claude/tintmark-token/vong_lap.json).
+"""So vong lap cho quyet cua tintmark-tietkiemtoken (~/.claude/tintmark-tietkiemtoken/vong_lap.json).
 
   vong_lap.py de-xuat --id ID --ten "..." --loai lich|cron|nen|khac --tan-suat "..." --ly-do "..." [--du-an DUONG_DAN] [--han-gio 48]
   vong_lap.py tra-loi --id ID --tat | --giu [--ra-lai-ngay 30]
@@ -14,7 +14,10 @@ import json
 import os
 import time
 
-TEP = os.path.join(os.environ.get('TINTMARK_TOKEN_DIR') or os.path.expanduser('~/.claude/tintmark-token'), 'vong_lap.json')
+_GOC = os.environ.get('TINTMARK_TOKEN_DIR') or os.path.expanduser('~/.claude/tintmark-tietkiemtoken')
+if not os.environ.get('TINTMARK_TOKEN_DIR') and not os.path.exists(_GOC) and os.path.isdir(os.path.expanduser('~/.claude/tintmark-token')):
+    _GOC = os.path.expanduser('~/.claude/tintmark-token')   # ten cu truoc 15/11/2026
+TEP = os.path.join(_GOC, 'vong_lap.json')
 
 
 def doc():

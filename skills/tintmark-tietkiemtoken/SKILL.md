@@ -1,9 +1,9 @@
 ---
-name: tintmark-token
-description: Tiết kiệm token, dùng cho MỌI dự án trên Claude Code và Claude Chat — ngưỡng 250k nhắc / 300k đổi phiên (hook tự đo), tệp bàn giao 7 mục, mở phiên kế nhiệm và đặt tên phiên cũ + số, quy tắc đặt tên phiên, phiên "Sắp xếp - tìm kiếm" (xếp phiên theo dự án, tìm phiên theo từ khoá), xử lý phiên cũ, phiên điều phối đầy, chọn model theo việc, dọn ngữ cảnh, trả lời gọn, nén tệp nhớ (CLAUDE.md), giao subagent trả kết quả nén, liệt kê và tắt vòng lặp / lịch tự chạy có nhắc và hạn tự tắt, cắt connector / skill thừa, plugin tintmark-tietkiem nén output bash (báo nén sai, tự sửa, cập nhật), đo token trung thực. Dùng khi nói "tiết kiệm token", "hết token", "phiên dài", "bàn giao", "đổi phiên", "đặt tên phiên", "sắp xếp phiên", "tìm phiên", "vòng lặp", "lịch tự chạy", "chọn model", "trả lời gọn", "nén CLAUDE.md", "subagent", "nén output", "nén sai", "tintmark-tietkiem", "cập nhật plugin", "đo token", "tintmark-token"; khi hook báo "[tintmark-token]"; khi bắt đầu một phiên điều phối; và ngay lượt đầu của mọi phiên dài hạn.
+name: tintmark-tietkiemtoken
+description: Tiết kiệm token, dùng cho MỌI dự án trên Claude Code và Claude Chat — ngưỡng 250k nhắc / 300k đổi phiên (hook tự đo), tệp bàn giao 7 mục, mở phiên kế nhiệm và đặt tên phiên cũ + số, quy tắc đặt tên phiên, phiên "Sắp xếp - tìm kiếm" (xếp phiên theo dự án, tìm phiên theo từ khoá), xử lý phiên cũ, phiên điều phối đầy, chọn model theo việc, dọn ngữ cảnh, trả lời gọn, nén tệp nhớ (CLAUDE.md), giao subagent trả kết quả nén, liệt kê và tắt vòng lặp / lịch tự chạy có nhắc và hạn tự tắt, cắt connector / skill thừa, plugin nén output bash (báo nén sai, tự sửa, cập nhật), đo token trung thực. Dùng khi nói "tiết kiệm token", "hết token", "phiên dài", "bàn giao", "đổi phiên", "đặt tên phiên", "sắp xếp phiên", "tìm phiên", "vòng lặp", "lịch tự chạy", "chọn model", "trả lời gọn", "nén CLAUDE.md", "subagent", "nén output", "nén sai", "tintmark-tietkiemtoken", "cập nhật plugin", "đo token"; khi hook báo "[tintmark-tietkiemtoken]"; khi bắt đầu một phiên điều phối; và ngay lượt đầu của mọi phiên dài hạn.
 ---
 
-# tintmark-token
+# tintmark-tietkiemtoken
 
 Quy trình chính về token cho mọi dự án (gồm cả trả lời gọn, nén tệp nhớ, subagent nén, đo trung thực). Không gắn với dự án nào: mọi đường dẫn tính từ **gốc dự án của phiên** (thư mục làm việc). Dự án có luật riêng (CLAUDE.md) thì luật riêng thắng khi trái nhau.
 
@@ -22,7 +22,7 @@ Quy trình chính về token cho mọi dự án (gồm cả trả lời gọn, n
 
 | Tình huống | Tệp |
 |---|---|
-| Hook báo `[tintmark-token]`, phiên sắp đầy, cần đổi phiên, phiên cũ làm gì | `ban-giao.md` |
+| Hook báo `[tintmark-tietkiemtoken]`, phiên sắp đầy, cần đổi phiên, phiên cũ làm gì | `ban-giao.md` |
 | Đặt / đổi tên phiên, mở phiên mới, sắp xếp danh sách phiên | `dat-ten-phien.md` |
 | Sắp xếp mọi phiên theo dự án, đổi tên hàng loạt, đề xuất lưu trữ / xoá, tìm phiên cũ theo từ khoá (phiên `Sắp xếp - tìm kiếm`) | `sap-xep-phien.md` |
 | Đang là phiên điều phối; phiên con đầy; điều phối đầy; dự án càng ngày càng tốn | `dieu-phoi.md` |
@@ -47,8 +47,8 @@ Quy trình chính về token cho mọi dự án (gồm cả trả lời gọn, n
 
 ## Công cụ
 
-- `cong_cu/nguong_token.py` — hook đo ngưỡng (plugin tintmark-tietkiem tự nối qua `hooks/hooks.json`); dưới ngưỡng thì im lặng.
+- `cong_cu/nguong_token.py` — hook đo ngưỡng (plugin tintmark-tietkiemtoken tự nối qua `hooks/hooks.json`); dưới ngưỡng thì im lặng.
 - `cong_cu/do_token.py [số ngày]` — báo cáo token theo phiên từ nhật ký trên máy.
 - `cong_cu/vong_lap.py` — sổ vòng lặp chờ quyết, có hạn tự tắt.
-- Cấu hình chung `~/.claude/tintmark-token/cau_hinh.json`; riêng dự án `<gốc dự án>/.claude/tintmark-token.json` (ví dụ `{"nhac":150000,"doi":200000}`).
-- Plugin tintmark-tietkiem (chỉ Claude Code), `P=~/.claude/skills/tintmark-token/../..`: `$P/scripts/thong_ke.py` (đã nén bao nhiêu), `phan_hoi.py` (báo nén sai), `tu_sua.py` (sửa bộ lọc), `cap_nhat.py` (cập nhật / quay lui), `cai_dat.py` (trạng thái / gộp / gỡ). Bản skill dùng trên Claude Chat không có các script này.
+- Cấu hình chung `~/.claude/tintmark-tietkiemtoken/cau_hinh.json`; riêng dự án `<gốc dự án>/.claude/tintmark-tietkiemtoken.json` (ví dụ `{"nhac":150000,"doi":200000}`).
+- Plugin tintmark-tietkiemtoken (chỉ Claude Code), `P=~/.claude/skills/tintmark-tietkiemtoken/../..`: `$P/scripts/thong_ke.py` (đã nén bao nhiêu), `phan_hoi.py` (báo nén sai), `tu_sua.py` (sửa bộ lọc), `cap_nhat.py` (cập nhật / quay lui), `cai_dat.py` (trạng thái / gộp / gỡ). Bản skill dùng trên Claude Chat không có các script này.

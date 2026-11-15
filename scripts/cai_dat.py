@@ -4,9 +4,9 @@
   cai_dat.py trang-thai
   cai_dat.py gop --lien-ket <liên kết cài đặt> --kenh <kenh.json> [--nguon <thư mục nguồn>] [--tu-dong bao|ap_dung|tat]
         1) sao lưu ~/.claude/settings.json  2) bỏ 2 hook ngưỡng cũ trong settings (plugin đã mang hook này)
-        3) ~/.claude/skills/tintmark-token: chuyển bản cũ vào sao lưu, thay bằng liên kết tới skill trong plugin
+        3) ~/.claude/skills/tintmark-tietkiemtoken: chuyển bản cũ vào sao lưu, thay bằng liên kết tới skill trong plugin
            (phiên đang mở vẫn gọi được hook / skill theo đường dẫn cũ)  4) ghi cấu hình cập nhật
-  cai_dat.py go        trả settings.json và skill về như trước khi gộp (plugin thì `claude plugin disable tintmark-tietkiem`)
+  cai_dat.py go        trả settings.json và skill về như trước khi gộp (plugin thì `claude plugin disable tintmark-tietkiemtoken`)
 KHÔNG chạy `gop` khi chưa kiểm hook ngưỡng của plugin đã chạy trong một phiên mới.
 """
 import argparse
@@ -19,7 +19,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import nen_loi  # noqa: E402
 
 NHA = os.environ.get("NEN_NHA") or os.path.expanduser("~/.claude")
-DAU = "tintmark-token/cong_cu/nguong_token.py"
+DAU = "tintmark-tietkiemtoken/cong_cu/nguong_token.py"
 
 
 def bo_hook_cu(st):
@@ -49,7 +49,7 @@ def main(argv=None):
     g.add_argument("--nguon", default=""); g.add_argument("--tu-dong", default="bao", choices=["bao", "ap_dung", "tat"])
     o = p.parse_args(argv)
     st_tep = os.path.join(NHA, "settings.json")
-    skill = os.path.join(NHA, "skills", "tintmark-token")
+    skill = os.path.join(NHA, "skills", "tintmark-tietkiemtoken")
     tt_tep = nen_loi.tep("cai_dat.json")
     tt = nen_loi.doc_json(tt_tep, {}) or {}
 
@@ -72,7 +72,7 @@ def main(argv=None):
         return 0
     if o.viec == "gop":
         lk = os.path.abspath(o.lien_ket)
-        dich_skill = os.path.join(lk, "skills", "tintmark-token")
+        dich_skill = os.path.join(lk, "skills", "tintmark-tietkiemtoken")
         if not os.path.isfile(os.path.join(dich_skill, "cong_cu", "nguong_token.py")):
             print("Bản plugin ở %s chưa có skill + hook ngưỡng: cập nhật plugin trước." % lk); return 1
         dau = time.strftime("%y%m%d-%H%M%S")
@@ -86,7 +86,7 @@ def main(argv=None):
         nen_loi.ghi_json(st_tep, st)
         sl_skill = ""
         if os.path.isdir(skill) and not os.path.islink(skill):
-            sl_skill = os.path.join(sl, "skill-tintmark-token-" + dau)
+            sl_skill = os.path.join(sl, "skill-tintmark-tietkiemtoken-" + dau)
             shutil.move(skill, sl_skill)
         if os.path.islink(skill):
             os.remove(skill)
@@ -114,7 +114,7 @@ def main(argv=None):
     tt["luc"] = 0
     nen_loi.ghi_json(tt_tep, tt)
     print("Đã trả settings.json và skill về trước khi gộp. LƯU Ý: thay đổi settings sau lần gộp đã mất "
-          "(bản ngay trước khi gỡ: settings.json.truoc-go-*). Tắt plugin: claude plugin disable tintmark-tietkiem@<marketplace>")
+          "(bản ngay trước khi gỡ: settings.json.truoc-go-*). Tắt plugin: claude plugin disable tintmark-tietkiemtoken@<marketplace>")
     return 0
 
 
