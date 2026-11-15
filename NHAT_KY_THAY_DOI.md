@@ -1,5 +1,8 @@
 # Nhật ký thay đổi — tintmark-tietkiemtoken
 
+## 0.6.0 — 15/11/2026
+- Luật đổi phiên: (1) module ban_giao — hook PostToolUse báo [tintmark-tietkiemtoken] BÀN GIAO DÀI khi ghi ban_giao_phien/*.md (Write/Edit/Bash) quá ban_giao_chu (mặc định 1.500 chữ, 0 = tắt), không chặn; (2) ở 300k lời nhắc đổi thành 'lưu trữ phiên TRƯỚC ĐÓ nếu có, GIỮ phiên này' (trước: lưu trữ phiên này, trái luật 2 phiên mới nhất); (3) phiên kế nhiệm detach_session "self" trước mọi bước lưu trữ (lệnh bàn giao mẫu, lời nhắc hook, SKILL.md). Test 80.
+
 ## 0.5.2 — 15/11/2026
 - Khung 0.2.1: miễn dòng bản quyền cho mã bên thứ ba khai trong khung.json ma_ben_thu_ba kèm NOTICE ở thư mục cha (cho gói khác dùng khung); plugin này không có mã bên thứ ba, hành vi không đổi.
 

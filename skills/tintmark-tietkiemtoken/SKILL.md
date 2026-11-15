@@ -10,7 +10,7 @@ Quy trình chính về token cho mọi dự án (gồm cả trả lời gọn, n
 ## 8 luật vàng
 
 1. **Phiên to là tốn nhất.** Mỗi lượt gọi model đọc lại cả phiên. Nhắc ở 250k, đổi phiên trước 300k. Không chờ tự nén.
-2. **Trạng thái nằm ngoài chat, viết gọn.** Mục tiêu, việc dở, quyết định ghi ra tệp bàn giao ở mỗi mốc việc. Tệp bàn giao dưới khoảng 1.500 chữ, chỉ trỏ đường dẫn, không chép nội dung; lời giao phiên kế nhiệm chỉ gồm lệnh bàn giao + việc mới nguyên văn.
+2. **Trạng thái nằm ngoài chat, viết gọn.** Mục tiêu, việc dở, quyết định ghi ra tệp bàn giao ở mỗi mốc việc. Tệp bàn giao dưới khoảng 1.500 chữ (hook báo `BÀN GIAO DÀI` khi vượt), chỉ trỏ đường dẫn, không chép nội dung; lời giao phiên kế nhiệm chỉ gồm lệnh bàn giao + việc mới nguyên văn.
 3. **Không đánh thức phiên đã nghỉ quá 1 giờ khi không có việc thật.** Bộ đệm đã hết hạn: lượt đầu nạp lại cả ngữ cảnh với giá ghi gấp đôi. Mở phiên mới nhỏ, hoặc đọc tệp trạng thái của nó.
 4. **Kết quả ra tệp, ngữ cảnh chính chỉ nhận kết luận.** Giữa các phiên chỉ gửi "xong X, xem `<tệp>`"; gom nhiều ý vào một tin. Dò tìm / đọc nhiều tệp: giao subagent. Gom nhiều lệnh vào một lượt; truy bảng luôn lọc + giới hạn dòng; không in cả tệp, cả nhật ký. Không đọc bản luật đầy đủ / tệp tham chiếu dài trừ khi thật cần.
 5. **Model theo việc.** Phiên yêu cầu / ghi sổ, báo cáo, điều phối: Sonnet hoặc Haiku. Opus (model mạnh) cho mã khó, kiến trúc, phát hành. Xem `chon-model.md`.
@@ -43,7 +43,7 @@ Quy trình chính về token cho mọi dự án (gồm cả trả lời gọn, n
 
 1. Xác định tên phiên đúng quy tắc (`dat-ten-phien.md`); sai thì đề xuất tên đúng.
 2. Tạo / cập nhật tệp bàn giao của phiên với **lệnh bàn giao** ở dòng đầu (`ban-giao.md` mục 2) — để lúc nào cũng mở được phiên kế nhiệm bằng một câu.
-3. Phiên kế nhiệm: đọc tệp bàn giao, xác nhận 3 dòng (mục tiêu, bước kế tiếp, tệp đang sửa), gọi `archive_session` lưu trữ mọi phiên cũ hơn 2 phiên mới nhất của chuỗi (bắt buộc; `ban-giao.md` mục 4), ghi id mới vào sổ phiên, rồi làm.
+3. Phiên kế nhiệm: đọc tệp bàn giao, xác nhận 3 dòng (mục tiêu, bước kế tiếp, tệp đang sửa), `detach_session "self"` trước, rồi gọi `archive_session` lưu trữ mọi phiên cũ hơn 2 phiên mới nhất của chuỗi (bắt buộc; `ban-giao.md` mục 4), ghi id mới vào sổ phiên, rồi làm.
 
 ## Công cụ
 

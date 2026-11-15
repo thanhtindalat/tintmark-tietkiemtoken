@@ -5,6 +5,8 @@
   "tu_sua": {"mo_ta": "Tự tắt bộ lọc nén bị báo / nghi hỏng nhiều lần", "mac_dinh": true, "hoi_vien": false, "tep": ["scripts/tu_sua.py"]},
   "nguong": {"mo_ta": "Nhắc ngưỡng 250k / 300k token, bàn giao, đổi phiên", "mac_dinh": true, "hoi_vien": false,
              "tep": ["skills/tintmark-tietkiemtoken/cong_cu/nguong_token.py"]},
+  "ban_giao": {"mo_ta": "Nhắc khi tệp ban_giao_phien/*.md vừa ghi dài hơn ngưỡng (mặc định 1.500 chữ)", "mac_dinh": true,
+               "hoi_vien": false, "tep": ["skills/tintmark-tietkiemtoken/cong_cu/nguong_token.py"]},
   "vong_lap": {"mo_ta": "Nhắc sổ vòng lặp / lịch tự chạy chờ quyết", "mac_dinh": true, "hoi_vien": false,
                "tep": ["skills/tintmark-tietkiemtoken/cong_cu/vong_lap.py"]},
   "tu_cap_nhat": {"mo_ta": "Kiểm bản mới mỗi 24 giờ (cap_nhat.py tu-dong)", "mac_dinh": true, "hoi_vien": false,

@@ -233,8 +233,59 @@ class TestNguongGop(Goc):
         a = self.goi()
         self.assertIn("Chuỗi phiên", a); self.assertIn("id phiên này: s1", a)
         self.assertIn("lưu trữ phiên cũ", a)            # lời giao thẻ kế nhiệm có bước lưu trữ
+        self.assertIn('detach_session \\"self\\" TRƯỚC', a)
         b = self.goi(n=310000)
-        self.assertIn("lưu trữ phiên cũ theo dòng Chuỗi phiên, id phiên này: s1", b)
+        self.assertIn("lưu trữ phiên cũ theo dòng Chuỗi phiên", b); self.assertIn("id phiên này: s1", b)
+        self.assertIn('detach_session \\"self\\" TRƯỚC', b)
+
+    def test_doi_phien_luu_tru_phien_truoc_do_giu_phien_nay(self):
+        """Xung đột cũ: lời nhắc bảo lưu trữ phiên đang đầy => trái luật 2 phiên mới nhất."""
+        for b in (self.goi(n=310000), self.goi("PostToolUse", n=360000)):   # nhánh tin người gõ + nhánh giữa lượt
+            self.assertIn("lưu trữ phiên TRƯỚC ĐÓ nếu có", b); self.assertIn("GIỮ phiên này", b)
+            self.assertNotIn("lưu trữ phiên này", b)
+            self.assertIn('detach_session \\"self\\"', b)
+
+    def bg(self, ten, chu, cong_cu="Write", **kw):
+        d = os.path.join(self.d, "ban_giao_phien")
+        os.makedirs(d, exist_ok=True)
+        p = os.path.join(d, ten)
+        with open(p, "w") as f:
+            f.write(" ".join(["chữ"] * chu))
+        ti = {"command": kw.get("lenh", "")} if cong_cu == "Bash" else {"file_path": kw.get("duong", p)}
+        r = chay(NGUONG, {"session_id": "s2", "transcript_path": self.nhat_ky(1000), "cwd": self.d,
+                          "hook_event_name": kw.get("su_kien", "PostToolUse"), "tool_name": cong_cu, "tool_input": ti}, self.env)
+        self.assertEqual((r.returncode, r.stderr), (0, b""))
+        return r.stdout.decode()
+
+    def test_ban_giao_dai_thi_nhac(self):
+        a = self.bg("x.md", 1600)
+        self.assertIn("BÀN GIAO DÀI: x.md 1600 chữ", a); self.assertIn("≤1.500", a)
+        self.assertEqual(self.bg("x.md", 1500), "")                                   # đúng ngưỡng: im
+        self.assertIn("BÀN GIAO DÀI", self.bg("y.md", 1600, "Edit", duong="ban_giao_phien/y.md"))   # đường tương đối
+        self.assertIn("BÀN GIAO DÀI", self.bg("z.md", 1600, "Bash", lenh="python3 - <<'EOF' > ban_giao_phien/z.md"))
+        self.assertIn("BÀN GIAO DÀI", self.bg("z.md", 1600, "Bash", lenh="sed -i '' 's/a/b/' %s/ban_giao_phien/z.md" % self.d))
+        self.assertEqual(self.bg("x.md", 1600, su_kien="UserPromptSubmit").count("BÀN GIAO"), 0)
+
+    def test_ban_giao_khong_nham(self):
+        self.assertEqual(self.bg("x.txt", 1600), "")                                  # không phải .md
+        p = os.path.join(self.d, "khac", "x.md"); os.makedirs(os.path.dirname(p))
+        self.assertEqual(self.bg("x.md", 10, duong=p), "")                            # ngoài ban_giao_phien
+        self.bg("cu.md", 1600)
+        t = os.path.join(self.d, "ban_giao_phien", "cu.md"); os.utime(t, (time.time() - 600,) * 2)
+        r = chay(NGUONG, {"session_id": "s2", "transcript_path": self.nhat_ky(1000), "cwd": self.d, "hook_event_name": "PostToolUse",
+                          "tool_name": "Bash", "tool_input": {"command": "cat ban_giao_phien/cu.md"}}, self.env)
+        self.assertEqual(r.stdout, b"")                                               # chỉ đọc tệp cũ: im
+        self.assertEqual(self.bg("x.md", 1600, "Read"), "")
+
+    def test_ban_giao_nguong_va_module(self):
+        self.cau_hinh(cho_giay=0, ban_giao_chu=2000)
+        self.assertEqual(self.bg("x.md", 1600), "")
+        self.assertIn("≤2.000", self.bg("x.md", 2100))
+        self.cau_hinh(cho_giay=0, ban_giao_chu=0)
+        self.assertEqual(self.bg("x.md", 9000), "")
+        self.cau_hinh(cho_giay=0)
+        self.env["TIETKIEM_TAT_MODULE"] = "ban_giao"
+        self.assertEqual(self.bg("x.md", 9000), "")
 
     def test_nhac_co_the_de_xuat_mot_lan_va_cau_moi(self):
         a = self.goi()

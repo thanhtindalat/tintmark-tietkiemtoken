@@ -73,5 +73,10 @@ class TestBanGiao(unittest.TestCase):
         s = open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "skills", "tintmark-tietkiemtoken", "ban-giao.md"), encoding="utf-8").read()
         dong = [l for l in s.splitlines() if l.startswith("> LỆNH BÀN GIAO")][0]
         self.assertIn("archive_session lưu trữ mọi phiên cũ hơn 2 phiên mới nhất", dong); self.assertIn("sổ phiên", dong)
+        self.assertLess(dong.index('detach_session "self"'), dong.index("archive_session"))   # tách khỏi phiên cha trước khi lưu trữ
+        self.assertIn("lưu trữ phiên **trước đó** nếu có", s); self.assertIn("**Giữ** phiên đang đầy", s)
+        self.assertNotIn("Lưu trữ (Archive), không xoá, không nhắn nữa.** Tắt", s)
+        k = open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "skills", "tintmark-tietkiemtoken", "SKILL.md"), encoding="utf-8").read()
+        self.assertIn('`detach_session "self"` trước, rồi gọi `archive_session`', k)
         for y in ("a hook changed this call's input", "cũ nhất", "đang ghim", "detach_session", "2 phiên mới nhất"):
             self.assertIn(y, s)

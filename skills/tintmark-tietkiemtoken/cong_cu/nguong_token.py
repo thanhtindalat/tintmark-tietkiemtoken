@@ -29,10 +29,15 @@ MAC_DINH = {
     'nhac_vong_lap_gio': 12,  # nhac muc cho quyet toi da 1 lan / chung nay gio
     'quet_vong_lap_ngay': 7,  # goi y quet lai vong lap sau chung nay ngay
     'cho_giay': 8,           # tin nguoi dung gui khi da qua nguong doi: giu lai chung nay giay roi moi cho qua (0 = khong cho)
+    'ban_giao_chu': 1500,    # tep ban_giao_phien/*.md vua ghi dai hon chung nay chu thi nhac cat (0 = tat)
 }
 CAU_MOI = 'Mở phiên mới để làm việc hiệu quả hơn. Ngữ cảnh đã đưa vào phiên mới.'
-THE = ('tạo MỘT thẻ kế nhiệm (start_session "own_initiative", "fresh", tên cũ + số; lời giao = lệnh bàn giao, '
-       'gồm bước lưu trữ phiên cũ theo dòng Chuỗi phiên (archive_session, chỉ giữ 2 phiên mới nhất) và ghi id mới vào sổ phiên; mô tả có câu "%s")' % CAU_MOI)
+LUOT_DAU = ('lượt đầu phiên mới: detach_session "self" TRƯỚC, rồi lưu trữ phiên cũ theo dòng Chuỗi phiên '
+            '(archive_session, chỉ giữ 2 phiên mới nhất), ghi id mới vào sổ phiên')
+SAU_DO = ('Sau đó lưu trữ phiên TRƯỚC ĐÓ nếu có (phiên ngay trước phiên này trong dòng Chuỗi phiên; '
+          'tách phiên con còn dùng trước); GIỮ phiên này, không nhận việc mới.')
+THE = ('tạo MỘT thẻ kế nhiệm (start_session "own_initiative", "fresh", tên cũ + số; lời giao = lệnh bàn giao (%s); '
+       'mô tả có câu "%s")' % (LUOT_DAU, CAU_MOI))
 
 
 def doc_json(duong, mac_dinh):
@@ -134,10 +139,9 @@ def nhac_nguong(vao, c, su_kien='UserPromptSubmit'):
             pass
         return ('[tintmark-tietkiemtoken] ĐỔI PHIÊN: %dk token (> %dk). KHÔNG làm việc vừa gửi ở phiên này; chốt tệp bàn giao (ban-giao.md). '
                 '(a) Người dùng gõ: start_session "user_asked", "fresh", tên cũ + số; lời giao CHỈ gồm lệnh bàn giao '
-                '(lưu trữ phiên cũ theo dòng Chuỗi phiên, id phiên này: %s) + NGUYÊN VĂN tin vừa gửi; trả lời một dòng "%s" kèm link. '
+                '(%s; id phiên này: %s) + NGUYÊN VĂN tin vừa gửi; trả lời một dòng "%s" kèm link. '
                 '(b) Tin do phiên khác gửi / sự kiện tự động:%s Trả lời một dòng "phiên đã đầy, gửi lại cho phiên <tên mới> sau khi người dùng bấm Bắt đầu". '
-                'Sau đó lưu trữ phiên này, không nhắn nữa.'
-                % (k, c['doi'] // 1000, phien, CAU_MOI, the))
+                % (k, c['doi'] // 1000, LUOT_DAU, phien, CAU_MOI, the)) + SAU_DO
     if muc <= da_muc and n < da_n + c['buoc_nhac_lai']:
         return None
     ghi_json(tep, dict(tt, muc=muc, n=n, luc=int(nay), the_da_tao=True))
@@ -147,9 +151,65 @@ def nhac_nguong(vao, c, su_kien='UserPromptSubmit'):
                 'Xong việc dở, không mở việc lớn mới.'
                 % (k, c['nhac'] // 1000, c['doi'] // 1000, k, CAU_MOI, phien, the))
     return ('[tintmark-tietkiemtoken] ĐỔI PHIÊN: %dk token (> %dk). Không nhận việc mới; dừng ở điểm an toàn, chốt tệp bàn giao.%s Báo: "%s" '
-            'Lượt người dùng gõ: mở phiên kế nhiệm mới hoàn toàn (fresh, không fork), lời giao = lệnh bàn giao, tên cũ + số. '
-            'Sau đó lưu trữ phiên này, không nhắn nữa.'
-            % (k, c['doi'] // 1000, the, CAU_MOI))
+            'Lượt người dùng gõ: mở phiên kế nhiệm mới hoàn toàn (fresh, không fork), lời giao = lệnh bàn giao (%s), tên cũ + số. '
+            % (k, c['doi'] // 1000, the, CAU_MOI, LUOT_DAU)) + SAU_DO
+
+
+def dem_chu(duong):
+    try:
+        with open(duong, encoding='utf-8', errors='replace') as f:
+            return len(f.read().split())
+    except OSError:
+        return -1
+
+
+def tep_ban_giao(vao):
+    """Cac tep ban_giao_phien/*.md vua duoc ghi boi lan goi cong cu nay (Write / Edit / MultiEdit / Bash)."""
+    ten = vao.get('tool_name') or ''
+    ti = vao.get('tool_input') or {}
+    if not isinstance(ti, dict):
+        return []
+    cwd = vao.get('cwd') or ''
+    def la_bg(p):
+        p = p.replace(os.sep, '/')
+        return p.endswith('.md') and '/ban_giao_phien/' in '/' + p
+    if ten in ('Write', 'Edit', 'MultiEdit', 'NotebookEdit'):
+        p = ti.get('file_path') or ''
+        return [os.path.join(cwd, p)] if p and la_bg(p) else []
+    if ten != 'Bash':
+        return []
+    import re
+    lenh = ti.get('command') or ''
+    if 'ban_giao_phien/' not in lenh:
+        return []
+    nay, ra = time.time(), []
+    for m in re.finditer(r'''[^\s'"`<>|;&()=]*ban_giao_phien/[^\s'"`<>|;&()]+?\.md''', lenh):
+        p = os.path.expanduser(m.group(0))
+        p = os.path.join(cwd, p)
+        try:
+            if nay - os.path.getmtime(p) < 120 and p not in ra:   # chi tep vua ghi (lenh doc thi bo qua)
+                ra.append(p)
+        except OSError:
+            pass
+    return ra
+
+
+def nhac_ban_giao(vao, c):
+    """PostToolUse: tep ban giao vua ghi dai hon nguong => nhac cat. Khong chan, khong ghi gi."""
+    try:
+        tran = int(c.get('ban_giao_chu') or 0)
+    except (TypeError, ValueError):
+        return None
+    if tran <= 0:
+        return None
+    dong = []
+    for p in tep_ban_giao(vao):
+        n = dem_chu(p)
+        if n > tran:
+            dong.append('[tintmark-tietkiemtoken] BÀN GIAO DÀI: %s %d chữ — cắt còn ≤%s, chỉ trỏ đường dẫn '
+                        '(bỏ lịch sử việc đã xong, không chép nội dung tệp khác; ban-giao.md mục 2).'
+                        % (os.path.basename(p), n, '{:,}'.format(tran).replace(',', '.')))
+    return '\n'.join(dong) or None
 
 
 def nhac_vong_lap(vao, c):
@@ -299,6 +359,13 @@ def main():
     a = nhac_nguong(vao, c, su_kien) if mo_dun('nguong', cwd) else None
     if a:
         tin.append(a)
+    if su_kien == 'PostToolUse' and mo_dun('ban_giao', cwd):
+        try:
+            b = nhac_ban_giao(vao, c)
+        except Exception:
+            b = None
+        if b:
+            tin.append(b)
     if su_kien == 'UserPromptSubmit':
         ds = [thong_bao_plugin, nhac_phan_hoi_cu]
         if mo_dun('vong_lap', cwd):
