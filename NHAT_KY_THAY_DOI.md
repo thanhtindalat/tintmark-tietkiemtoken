@@ -1,5 +1,8 @@
 # Nhật ký thay đổi — tintmark-tietkiemtoken
 
+## 0.3.8 — 15/11/2026
+- Theo bản đổi tên: ban-giao.md mục Phiên con: list_sessions không cho thấy cha – con; dò get_session tìm parentSessionId (cả cháu), detach_session phiên còn dùng, lỡ kéo theo thì unarchive_session. Thêm test.
+
 ## 0.3.7 — 15/11/2026
 - cap_nhat.py thử khói tìm hook ngưỡng theo mẫu skills/*/cong_cu/nguong_token.py (bản cũ 0.3.5 kiểm đường skill cũ nên tự quay lui khi lên 0.3.6).
 

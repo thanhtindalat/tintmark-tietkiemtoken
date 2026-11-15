@@ -35,6 +35,13 @@ class KiemSkillMd(unittest.TestCase):
                     self.assertTrue(os.path.exists(os.path.join(THU_MUC, ten)),
                                     "%s nhắc %s nhưng không có tệp" % (t, ten))
 
+    def test_ban_giao_tim_phien_con(self):
+        """Lưu trữ phiên gốc: phải dò parentSessionId và biết khôi phục phiên con lỡ bị kéo theo."""
+        with open(os.path.join(THU_MUC, "ban-giao.md"), encoding="utf-8") as f:
+            nd = f.read()
+        for chu in ("parentSessionId", "unarchive_session", "detach_session", "get_session"):
+            self.assertIn(chu, nd)
+
 
 if __name__ == "__main__":
     unittest.main()
