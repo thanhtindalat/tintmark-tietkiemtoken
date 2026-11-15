@@ -1,6 +1,6 @@
 ---
 name: tintmark-tietkiemtoken
-description: Tiết kiệm token, dùng cho MỌI dự án trên Claude Code và Claude Chat — ngưỡng 250k nhắc / 300k đổi phiên (hook tự đo), tệp bàn giao 7 mục, mở phiên kế nhiệm và đặt tên phiên cũ + số, quy tắc đặt tên phiên, phiên "Sắp xếp - tìm kiếm" (xếp phiên theo dự án, tìm phiên theo từ khoá), xử lý phiên cũ, phiên điều phối đầy, chọn model theo việc, dọn ngữ cảnh, trả lời gọn, nén tệp nhớ (CLAUDE.md), giao subagent trả kết quả nén, liệt kê và tắt vòng lặp / lịch tự chạy có nhắc và hạn tự tắt, cắt connector / skill thừa, plugin nén output bash (báo nén sai, tự sửa, cập nhật), đo token trung thực. Dùng khi nói "tiết kiệm token", "hết token", "phiên dài", "bàn giao", "đổi phiên", "đặt tên phiên", "sắp xếp phiên", "tìm phiên", "vòng lặp", "lịch tự chạy", "chọn model", "trả lời gọn", "nén CLAUDE.md", "subagent", "nén output", "nén sai", "tintmark-tietkiemtoken", "cập nhật plugin", "đo token"; khi hook báo "[tintmark-tietkiemtoken]"; khi bắt đầu một phiên điều phối; và ngay lượt đầu của mọi phiên dài hạn.
+description: Tiết kiệm token cho mọi dự án Claude Code và Chat. Dùng khi nói tiết kiệm token, hết token, phiên dài, đổi phiên, bàn giao, đặt tên phiên, sắp xếp / tìm phiên, vòng lặp, chọn model, nén output, nén sai, đo token, cập nhật plugin; khi hook báo [tintmark-tietkiemtoken]; lượt đầu phiên dài hạn.
 ---
 
 # tintmark-tietkiemtoken

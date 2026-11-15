@@ -1,5 +1,8 @@
 # Nhật ký thay đổi — tintmark-tietkiemtoken
 
+## 0.3.9 — 15/11/2026
+- Mô tả SKILL.md rút còn 292 ký tự / 351 byte (trước ~1.000 ký tự / ~1.240 byte, vượt giới hạn 1.024 của claude.ai); test giới hạn 320 ký tự và 1.024 byte.
+
 ## 0.3.8 — 15/11/2026
 - Theo bản đổi tên: ban-giao.md mục Phiên con: list_sessions không cho thấy cha – con; dò get_session tìm parentSessionId (cả cháu), detach_session phiên còn dùng, lỡ kéo theo thì unarchive_session. Thêm test.
 

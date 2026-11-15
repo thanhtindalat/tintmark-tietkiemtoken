@@ -1,6 +1,6 @@
 {
  "name": "tintmark-tietkiemtoken",
- "version": "0.3.8",
+ "version": "0.3.9",
  "description": "Tiết kiệm token: nén output lệnh bash, ngưỡng 250k/300k đổi phiên, sổ vòng lặp, đo token, sổ phản hồi, tự sửa, tự cập nhật. Python thuần, chạy trên máy.",
  "author": {
   "name": "Tintmark"

@@ -1,4 +1,4 @@
-"""Kiểm SKILL.md trước khi phát bản: mô tả ≤ 1024 ký tự, mọi tệp .md được nhắc đều có thật."""
+"""Kiểm SKILL.md trước khi phát bản: mô tả ≤ 320 ký tự (≤ 1024 byte cho claude.ai), mọi tệp .md được nhắc đều có thật."""
 import os
 import re
 import unittest
@@ -16,7 +16,8 @@ class KiemSkillMd(unittest.TestCase):
         m = re.search(r"^description:\s*(.*)$", self.noi_dung, re.M)
         self.assertIsNotNone(m, "SKILL.md thiếu dòng description")
         mo_ta = m.group(1).strip().strip('"')
-        self.assertLessEqual(len(mo_ta), 1024, "mô tả dài %d ký tự" % len(mo_ta))
+        self.assertLessEqual(len(mo_ta), 320, "mô tả dài %d ký tự" % len(mo_ta))
+        self.assertLessEqual(len(mo_ta.encode("utf-8")), 1024, "mô tả dài %d byte" % len(mo_ta.encode("utf-8")))
         self.assertNotIn("<", mo_ta)
         self.assertNotIn(">", mo_ta)
 
