@@ -25,7 +25,7 @@ Mỗi đề xuất là một thẻ ngắn để người dùng bấm chọn, kh�
 |---|---|---|
 | **Đổi tên** | Tên sai quy tắc `dat-ten-phien.md`, tên mặc định, tên trùng, thiếu số kế nhiệm, tên dài | Đổi bằng công cụ đổi tên phiên; ghi tên cũ vào sổ để còn tìm được |
 | **Xếp nhóm** | Phiên nằm sai nhóm / chưa có nhóm theo dự án | Tạo nhóm / mục ở thanh bên theo cây `dự án › phạm vi`, chuyển phiên vào |
-| **Lưu trữ** | Phiên đã có kế nhiệm; việc đã xong; rảnh quá 7 ngày; phiên > 300k đã nguội | Lưu trữ (không xoá). Còn vòng lặp / tiến trình nền gắn với nó thì chuyển chủ hoặc tắt trước (`don-ngu-canh.md`) |
+| **Lưu trữ** | Phiên đã có kế nhiệm; việc đã xong; rảnh quá 7 ngày; phiên > 350k đã nguội | Lưu trữ (không xoá). Còn vòng lặp / tiến trình nền gắn với nó thì chuyển chủ hoặc tắt trước (`don-ngu-canh.md`) |
 | **Xoá** | Phiên rỗng / thử nghiệm, phiên trùng không có nội dung, phiên đã lưu trữ quá 30 ngày không ai tra | Xoá từng nhóm nhỏ. Luôn nêu "không khôi phục được" |
 | **Gộp việc** | Nhiều phiên cùng làm một việc | Chỉ đề xuất giữ phiên nào, phiên còn lại lưu trữ; không gộp nội dung |
 | **Cụm tự sinh** | Hàng chục / hàng trăm phiên cùng tên do lịch hoặc hook sinh ra | Một thẻ cho cả cụm (không tính vào giới hạn 10 phiên): lưu trữ theo ngày, giữ lại vài phiên mới nhất; kèm đề xuất tắt hoặc giãn nguồn sinh (`don-ngu-canh.md` mục 2–4) để khỏi phình lại |
@@ -84,4 +84,16 @@ Người dùng hỏi "phiên nào làm X", "tìm phiên về Y", "hôm trước 
 - Tên công cụ trong app máy tính (bản 11/2026, kiểm bằng tìm công cụ trước khi dùng vì có thể đổi): liệt kê `list_sessions`, tìm `search_session_transcripts`, đổi tên `set_session_title`, lưu trữ `archive_session` / `unarchive_session`, xoá `delete_session` (nhóm `ccd_session_mgmt`); nhóm thanh bên `list_groups`, `create_group`, `move_sessions`, `set_pinned` (nhóm `ccd_sidebar`).
 - Lưu trữ một phiên có thể kéo theo các phiên con đã xong của nó: trước khi lưu trữ phiên từng mở phiên khác, xem phiên con nào cần giữ.
 - Hai tệp sổ nằm ở `~/.claude/tintmark-tietkiemtoken/`, ngoài thư mục dự án. Dự án có luật "chỉ ghi trong thư mục dự án" thì hỏi người dùng một lần nơi đặt sổ, rồi ghi nơi đó vào `cau_hinh.json`.
-- Phiên `Sắp xếp - tìm kiếm` cũng theo ngưỡng 250k / 300k như mọi phiên; trạng thái nằm ở hai tệp sổ nên đổi phiên không mất gì.
+- Phiên `Sắp xếp - tìm kiếm` cũng theo ngưỡng 300k / 350k như mọi phiên; trạng thái nằm ở hai tệp sổ nên đổi phiên không mất gì.
+
+## Bổ sung 15/11 từ lượt chạy thử đầu
+- `list_sessions` chỉ lọc theo `group` và `linked`, mặc định 20 dòng; 697 phiên ≈ 353k ký tự. Gọi một lần `limit=1000, include_archived=true`, xử lý tệp kết quả bằng `python3 -I`/`jq`, chỉ in số đếm; đừng gọi lại nhiều lần.
+- Danh sách không có trường nhánh, chỉ có `cwd`, `group`, `isRunning`, `lastActivityAt`, `name`, `startedBy`, `link`; phiên đang chạy này bị loại. Không biết phiên nào đang chờ người dùng trả lời (chỉ có `isRunning`).
+- Chuẩn hoá `cwd` trước khi gom dự án: đường dẫn cũ đã đổi tên / lối tắt → đường dẫn hiện hành của dự án; worktree `.claude/worktrees/*` → gốc; thư mục scratch của app → "Việc tự sinh".
+- Nhóm thanh bên chỉ một tầng (`create_group` không có cha): dùng nhóm + tiền tố tên, không có cây 2 tầng.
+- Khuôn tên: dự án có luật đặt tên riêng (tiền tố theo khối / phòng ban) thì theo luật đó; `Sắp xếp - tìm kiếm` là ngoại lệ ghi rõ.
+- Phiên tự sinh số lượng lớn (sửa lỗi bản vá, lịch quét): lưu trữ theo cụm tên + ngày, giữ phiên có hoạt động trong khoảng người dùng nói; hỏi người dùng có tắt nguồn sinh (lịch, hook) không. Tên cụm cần lọc theo `lastActivityAt` chứ không chỉ theo tên.
+- Quyền: `archive_session` hỏi từng phiên; 9 lần bị chặn/từ chối liên tiếp thì bộ phân loại auto mode dừng cả lô. Lưu trữ hàng loạt nên chia cụm ≤ 10 và báo trước để người dùng bấm cho phép; `unarchive_session` có thể bị hook chèn trường `session`, khi đó gọi lại một lần đúng input hook nêu. `delete_session` luôn hỏi người dùng.
+- `search_session_transcripts`: một hit mỗi phiên, khớp chuỗi con, không xếp hạng, có thể khớp tên tệp trong danh mục dán vào transcript; lấy ≥10 hit rồi tự lọc 5.
+- Hai tệp sổ (`so_phien.md`, `so_phien_nhat_ky.md`) nằm trong thư mục dữ liệu của skill (`~/.claude/tintmark-tietkiemtoken/`, máy cũ có thể còn tên `tintmark-token`); chỉ ghi khi người dùng đã cho phép.
+- Cách làm sai cần tránh: lệnh "lưu trữ hết trừ 3 phiên mới nhất" mâu thuẫn với câu trả lời "từ 08/11 để lại"; trước khi lưu trữ hàng loạt phải đối chiếu mọi chỉ dẫn của người dùng, lưu trữ theo ngưỡng ngày, rồi mới chạy.

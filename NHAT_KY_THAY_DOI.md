@@ -1,5 +1,11 @@
 # Nhật ký thay đổi — tintmark-tietkiemtoken
 
+## 0.7.4 — 15/11/2026
+- sap-xep-phien.md: mục 'Bổ sung 15/11' viết trung tính (bỏ tên dự án, mã yêu cầu, cách gọi chủ máy) để xuất công khai; không đổi hành vi.
+
+## 0.7.3 — 15/11/2026
+- Ngưỡng mặc định đổi: NHẮC 250k -> 300k, ĐỔI PHIÊN / tự mở kế nhiệm 300k -> 350k (quyết định 15/11); sửa nguong_token.py, do_token.py (NGUONG 350k, nhóm đỉnh ngữ cảnh), SKILL.md, ban-giao.md, dieu-phoi.md, don-ngu-canh.md, sap-xep-phien.md, thuat-toan.md, README, plugin.json, module.json, test. Máy đã có cau_hinh.json ghi cứng 250k/300k thì phải sửa tay (máy này đã sửa).
+
 ## 0.7.2 — 15/11/2026
 - Thư mục gốc phê duyệt trên Drive đổi Claude_PheDuyet -> dieu_phoi (quyết định 15/11); không đổi cách dùng khác.
 

@@ -16,10 +16,10 @@ Phiên điều phối sắp xếp các phiên làm việc của một hoặc nhi
 
 | Phiên nhận | Làm gì |
 |---|---|
-| < 250k, vừa hoạt động | Nhắn bình thường |
+| < 300k, vừa hoạt động | Nhắn bình thường |
 | Đã nghỉ quá 1 giờ, không có việc thật | Không nhắn (bộ đệm hết hạn, nạp lại cả ngữ cảnh giá gấp đôi). Có việc thật mà phiên nhỏ thì gom mọi ý vào một tin |
-| > 300k hoặc đã nghỉ lâu mà phiên to | Không nhắn. Mở phiên kế nhiệm từ tệp bàn giao của nó rồi giao việc cho phiên mới |
-| Không có tệp bàn giao, > 300k | Nhắn **một** tin duy nhất: "viết bàn giao theo tintmark-tietkiemtoken rồi dừng"; sau đó mở phiên kế nhiệm |
+| > 350k hoặc đã nghỉ lâu mà phiên to | Không nhắn. Mở phiên kế nhiệm từ tệp bàn giao của nó rồi giao việc cho phiên mới |
+| Không có tệp bàn giao, > 350k | Nhắn **một** tin duy nhất: "viết bàn giao theo tintmark-tietkiemtoken rồi dừng"; sau đó mở phiên kế nhiệm |
 | Việc nhỏ, độc lập | Không dùng phiên dài hạn; mở phiên `Tạm` model nhỏ hoặc subagent |
 
 ## 3. Khi phiên làm việc đầy
@@ -39,7 +39,7 @@ Như `ban-giao.md`, thêm:
 ## 5. Khi dự án càng ngày càng tốn
 
 Chạy `cong_cu/do_token.py 7`, rồi xử theo thứ tự:
-1. Phiên có đỉnh ngữ cảnh > 300k: đổi phiên, bắt đầu từ các phiên chiếm nhiều chi phí nhất.
+1. Phiên có đỉnh ngữ cảnh > 350k: đổi phiên, bắt đầu từ các phiên chiếm nhiều chi phí nhất.
 2. Phiên sổ sách đang chạy model mạnh: hạ model (`chon-model.md`).
 3. Số lần ghi lại cache nguội cao: đang nhắn qua lại nhiều → áp mục 1 và 2 ở trên.
 4. Phiên tạm dừng, phiên `Tạm` / `Lịch` cũ: lưu trữ, tắt điều khiển từ xa.

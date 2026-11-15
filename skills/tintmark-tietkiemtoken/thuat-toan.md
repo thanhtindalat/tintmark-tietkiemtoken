@@ -24,7 +24,7 @@ Model: Haiku rẻ hơn Sonnet, Sonnet rẻ hơn Opus nhiều lần; hệ số tr
 
 | Đòn | Tác động vào | Mức |
 |---|---|---|
-| Giữ phiên ≤ 300k (đổi phiên có bàn giao) | đọc cache | lớn nhất |
+| Giữ phiên ≤ 350k (đổi phiên có bàn giao) | đọc cache | lớn nhất |
 | Không đánh thức phiên to nguội; gom tin | ghi cache | lớn |
 | Model nhỏ cho việc sổ sách, lịch, dò tìm | giá mỗi token | lớn |
 | Cắt connector / skill thừa | chi phí nền mọi lượt | vừa |

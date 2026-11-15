@@ -6,8 +6,8 @@ Lệnh gọi: "dọn ngữ cảnh", "dọn phiên", "liệt kê vòng lặp". D�
 
 1. Đo: số token hiện tại, nhóm chiếm nhiều nhất (tin nhắn / công cụ / connector / skill).
 2. Ghi trạng thái ra tệp bàn giao trước (luôn làm trước khi dọn bất cứ gì).
-3. ≥ 250k: đổi phiên theo `ban-giao.md`. Không nén tại chỗ.
-4. < 250k nhưng đổi hẳn chủ đề: mở phiên mới cho chủ đề mới, phiên này giữ chủ đề cũ.
+3. ≥ 300k: đổi phiên theo `ban-giao.md`. Không nén tại chỗ.
+4. < 300k nhưng đổi hẳn chủ đề: mở phiên mới cho chủ đề mới, phiên này giữ chủ đề cũ.
 5. Thói quen giữ phiên gọn: gom nhiều lệnh độc lập vào một lượt; lệnh in dài thì lọc / cắt đuôi (`| tail -40`, `grep`) hoặc ghi ra tệp; không in cả tệp hay cả nhật ký, đọc tệp theo đoạn; truy bảng / dữ liệu luôn có lọc và giới hạn dòng; việc đọc rộng giao subagent (`subagent-nen.md`); không đọc bản luật đầy đủ / tệp tham chiếu dài trừ khi bước đang làm thật cần.
 
 ## 2. Quét vòng lặp (mọi thứ tự chạy lại và tốn token)
@@ -68,7 +68,7 @@ Luật an toàn:
 
 Bảng phiên: tên · token · hoạt động cuối · trạng thái · đề xuất.
 - Phiên `Tạm`, `Lịch` đã xong; phiên tạm dừng; phiên đã có kế nhiệm → lưu trữ.
-- Phiên > 300k còn dùng → đổi phiên khi có việc kế tiếp (không đánh thức chỉ để bàn giao, trừ khi chưa có tệp bàn giao).
+- Phiên > 350k còn dùng → đổi phiên khi có việc kế tiếp (không đánh thức chỉ để bàn giao, trừ khi chưa có tệp bàn giao).
 - Phiên đã nghỉ quá 1 giờ: không nhắn khi không có việc thật (bộ đệm hết hạn, nạp lại cả ngữ cảnh giá gấp đôi).
 - Tên sai quy tắc → `dat-ten-phien.md` mục 6.
 - Sắp xếp, đổi tên phiên máy đặt, lưu trữ phiên đã xong: làm luôn rồi báo. Xoá hẳn: hỏi.

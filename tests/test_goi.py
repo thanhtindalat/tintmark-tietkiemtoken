@@ -211,7 +211,7 @@ class TestNguongGop(Goc):
         d = json.load(open(t)); d["luc_doi"] = d.get("luc_doi", 0) - giay
         json.dump(d, open(t, "w"))
 
-    def goi(self, su_kien="UserPromptSubmit", n=260000):
+    def goi(self, su_kien="UserPromptSubmit", n=310000):
         r = chay(NGUONG, {"session_id": "s1", "transcript_path": self.nhat_ky(n), "cwd": self.d,
                           "hook_event_name": su_kien, "prompt": "làm việc X"}, self.env)
         self.assertEqual((r.returncode, r.stderr), (0, b""))
@@ -227,20 +227,20 @@ class TestNguongGop(Goc):
         self.assertIn("NHẮC", self.goi())
         self.assertEqual(self.goi(), "")                  # hook thứ hai (settings + plugin cùng nối) im lặng
         self.assertEqual(self.goi("PostToolUse"), "")
-        self.assertIn("ĐỔI PHIÊN", self.goi(n=310000))
+        self.assertIn("ĐỔI PHIÊN", self.goi(n=360000))
 
     def test_nhac_co_id_phien_va_buoc_luu_tru(self):
         a = self.goi()
         self.assertIn("Chuỗi phiên", a); self.assertIn("id phiên này: s1", a)
         self.assertIn("lưu trữ phiên cũ", a)            # lời giao thẻ kế nhiệm có bước lưu trữ
         self.assertIn('detach_session \\"self\\" TRƯỚC', a)
-        b = self.goi(n=310000)
+        b = self.goi(n=360000)
         self.assertIn("lưu trữ phiên cũ theo dòng Chuỗi phiên", b); self.assertIn("id phiên này: s1", b)
         self.assertIn('detach_session \\"self\\" TRƯỚC', b)
 
     def test_doi_phien_luu_tru_phien_truoc_do_giu_phien_nay(self):
         """Xung đột cũ: lời nhắc bảo lưu trữ phiên đang đầy => trái luật 2 phiên mới nhất."""
-        for b in (self.goi(n=310000), self.goi("PostToolUse", n=360000)):   # nhánh tin người gõ + nhánh giữa lượt
+        for b in (self.goi(n=360000), self.goi("PostToolUse", n=410000)):   # nhánh tin người gõ + nhánh giữa lượt
             self.assertIn("lưu trữ phiên TRƯỚC ĐÓ nếu có", b); self.assertIn("GIỮ phiên này", b)
             self.assertNotIn("lưu trữ phiên này", b)
             self.assertIn('detach_session \\"self\\"', b)
@@ -290,27 +290,27 @@ class TestNguongGop(Goc):
     def test_nhac_co_the_de_xuat_mot_lan_va_cau_moi(self):
         a = self.goi()
         self.assertIn("own_initiative", a); self.assertIn("Mở phiên mới để làm việc hiệu quả hơn. Ngữ cảnh đã đưa vào phiên mới.", a)
-        b = self.goi(n=260000 + 50000 - 1000)          # 309k: đã qua ngưỡng đổi
+        b = self.goi(n=310000 + 50000 - 1000)          # 359k: đã qua ngưỡng đổi
         self.assertIn("ĐỔI PHIÊN", b)
         self.assertNotIn("own_initiative", b)          # thẻ chỉ được bảo tạo một lần mỗi phiên
         self.assertIn("Ngữ cảnh đã đưa vào phiên mới", b)
 
     def test_qua_nguong_doi_nhac_moi_luot_nguoi_dung(self):
-        a = self.goi(n=310000)
+        a = self.goi(n=360000)
         self.assertIn("user_asked", a); self.assertIn("NGUYÊN VĂN", a); self.assertIn("phiên khác gửi", a)
-        self.assertEqual(self.goi(n=310000), "")       # hook nối trùng chạy cùng lúc: chỉ một cái nói
+        self.assertEqual(self.goi(n=360000), "")       # hook nối trùng chạy cùng lúc: chỉ một cái nói
         self.lui_gio()
-        self.assertIn("user_asked", self.goi(n=311000))            # lượt người dùng kế tiếp: nhắc lại, không chờ +50k
+        self.assertIn("user_asked", self.goi(n=361000))            # lượt người dùng kế tiếp: nhắc lại, không chờ +50k
         self.lui_gio()
-        self.assertEqual(self.goi("PostToolUse", n=312000), "")    # giữa lượt (sau công cụ) thì không lặp
+        self.assertEqual(self.goi("PostToolUse", n=362000), "")    # giữa lượt (sau công cụ) thì không lặp
 
     def test_qua_nguong_doi_giu_tin_vai_giay_khong_chan(self):
         import time
         self.cau_hinh(cho_giay=1)
-        t = time.time(); a = self.goi(n=310000); cho = time.time() - t
+        t = time.time(); a = self.goi(n=360000); cho = time.time() - t
         self.assertIn("ĐỔI PHIÊN", a); self.assertGreaterEqual(cho, 1.0)
         self.assertNotIn('"decision"', a)              # không chặn tin
-        t = time.time(); self.assertIn("NHẮC", self.goi2(n=260000)); self.assertLess(time.time() - t, 1.0)  # dưới ngưỡng đổi: không chờ
+        t = time.time(); self.assertIn("NHẮC", self.goi2(n=310000)); self.assertLess(time.time() - t, 1.0)  # dưới ngưỡng đổi: không chờ
         tg = json.load(open(os.path.join(GOC, "hooks", "hooks.json")))["hooks"]["UserPromptSubmit"][0]["hooks"][0]["timeout"]
         self.assertGreaterEqual(tg, 35)                # timeout hook phải lớn hơn mức chờ tối đa 30 giây
 

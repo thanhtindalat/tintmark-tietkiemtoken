@@ -14,7 +14,7 @@ import os
 import sys
 import time
 
-NGUONG = 300000
+NGUONG = 350000
 
 
 def main():
@@ -95,8 +95,8 @@ def main():
     b = collections.Counter()
     for p in ds:
         x = p['dinh']
-        b['<100k' if x < 1e5 else '100-250k' if x < 2.5e5 else '250-300k' if x < 3e5 else '300-500k' if x < 5e5 else '>500k'] += 1
-    print('Dinh ngu canh: ' + ', '.join('%s: %d' % (k, b[k]) for k in ('<100k', '100-250k', '250-300k', '300-500k', '>500k')))
+        b['<100k' if x < 1e5 else '100-300k' if x < 3e5 else '300-350k' if x < 3.5e5 else '350-500k' if x < 5e5 else '>500k'] += 1
+    print('Dinh ngu canh: ' + ', '.join('%s: %d' % (k, b[k]) for k in ('<100k', '100-300k', '300-350k', '350-500k', '>500k')))
     print('\nTop 15 phien (% chi phi | dinh k | hien tai k | luot | lan nguoi | model chinh | ten)')
     for p in sorted(ds, key=lambda p: -p['q'])[:15]:
         ten = p['ten'] or os.path.basename(os.path.dirname(p['f']))[-28:]

@@ -3,7 +3,7 @@
   "nen": {"mo_ta": "Nén output lệnh bash (hook PostToolUse / PreToolUse)", "mac_dinh": true, "hoi_vien": false,
           "tep": ["scripts/hook_sau.py", "scripts/hook.py", "scripts/nen_loi.py", "luat/luat.json"]},
   "tu_sua": {"mo_ta": "Tự tắt bộ lọc nén bị báo / nghi hỏng nhiều lần", "mac_dinh": true, "hoi_vien": false, "tep": ["scripts/tu_sua.py"]},
-  "nguong": {"mo_ta": "Nhắc ngưỡng 250k / 300k token, bàn giao, đổi phiên", "mac_dinh": true, "hoi_vien": false,
+  "nguong": {"mo_ta": "Nhắc ngưỡng 300k / 350k token, bàn giao, đổi phiên", "mac_dinh": true, "hoi_vien": false,
              "tep": ["skills/tintmark-tietkiemtoken/cong_cu/nguong_token.py"]},
   "ban_giao": {"mo_ta": "Nhắc khi tệp ban_giao_phien/*.md vừa ghi dài hơn ngưỡng (mặc định 1.500 chữ)", "mac_dinh": true,
                "hoi_vien": false, "tep": ["skills/tintmark-tietkiemtoken/cong_cu/nguong_token.py"]},

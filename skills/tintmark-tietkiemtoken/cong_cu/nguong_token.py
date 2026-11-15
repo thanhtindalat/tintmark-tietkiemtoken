@@ -23,8 +23,8 @@ if not os.environ.get('NEN_DATA_DIR') and not os.path.exists(NEN):
             NEN = os.path.expanduser('~/.claude/' + _ten)
             break
 MAC_DINH = {
-    'nhac': 250000,          # bao nguoi dung, viet ban giao
-    'doi': 300000,           # khong nhan viec moi, mo phien ke nhiem
+    'nhac': 300000,          # bao nguoi dung, viet ban giao
+    'doi': 350000,           # khong nhan viec moi, mo phien ke nhiem
     'buoc_nhac_lai': 50000,  # sau khi da nhac, nhac lai moi lan tang them chung nay
     'nhac_vong_lap_gio': 12,  # nhac muc cho quyet toi da 1 lan / chung nay gio
     'quet_vong_lap_ngay': 7,  # goi y quet lai vong lap sau chung nay ngay

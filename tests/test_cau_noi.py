@@ -144,6 +144,11 @@ class TestLuatKeNhiem(Goc):
                     "sổ hỏi đáp"):
             self.assertIn(chu, ng.THE + ng.LUOT_DAU)
 
+    def test_nguong_mac_dinh_300k_350k(self):
+        sys.path.insert(0, os.path.dirname(NGUONG))
+        import nguong_token as ng
+        self.assertEqual((ng.MAC_DINH["nhac"], ng.MAC_DINH["doi"]), (300000, 350000))
+
     def test_tai_lieu_skill(self):
         th = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "skills", "tintmark-tietkiemtoken")
         doc = lambda t: open(os.path.join(th, t), encoding="utf-8").read()
