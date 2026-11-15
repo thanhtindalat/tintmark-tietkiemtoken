@@ -62,6 +62,13 @@ def main(argv=None):
                                         else "thư mục thật" if os.path.isdir(skill) else "không có"))
         print("Đã gộp: %s" % (time.strftime("%d/%m/%Y %H:%M", time.localtime(tt["luc"])) if tt.get("luc") else "chưa"))
         print("Bản plugin đang cài: %s · chế độ nén: %s" % (nen_loi.phien_ban(), nen_loi.cau_hinh()["che_do"]))
+        ten = (nen_loi.doc_json(os.path.join(nen_loi.GOC, ".claude-plugin", "plugin.json"), {}) or {}).get("name", "")
+        ghi = (nen_loi.doc_json(os.path.join(NHA, "plugins", "installed_plugins.json"), {}) or {}).get("plugins", {})
+        for k, v in ghi.items():
+            if k.split("@")[0] == ten and isinstance(v, list) and v:
+                ban = v[-1].get("version", "?")
+                print("Claude Code ghi nhận %s: bản %s%s" % (k, ban, "" if ban == nen_loi.phien_ban() else
+                      "  ⚠ LỆCH (chạy: claude plugin marketplace update %s && claude plugin update %s)" % (k.split("@")[-1], k)))
         return 0
     if o.viec == "gop":
         lk = os.path.abspath(o.lien_ket)

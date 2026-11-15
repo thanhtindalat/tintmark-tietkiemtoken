@@ -56,3 +56,7 @@ Phải ra "Hook ngưỡng cũ trong settings.json: 0" và "Skill người dùng:
 - Trả `settings.json` và skill về trước khi gộp: `python3 $P/scripts/cai_dat.py go`. Thay đổi `settings.json` làm sau lần gộp sẽ mất (bản ngay trước khi gỡ lưu ở `settings.json.truoc-go-<ngày giờ>`).
 - Tắt plugin: `claude plugin disable tintmark-tietkiem@<marketplace>`.
 - Xoá dữ liệu: xoá thư mục `~/.claude/plugin-tintmark-tietkiem/`.
+
+## Bản Claude Code ghi nhận
+
+Marketplace dạng thư mục: phiên mới nạp plugin qua liên kết cài đặt (bản `cap_nhat.py` vừa đặt), còn `~/.claude/plugins/installed_plugins.json` chỉ ghi bản lúc `claude plugin install` / `update`. Hai số có thể lệch; `cai_dat.py trang-thai` in cả hai và báo `⚠ LỆCH`. Đồng bộ ghi chép bằng lệnh, không sửa tay JSON: `claude plugin marketplace update <marketplace>` rồi `claude plugin update tintmark-tietkiem@<marketplace>`. Kiểm thành phần đang nạp: `claude plugin details tintmark-tietkiem@<marketplace>` (phải có Hooks PostToolUse + UserPromptSubmit).

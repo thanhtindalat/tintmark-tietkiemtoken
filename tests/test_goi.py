@@ -206,6 +206,13 @@ class TestNguongGop(Goc):
         self.assertEqual(self.goi("PostToolUse"), "")
         self.assertIn("ĐỔI PHIÊN", self.goi(n=310000))
 
+    def test_nhac_co_id_phien_va_buoc_luu_tru(self):
+        a = self.goi()
+        self.assertIn("Chuỗi phiên", a); self.assertIn("id phiên này: s1", a)
+        self.assertIn("lưu trữ phiên cũ", a)            # lời giao thẻ kế nhiệm có bước lưu trữ
+        b = self.goi(n=310000)
+        self.assertIn("lưu trữ phiên cũ theo dòng Chuỗi phiên, id phiên này: s1", b)
+
     def test_nhac_co_the_de_xuat_mot_lan_va_cau_moi(self):
         a = self.goi()
         self.assertIn("own_initiative", a); self.assertIn("Mở phiên mới để làm việc hiệu quả hơn. Ngữ cảnh đã đưa vào phiên mới.", a)

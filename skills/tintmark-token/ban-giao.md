@@ -22,9 +22,9 @@ Mẫu:
 
 ```markdown
 # Bàn giao: <tên phiên, không số>
-> LỆNH BÀN GIAO: Đọc `<đường dẫn tệp này>` rồi làm tiếp từ mục 3. Phiên này là `<tên phiên> <số kế tiếp>`.
+> LỆNH BÀN GIAO: Đọc `<đường dẫn tệp này>` rồi làm tiếp từ mục 3. Phiên này là `<tên phiên> <số kế tiếp>`. Lượt đầu: xác nhận 3 dòng, rồi lưu trữ các phiên cũ trong dòng `Chuỗi phiên`, giữ phiên ngay trước (ban-giao.md mục 4), thêm id của mình vào dòng đó.
 Cập nhật: <ngày giờ> · Phiên đang giữ: `<tên> <số>` (id <id nếu biết>) · Số phiên đã tạo: <n> · Model: <model>
-Chuỗi phiên: <id phiên 1>, <id phiên 2>, …
+Chuỗi phiên: <id phiên 1> (đã lưu trữ), <id phiên 2> (giữ), <id phiên hiện tại>
 
 ## 1. Mục tiêu
 ## 2. Việc đã xong            (kèm commit / tệp / link)
@@ -35,7 +35,7 @@ Chuỗi phiên: <id phiên 1>, <id phiên 2>, …
 ## 7. Cạm bẫy đã gặp
 ```
 
-**Lệnh bàn giao** (dòng đầu) phải có từ lượt đầu của phiên: phiên treo, hết hạn mức hay cache nguội thì người dùng hoặc phiên điều phối vẫn mở phiên mới được bằng đúng một câu, không phải đánh thức phiên cũ.
+**Lệnh bàn giao** (dòng đầu) luôn kèm bước lưu trữ phiên cũ như mẫu, và phải có từ lượt đầu của phiên: phiên treo, hết hạn mức hay cache nguội thì người dùng hoặc phiên điều phối vẫn mở phiên mới được bằng đúng một câu, không phải đánh thức phiên cũ.
 
 Cập nhật tệp khi: xong một việc; trước khi dừng chờ người dùng; trước khi chạy việc dài; khi hook nhắc. Viết bình thường, đủ chữ phủ định, con số, đường dẫn — đây là tài liệu lưu, không viết kiểu rút gọn.
 
@@ -58,6 +58,10 @@ Cập nhật tệp khi: xong một việc; trước khi dừng chờ người d�
 
 - **Lưu trữ (Archive), không xoá, không nhắn nữa.** Tắt điều khiển từ xa của nó nếu đang bật.
 - **Chỉ giữ 1 phiên trước + 1 phiên đang chạy.** Tệp bàn giao có dòng `Chuỗi phiên: <id 1>, <id 2>, …` (id theo thứ tự tạo; phiên mới tự thêm id của mình). Phiên kế nhiệm, ở lượt đầu sau khi xác nhận 3 dòng, lưu trữ mọi phiên trong chuỗi **trừ phiên ngay trước nó** (công cụ lưu trữ phiên; việc này không cần hỏi người dùng). Phiên ngay trước được giữ tới khi có phiên kế tiếp nữa.
+- **Dòng `Chuỗi phiên` phải có id thật** từ lượt đầu (id phiên hiện tại: hook báo kèm ở mức NHẮC, hoặc tra danh sách phiên). Không có id thì phiên kế nhiệm không lưu trữ được.
+- **Thứ tự:** lưu trữ từ phiên **cũ nhất**. Lưu trữ một phiên kéo theo các phiên con nó đã mở mà đã xong: nếu phiên cần giữ (phiên ngay trước, hoặc phiên đang chạy) là con của phiên sắp lưu trữ thì KHÔNG lưu trữ phiên đó, ghi "(giữ vì là cha của …)" trong dòng `Chuỗi phiên`.
+- **Lỗi lần đầu trong chế độ tự động:** gọi công cụ lưu trữ có thể bị từ chối với lỗi kiểu "a hook changed this call's input" (app thêm trường `session`). Gọi lại **đúng input mà lỗi trả về** thì qua; không dừng ở lần lỗi đầu.
+- **Công cụ từ chối** phiên đang ghim, đang mở trên màn hình hoặc đang chạy: không thử lại vòng vòng; ghi "(chưa lưu trữ: đang ghim / đang mở / đang chạy)" vào dòng `Chuỗi phiên` và báo người dùng một dòng tên phiên đó. Phiên kế tiếp thử lại.
 - Cần chi tiết cũ: phiên mới tìm trong lịch sử phiên cũ (tìm kiếm transcript), không mở lại để hỏi.
 - Xoá hẳn: chỉ khi người dùng bảo; gợi ý sau 30 ngày không ai tra.
 - Phiên cũ còn tiến trình nền / lịch gắn với nó: chuyển hoặc tắt trước khi lưu trữ, ghi ở mục 6 tệp bàn giao.
@@ -72,4 +76,4 @@ Có, thường tốt hơn: ngữ cảnh ngắn thì model bám luật tốt hơn
 - [ ] Mọi thay đổi mã đã commit hoặc ghi rõ "chưa commit" kèm đường dẫn
 - [ ] Phiên mới đã xác nhận 3 dòng
 - [ ] Sổ phiên đã sửa id, vòng lặp đã chuyển chủ
-- [ ] Phiên cũ hơn phiên ngay trước đã lưu trữ; dòng `Chuỗi phiên` đã thêm id phiên mới
+- [ ] Phiên cũ hơn phiên ngay trước đã lưu trữ (từ cũ nhất, gọi lại khi lỗi hook); dòng `Chuỗi phiên` có id thật và đã thêm id phiên mới

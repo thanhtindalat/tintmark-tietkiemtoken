@@ -26,7 +26,7 @@ MAC_DINH = {
 }
 CAU_MOI = 'Mở phiên mới để làm việc hiệu quả hơn. Ngữ cảnh đã đưa vào phiên mới.'
 THE = ('tạo MỘT thẻ đề xuất phiên kế nhiệm (start_session, initiation "own_initiative", context "fresh", '
-       'tên = tên phiên này + số kế nhiệm, lời giao = lệnh bàn giao, mô tả thẻ có câu "%s") để người dùng chỉ cần bấm Bắt đầu' % CAU_MOI)
+       'tên = tên phiên này + số kế nhiệm, lời giao = lệnh bàn giao (kèm bước lưu trữ phiên cũ theo dòng Chuỗi phiên, giữ phiên ngay trước), mô tả thẻ có câu "%s") để người dùng chỉ cần bấm Bắt đầu' % CAU_MOI)
 
 
 def doc_json(duong, mac_dinh):
@@ -127,21 +127,22 @@ def nhac_nguong(vao, c, su_kien='UserPromptSubmit'):
         return ('[tintmark-token] ĐỔI PHIÊN: phiên này đã %dk token, vượt ngưỡng %dk. KHÔNG làm việc vừa được gửi ở phiên này. '
                 '(a) Nếu lượt này do NGƯỜI DÙNG gõ (không phải tin của phiên khác hay sự kiện tự động): lượt này được phép mở phiên. '
                 'Chốt tệp bàn giao 7 mục (ban-giao.md), rồi gọi start_session (initiation "user_asked", context "fresh", '
-                'tên = tên phiên này + số kế nhiệm) với lời giao = lệnh bàn giao + NGUYÊN VĂN tin người dùng vừa gửi; '
+                'tên = tên phiên này + số kế nhiệm) với lời giao = lệnh bàn giao (kèm bước lưu trữ phiên cũ theo dòng Chuỗi phiên, id phiên này: %s) + NGUYÊN VĂN tin người dùng vừa gửi; '
                 'trả lời đúng một dòng: "%s" kèm link phiên mới. '
                 '(b) Nếu lượt này do phiên khác gửi hoặc sự kiện tự động (app không cho mở phiên): chốt tệp bàn giao;%s '
                 'trả lời phiên gửi một dòng: "phiên đã đầy, gửi lại việc này cho phiên <tên mới> sau khi người dùng bấm Bắt đầu". '
                 'Sau khi phiên mới chạy: phiên này lưu trữ, không nhắn nữa.'
-                % (k, c['doi'] // 1000, CAU_MOI, the))
+                % (k, c['doi'] // 1000, phien, CAU_MOI, the))
     if muc <= da_muc and n < da_n + c['buoc_nhac_lai']:
         return None
     ghi_json(tep, dict(tt, muc=muc, n=n, luc=int(nay), the_da_tao=True))
     if muc == 1:
         return ('[tintmark-token] NHẮC: phiên này đã %dk token (ngưỡng nhắc %dk, ngưỡng đổi phiên %dk). '
                 'Câu đầu tiên của câu trả lời kế tiếp phải báo người dùng: "Phiên đã %dk token. %s" '
-                'Viết / cập nhật ngay tệp bàn giao 7 mục theo skill tintmark-token (ban-giao.md).%s '
+                'Viết / cập nhật ngay tệp bàn giao 7 mục theo skill tintmark-token (ban-giao.md); dòng `Chuỗi phiên` phải có id thật, '
+                'id phiên này: %s.%s '
                 'Được hoàn tất việc đang dở, không mở việc lớn mới.'
-                % (k, c['nhac'] // 1000, c['doi'] // 1000, k, CAU_MOI, the))
+                % (k, c['nhac'] // 1000, c['doi'] // 1000, k, CAU_MOI, phien, the))
     return ('[tintmark-token] ĐỔI PHIÊN: phiên này đã %dk token, vượt ngưỡng %dk. Không nhận việc mới. '
             'Dừng ở điểm an toàn, chốt tệp bàn giao 7 mục.%s Báo người dùng: "%s" '
             'Lượt do người dùng gõ thì mở luôn phiên kế nhiệm MỚI HOÀN TOÀN (không fork) với lệnh bàn giao, '

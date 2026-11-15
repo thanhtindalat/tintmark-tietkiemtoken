@@ -1,5 +1,8 @@
 # Nhật ký thay đổi — tintmark-tietkiem
 
+## 0.3.1 — 15/11/2026
+- Lưu trữ phiên cũ: mẫu lệnh bàn giao có bước lưu trữ theo dòng Chuỗi phiên; hook NHẮC đòi id thật và báo id phiên hiện tại; lời giao phiên kế nhiệm có bước lưu trữ; ban-giao.md ghi thứ tự từ cũ nhất (kéo theo phiên con), gọi lại khi lỗi hook ở auto mode, cách báo khi công cụ từ chối; cai_dat.py trang-thai báo bản Claude Code ghi nhận và cảnh báo lệch; test mới
+
 ## 0.3.0 — 15/11/2026
 - Đổi tên plugin nen-token -> tintmark-tietkiem (dữ liệu ~/.claude/plugin-tintmark-tietkiem, đọc tiếp thư mục cũ; scripts/doi_ten.py chuyển máy + quay lui); luật git-ghi (push/pull/commit/branch…); nén lệnh dạng cd X && <lệnh đơn>; hook báo phản hồi mở quá 3 ngày; lệnh /tintmark-tietkiem:phan-hoi; luật phat-hanh chuyển sang luật riêng máy; mẫu mau/ thay bằng kho mẫu tổng hợp; tài liệu trung tính, README có tóm tắt tiếng Anh và ghi chưa cấp phép
 
