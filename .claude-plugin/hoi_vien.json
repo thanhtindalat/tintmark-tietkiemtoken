@@ -1,7 +1,7 @@
 {
  "bat": false,
- "thuat_toan": null,
- "khoa_cong_khai": null,
+ "thuat_toan": "ed25519",
+ "khoa_cong_khai": "4cc5Bc6MCc8UUhXVlGLBKUGFIVM0609cOL3yHb5DTxo=",
  "tep_khoa": "khoa_hoi_vien.json",
  "lien_he": ""
 }

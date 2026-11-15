@@ -19,13 +19,16 @@ Quy tắc:
     có id module trong "goi"; module thường luôn chạy.
   - Fail-open: lỗi trong chính mã kiểm (ngoại lệ) => cho chạy. Khoá thiếu / sai / hết hạn => chỉ module hội viên im,
     KHÔNG BAO GIỜ chặn lệnh của người dùng hay làm hỏng phiên.
-  - Thuật toán chữ ký: đăng ký vào XAC_MINH[tên] = hàm(noi_dung_bytes, chu_ky_bytes, khoa_cong_khai) -> bool.
-    Chưa đăng ký thuật toán nào (chờ chủ plugin chọn) => bat = true cũng coi mọi khoá là chưa hợp lệ.
+  - Thuật toán chữ ký: XAC_MINH[tên] = hàm(noi_dung_bytes, chu_ky_bytes, khoa_cong_khai) -> bool.
+    Có sẵn "ed25519" (RFC 8032, Python thuần, chỉ XÁC MINH; chọn 15/11): khoa_cong_khai = base64 của 32 byte.
+    Khoá bí mật và việc ký nằm ở `khung_plugin_ban_quyen/cong_cu/cap_khoa.py`, KHÔNG đi theo plugin.
+    thuat_toan null / lạ => bat = true cũng coi mọi khoá là chưa hợp lệ.
 
   hoi_vien.py trang-thai           in trạng thái
   hoi_vien.py nap <tệp khoá>       kiểm rồi chép khoá vào thư mục dữ liệu máy
 """
 import base64
+import hashlib
 import json
 import os
 import shutil
@@ -35,7 +38,103 @@ import time
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import khung_chung as kc  # noqa: E402
 
-XAC_MINH = {}   # tên thuật toán -> hàm xác minh; thêm khi chủ plugin chọn thuật toán
+# ---- Ed25519 (RFC 8032 mục 5.1, bản tham chiếu), Python thuần, không thư viện ngoài ----
+_P = 2 ** 255 - 19
+_Q = 2 ** 252 + 27742317777372353535851937790883648493
+
+
+def _inv(x):
+    return pow(x, _P - 2, _P)
+
+
+_D = -121665 * _inv(121666) % _P
+_CAN_M1 = pow(2, (_P - 1) // 4, _P)
+
+
+def _cong(a, b):
+    A = (a[1] - a[0]) * (b[1] - b[0]) % _P
+    B = (a[1] + a[0]) * (b[1] + b[0]) % _P
+    C = 2 * a[3] * b[3] * _D % _P
+    D = 2 * a[2] * b[2] % _P
+    E, F, G, H = B - A, D - C, D + C, B + A
+    return (E * F % _P, G * H % _P, F * G % _P, E * H % _P)
+
+
+def _nhan(s, a):
+    kq = (0, 1, 1, 0)
+    while s > 0:
+        if s & 1:
+            kq = _cong(kq, a)
+        a = _cong(a, a)
+        s >>= 1
+    return kq
+
+
+def _bang(a, b):
+    return (a[0] * b[2] - b[0] * a[2]) % _P == 0 and (a[1] * b[2] - b[1] * a[2]) % _P == 0
+
+
+def _tim_x(y, dau):
+    if y >= _P:
+        return None
+    x2 = (y * y - 1) * _inv(_D * y * y + 1) % _P
+    if x2 == 0:
+        return None if dau else 0
+    x = pow(x2, (_P + 3) // 8, _P)
+    if (x * x - x2) % _P:
+        x = x * _CAN_M1 % _P
+    if (x * x - x2) % _P:
+        return None
+    return _P - x if (x & 1) != dau else x
+
+
+_GY = 4 * _inv(5) % _P
+_GX = _tim_x(_GY, 0)
+_G = (_GX, _GY, 1, _GX * _GY % _P)
+
+
+def _nen_diem(a):
+    zi = _inv(a[2])
+    x, y = a[0] * zi % _P, a[1] * zi % _P
+    return (y | ((x & 1) << 255)).to_bytes(32, "little")
+
+
+def _mo_diem(b):
+    if len(b) != 32:
+        return None
+    y = int.from_bytes(b, "little")
+    dau, y = y >> 255, y & ((1 << 255) - 1)
+    x = _tim_x(y, dau)
+    return None if x is None else (x, y, 1, x * y % _P)
+
+
+def _bam_q(b):
+    return int.from_bytes(hashlib.sha512(b).digest(), "little") % _Q
+
+
+def ed25519_xac_minh(cong_khai, thong_diep, chu_ky):
+    """True nếu chu_ky (64 byte) là chữ ký Ed25519 hợp lệ của thong_diep theo khoá công khai 32 byte."""
+    if len(cong_khai) != 32 or len(chu_ky) != 64:
+        return False
+    A, R = _mo_diem(cong_khai), _mo_diem(chu_ky[:32])
+    if A is None or R is None:
+        return False
+    s = int.from_bytes(chu_ky[32:], "little")
+    if s >= _Q:
+        return False
+    h = _bam_q(chu_ky[:32] + cong_khai + thong_diep)
+    return _bang(_nhan(s, _G), _cong(R, _nhan(h, A)))
+
+
+def _xm_ed25519(nd_b, ck_b, khoa_cong_khai):
+    try:
+        ck = base64.b64decode(khoa_cong_khai or "", validate=True)
+    except Exception:
+        return False
+    return ed25519_xac_minh(ck, nd_b, ck_b)
+
+
+XAC_MINH = {"ed25519": _xm_ed25519}   # tên thuật toán -> hàm xác minh
 
 
 def cau_hinh():

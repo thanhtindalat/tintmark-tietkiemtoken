@@ -13,7 +13,7 @@ Thiếu khung.json thì dùng mặc định theo tên thư mục plugin. Không 
 import json
 import os
 
-PHIEN_BAN_KHUNG = "0.1.1"
+PHIEN_BAN_KHUNG = "0.2.0"
 GOC = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 

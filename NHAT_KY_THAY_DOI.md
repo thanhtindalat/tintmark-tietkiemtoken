@@ -1,5 +1,11 @@
 # Nhật ký thay đổi — tintmark-tietkiemtoken
 
+## 0.5.1 — 15/11/2026
+- Bỏ tên người trong ghi chú mã (bộ quét công khai chặn); không đổi hành vi.
+
+## 0.5.0 — 15/11/2026
+- GĐ4 hội viên: thuật toán Ed25519 Python thuần (RFC 8032, chọn 15/11) trong hoi_vien.py, khoá công khai trong hoi_vien.json; cơ chế vẫn TẮT (bat:false, chưa thu phí A198), fail-open, kiểm cục bộ. Khung 0.2.0: cong_cu/cap_khoa.py (tạo khoá, ký; không đi theo plugin). Gồm sửa 0.4.1. Test 75.
+
 ## 0.4.1 — 15/11/2026
 - Hook nén bỏ qua output ≥ 30.000 ký tự (Claude Code tự cất output gốc, bản nén không tới model; thống kê không còn tính ảo); thêm cap_nhat.py thu-khoi [thư mục] để kiểm hook bản cài bằng dữ liệu tạm thay cho gọi tay (gọi tay đã ghi 2 dòng giả vào sổ thống kê thật); khung 0.1.1; test 72.
 
