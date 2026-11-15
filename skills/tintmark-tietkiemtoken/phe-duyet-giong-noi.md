@@ -11,7 +11,7 @@ Người dùng duyệt / ra chỉ đạo bằng giọng trên app Claude điện
 ## 2. Phiên Code làm
 
 1. Viết câu hỏi ra tệp tạm: mỗi câu một dòng đánh số `1.` (hoặc `Câu 1:`), câu ngắn, kèm lựa chọn `A: … B: …` và đề xuất. Đủ ý để quyết tại chỗ (cần gì, vì sao, hệ quả).
-2. `python3 $P/scripts/cau_noi.py tao --du-an "<dự án>" --ten "<tên ngắn>" --tu <tệp câu hỏi>` → tạo `<Drive>/Claude_PheDuyet/<du_an>/<ten>.md`, đầu tệp có giao thức cho Chat.
+2. `python3 $P/scripts/cau_noi.py tao --du-an "<dự án>" --ten "<tên ngắn>" --tu <tệp câu hỏi>` → tạo `<Drive>/dieu_phoi/<du_an>/<ten>.md`, đầu tệp có giao thức cho Chat.
 3. Canh nền (0 token khi chờ): Bash `run_in_background` chạy `python3 $P/scripts/cau_noi.py canh --ten <ten>` (mặc định chờ 24 giờ, kiểm mỗi 30 giây). Có tệp kết quả thì lệnh thoát → phiên tự thức.
 4. Báo người dùng một dòng: "Mở Claude trên điện thoại, nói: đọc tệp phê duyệt `<ten>`."
 5. Kết quả về (lệnh canh thoát, hoặc hook đầu lượt báo `CÓ KẾT QUẢ PHÊ DUYỆT`): đọc tệp `ket_qua_<ten>_<giờ>.md` → **ghi sổ hỏi đáp dự án trước** (`ban-giao.md` mục 2b) → làm việc được duyệt; chỉ đạo mới ghi sổ yêu cầu của dự án → `cau_noi.py da-doc <tệp>`.

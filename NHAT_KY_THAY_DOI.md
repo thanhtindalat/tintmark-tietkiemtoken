@@ -1,5 +1,8 @@
 # Nhật ký thay đổi — tintmark-tietkiemtoken
 
+## 0.7.2 — 15/11/2026
+- Thư mục gốc phê duyệt trên Drive đổi Claude_PheDuyet -> dieu_phoi (quyết định 15/11); không đổi cách dùng khác.
+
 ## 0.7.1 — 15/11/2026
 - Dữ liệu mẫu trong test_cau_noi trung tính (bộ quét công khai); không đổi hành vi.
 

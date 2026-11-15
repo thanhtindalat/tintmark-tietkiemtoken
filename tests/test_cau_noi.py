@@ -32,10 +32,10 @@ class TestCauNoi(Goc):
     def tao(self, ten="Duyệt bản 0.7"):
         rc, out, err = self.cn("tao", "--du-an", "Skill và Token", "--ten", ten, "--tu", "-", "--cwd", self.da, inp=CAU)
         self.assertEqual((rc, err), (0, ""), out)
-        return os.path.join(self.drive, "Claude_PheDuyet", "skill_va_token", "duyet_ban_0_7.md")
+        return os.path.join(self.drive, "dieu_phoi", "skill_va_token", "duyet_ban_0_7.md")
 
     def ghi_kq(self, ten="duyet_ban_0_7", gio="20261115-1700"):
-        p = os.path.join(self.drive, "Claude_PheDuyet", "skill_va_token", "ket_qua_%s_%s.md" % (ten, gio))
+        p = os.path.join(self.drive, "dieu_phoi", "skill_va_token", "ket_qua_%s_%s.md" % (ten, gio))
         with open(p, "w", encoding="utf-8") as f:
             f.write("# KẾT QUẢ: %s\n## Trả lời\n1. Phát bản → A\n" % ten)
         return p
@@ -69,7 +69,7 @@ class TestCauNoi(Goc):
         os.makedirs(os.path.join(self.d, "Library", "CloudStorage", "GoogleDrive-tai_khoan_thu", "My Drive"))
         rc, out, _ = self.cn("thu-muc")
         self.assertEqual(rc, 0, out)
-        self.assertTrue(out.strip().endswith("My Drive/Claude_PheDuyet"))
+        self.assertTrue(out.strip().endswith("My Drive/dieu_phoi"))
 
     def test_canh_thoat_khi_co_ket_qua(self):
         self.tao()
@@ -127,7 +127,7 @@ class TestCauNoi(Goc):
             f.write("# Điều phối\n- Việc A chờ duyệt\n")
         rc, out, _ = self.cn("ban-sao", "--du-an", "Dự án Mẫu", "--tu", tep, "--cwd", self.da)
         self.assertEqual(rc, 0, out)
-        p = os.path.join(self.drive, "Claude_PheDuyet", "du_an_mau", "dieu_phoi_dieu_phoi.md")
+        p = os.path.join(self.drive, "dieu_phoi", "du_an_mau", "dieu_phoi_dieu_phoi.md")
         s = open(p, encoding="utf-8").read()
         self.assertIn("bản sao chỉ đọc", s)
         self.assertIn("Việc A chờ duyệt", s)

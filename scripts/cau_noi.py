@@ -2,7 +2,7 @@
 # Copyright (c) 2026 Tintmark. All rights reserved. Xem LICENSE / NOTICE.
 """Cầu nối phê duyệt bằng giọng nói: phiên Claude Code <-> Claude Chat qua thư mục Google Drive đồng bộ trên máy.
 
-Luồng: phiên Code tạo "tệp phê duyệt" .md trong <Drive>/Claude_PheDuyet/<du_an>/ (đầu tệp có giao thức cho Chat)
+Luồng: phiên Code tạo "tệp phê duyệt" .md trong <Drive>/dieu_phoi/<du_an>/ (đầu tệp có giao thức cho Chat)
 -> người dùng mở Claude Chat (điện thoại), nói "đọc tệp phê duyệt <tên>" -> Chat hỏi từng câu bằng giọng
 -> Chat TẠO TỆP MỚI ket_qua_<tên>_<YYYYMMDD-HHMM>.md cùng thư mục (connector Drive không ghi đè tệp có sẵn)
 -> Drive đồng bộ về máy -> `canh` (chạy nền, 0 token khi chờ) thoát -> phiên tự thức, đọc kết quả, làm.
@@ -32,7 +32,7 @@ import unicodedata
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import khung_chung as kc  # noqa: E402
 
-THU_MUC_GOC = "Claude_PheDuyet"
+THU_MUC_GOC = "dieu_phoi"
 HAN_CHO_NGAY = 14          # mục chờ quá chừng này ngày thì hook thôi báo
 NHAC_LAI_GIAY = 6 * 3600   # hook báo lại một kết quả chưa đọc tối đa 1 lần / 6 giờ
 SO_CAU_TOM_TAT = 6
